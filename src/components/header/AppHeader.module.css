@@ -1,0 +1,56 @@
+.AppHeader {
+    background-color: var(--header);
+    height: 50px;
+    width: 90vw;
+    margin: auto;
+    display: flex;
+    align-items: center; /* Wyśrodkowanie w pionie */
+}
+
+.HeaderLeft {
+    display: flex; /* Umożliwia ustawienie elementów w linii */
+    align-items: center; /* Wyśrodkowanie w pionie */
+    margin-left: 20px;
+}
+.HeaderTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+.HeaderTitle:hover {
+    color: #ffcc00; /* Change text color on hover */
+}
+
+
+
+.HeaderRight {
+    margin-left: auto;
+    height: auto;
+    width: auto;
+    position: page;
+}
+
+.HeaderRight div {
+    margin: 15px 30px 20px;
+    display: inline-block;
+    font-size: large;
+    color: azure;
+}
+
+.HeaderUser {
+    margin-left: 20px;
+    font-size: 1rem;
+    color: #ffffff;
+    opacity: 0.9; /* Slightly dimmed text */
+}
+
+@media print {
+    .AppHeader {
+        display: none; /* Ukryj nagłówek aplikacji */
+    }
+    .ButtonPrint {
+        display: none; /* Opcjonalnie, ukryj przycisk drukowania */
+    }
+}

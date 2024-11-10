@@ -1,0 +1,91 @@
+/* Renting.module.css */
+
+.Form {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.FormRow {
+    margin-bottom: 20px;
+
+}
+
+.form-input-label {
+    font-weight: bold;
+    display: list-item;
+    color: #333;
+}
+
+.form-input-field {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    text-align: left; /* Wyrównanie pól tekstowych do lewej */
+}
+.EquipmentList {
+    display: grid;
+    justify-content: start; /* Aligns the grid content to the left */
+    padding-left: 0; /* Optional: Adjust to fine-tune the left padding */
+
+}
+
+.EquipmentList div {
+    display: flex; /* Flexbox to align items on the same line */
+    align-items: center; /* Aligns checkbox and text vertically on the same height */
+    margin-bottom: 10px; /* Adds spacing between each row */
+    white-space: nowrap; /* Zapobiega zawijaniu tekstu */
+
+}
+
+
+.EquipmentList input[type="checkbox"] {
+    margin-right: 10px; /* Adds space between the checkbox and the label */
+    transform: scale(1.2); /* Increases checkbox size */
+
+}
+
+
+
+
+
+.Button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.RentingButton {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.RentingButton:hover {
+    background-color: #0056b3;
+}
+
+p {
+    font-size: 14px;
+    color: #28a745;
+    margin-top: 10px;
+    text-align: left; /* Wyrównanie tekstu potwierdzenia do lewej */
+}
+
+
+@media (max-width: 768px) {
+    .Form {
+        grid-template-columns: 1fr; /* Jedna kolumna na małych ekranach */
+    }
+
+
+}

@@ -1,0 +1,51 @@
+.TableHeader {
+    background-color: #f1f1f1;
+    font-weight: bold;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.HeaderCell {
+    padding: 10px 5px;
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+}
+
+.TableRow {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.RowCell {
+    padding: 10px 5px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.TableRow:nth-of-type(even) {
+    background-color: #fafafa;
+}
+.ButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center; /* This will vertically align the buttons */
+}
+
+.CustomButton {
+    padding: 12px 4px;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Add some margin to separate the buttons */
+}
+
+.CustomButton:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+
+
+
+

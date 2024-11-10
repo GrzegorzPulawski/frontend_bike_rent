@@ -1,0 +1,30 @@
+.Form  div {
+    border: 1px solid var(--border-color);
+    padding: 20px 20px 20px 20px;
+    background: var(--nawigacja);
+    color: ghostwhite;
+    display: flex;
+    justify-content: center;
+}
+.ButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* This will vertically align the buttons */
+}
+
+.CustomButton {
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Add some margin to separate the buttons */
+}
+
+.CustomButton:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+
+
+

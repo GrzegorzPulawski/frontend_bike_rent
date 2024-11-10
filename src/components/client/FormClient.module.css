@@ -1,0 +1,76 @@
+:root {
+    --primary-color: #007bff;
+    --primary-hover-color: #0056b3;
+    --background-color: #f9f9f9;
+    --border-color: #ccc;
+    --text-color: #333;
+    --input-padding: 10px;
+    --border-radius: 4px;
+    --error-color: red;
+    --success-color: green;
+    --font-size: 16px;
+}
+
+.ClientForm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--background-color);
+}
+
+.GridContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: var(--font-size);
+    color: var(--text-color);
+}
+
+input {
+    width: 100%;
+    padding: var(--input-padding);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size);
+    color: var(--text-color);
+}
+
+.FormConfirm {
+    padding: var(--input-padding) 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: var(--font-size);
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.FormConfirm:hover {
+    background-color: var(--primary-hover-color);
+}
+
+p {
+    font-size: 14px;
+    color: var(--success-color);
+    margin-top: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    margin-top: 15px;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-hover-color);
+}

@@ -1,0 +1,7 @@
+.FormRow {
+    background-color: lightgray;
+    border-style: groove;
+    font-size: large;
+    margin: auto 100px auto 100px;
+    padding: 20px;
+}

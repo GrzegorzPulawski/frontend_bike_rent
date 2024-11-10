@@ -1,0 +1,59 @@
+.TableRow {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd; /* Light border around each agreement row */
+    background-color: #f9f9f9; /* Light background color */
+    border-radius: 5px;
+}
+
+.TableRow h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.TableRow div {
+    margin: 8px 0;
+    padding: 5px 10px;
+    font-size: 1rem;
+    color: #333; /* Darker text color for readability */
+}
+
+.TableRow div:nth-child(even) {
+    background-color: #f2f2f2; /* Light grey background for alternating rows */
+}
+
+.TableRow div:nth-child(odd) {
+    background-color: #fff; /* White background for alternating rows */
+}
+
+.TableRow .signature {
+    text-align: right;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.TableRow .center {
+    text-align: center;
+}
+
+@media print {
+    .TableRow {
+        background-color: white !important;
+        color: black !important;
+        border: none;
+    }
+
+    .TableRow h4, .TableRow div {
+        color: black !important;
+    }
+
+    .AppHeader {
+        display: none; /* Ukryj nagłówek aplikacji */
+    }
+    .ButtonPrint {
+        display: none; /* Opcjonalnie, ukryj przycisk drukowania */
+    }
+}

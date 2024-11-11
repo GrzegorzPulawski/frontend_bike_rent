@@ -23,20 +23,18 @@
     color: #ffcc00; /* Change text color on hover */
 }
 
-
-
-.HeaderRight {
-    margin-left: auto;
-    height: auto;
-    width: auto;
-    position: page;
-}
-
 .HeaderRight div {
     margin: 15px 30px 20px;
     display: inline-block;
     font-size: large;
     color: azure;
+}
+.HeaderRight {
+    margin-left: auto;
+    height: auto;
+    display: flex; /* Umożliwia ustawienie elementów w linii */
+    flex-wrap: wrap; /* Pozwala przyciskom na złamanie w nowym wierszu */
+    justify-content: flex-end; /* Wyrównanie do prawej */
 }
 
 .HeaderUser {
@@ -52,5 +50,27 @@
     }
     .ButtonPrint {
         display: none; /* Opcjonalnie, ukryj przycisk drukowania */
+    }
+}
+@media (max-width: 768px) { /* Dla ekranów o szerokości 768px i mniejszych */
+    .AppHeader {
+        flex-direction: column; /* Zmiana kierunku na kolumnę */
+        height: auto; /* Dostosuj wysokość */
+    }
+
+    .HeaderLeft {
+        margin: 10px 0; /* Dostosowanie marginesów */
+        flex: none; /* Resetowanie elastyczności dla HeaderLeft */
+    }
+
+    .HeaderRight {
+        justify-content: center; /* Wyśrodkowanie przycisków */
+        flex-direction: row; /* Utrzymanie wiersza */
+        width: 100%; /* Szerokość na 100% */
+    }
+
+    .HeaderRight div {
+        margin: 5px; /* Zmniejszenie marginesów na małych ekranach */
+        font-size: medium; /* Dostosowanie rozmiaru czcionki */
     }
 }

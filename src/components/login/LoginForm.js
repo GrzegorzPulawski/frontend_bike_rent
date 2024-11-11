@@ -1,5 +1,6 @@
 import * as React from 'react';
-import classNames from 'classnames'; // Upewnij się, że masz ten import
+import classNames from 'classnames';
+import styles from "./LoginForm.module.css";
 
 export default class LoginForm extends React.Component {
     constructor(props) {
@@ -37,7 +38,7 @@ export default class LoginForm extends React.Component {
 
     render() {
         return (
-            <div className="row justify-content-center">
+            <div className="row justify-content: center ">
                 <div className="col-4">
                     <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tab-list">
                         <li className="nav-item" role="presentation">
@@ -46,7 +47,7 @@ export default class LoginForm extends React.Component {
                                 id="tab-login"
                                 onClick={() => this.setState({ active: "login" })}
                             >
-                                Login
+                                Logowanie
                             </button>
                         </li>
                         <li className="nav-item" role="presentation">
@@ -55,7 +56,7 @@ export default class LoginForm extends React.Component {
                                 id="tab-register"
                                 onClick={() => this.setState({ active: "register" })}
                             >
-                                Register
+                                Rejestracja
                             </button>
                         </li>
                     </ul>
@@ -71,7 +72,7 @@ export default class LoginForm extends React.Component {
                                             className="form-control"
                                             onChange={this.onChangeHandler}
                                         />
-                                        <label className="form-label" htmlFor="loginName">Username</label>
+                                        <label className="form-label" htmlFor="loginName">Nazwa użytkownika</label>
                                     </div>
                                     <div className="form-outline mb-4">
                                         <input
@@ -81,9 +82,9 @@ export default class LoginForm extends React.Component {
                                             className="form-control"
                                             onChange={this.onChangeHandler}
                                         />
-                                        <label className="form-label" htmlFor="loginPassword">Password</label>
+                                        <label className="form-label" htmlFor="loginPassword">Hasło</label>
                                     </div>
-                                    <button type="submit" className="btn btn-primary btn-block mb-4">Sign in</button>
+                                    <button type="submit" className="btn btn-primary btn-block mb-4">Zatwierdź</button>
                                 </form>
                             </div>
                         )}
@@ -118,7 +119,7 @@ export default class LoginForm extends React.Component {
                                             className="form-control"
                                             onChange={this.onChangeHandler}
                                         />
-                                        <label className="form-label" htmlFor="login">UserName</label>
+                                        <label className="form-label" htmlFor="login">Nazwa użytkownika</label>
                                     </div>
                                     <div className="form-outline mb-4">
                                         <input
@@ -128,9 +129,9 @@ export default class LoginForm extends React.Component {
                                             className="form-control"
                                             onChange={this.onChangeHandler}
                                         />
-                                        <label className="form-label" htmlFor="password">Password</label>
+                                        <label className="form-label" htmlFor="password">Hasło</label>
                                     </div>
-                                    <button type="submit" className="btn btn-primary btn-block mb-4">Register</button>
+                                    <button type="submit" className="btn btn-primary btn-block mb-4">Zatwierdź</button>
                                 </form>
                             </div>
                         )}

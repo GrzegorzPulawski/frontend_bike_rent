@@ -27,8 +27,8 @@ const UserList = () => {
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Imię</th>
-                    <th>Nazwisko</th>
+                    <th>Nazwa firmy</th>
+                    <th>Nip firmy</th>
                     <th>Login</th>
                     <th>Rola</th>
                 </tr>

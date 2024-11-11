@@ -1,0 +1,14 @@
+.tab-container {
+    display: flex;
+    justify-content: center; /* Wyśrodkowanie w poziomie */
+    margin-bottom: 20px; /* Dodatkowy margines dolny, aby odseparować od formularza */
+}
+
+.nav-pills {
+    width: 100%; /* Ustalenie szerokości na 100% kontenera */
+    text-align: center; /* Wyśrodkowanie elementów w liście */
+}
+
+.nav-item {
+    margin: 0 10px; /* Dostosuj margines w poziomie między przyciskami */
+}

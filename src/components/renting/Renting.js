@@ -93,7 +93,7 @@ function Renting() {
                         </select>
                     </Col>
                     <Col className={classes.FormRow}>
-                        <label className={'form-input-label'}>Wybierz sprzęt do wypozyczenia:</label>
+                        <label className={'form-input-label'}>Wybierz sprzęt do wypożyczenia:</label>
                         <div className={classes.EquipmentList}>
                             {equipment.map(equip => (
                                 <div key={equip.idEquipment}>

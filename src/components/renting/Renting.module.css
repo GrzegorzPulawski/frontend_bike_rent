@@ -30,8 +30,8 @@
     text-align: left; /* Wyrównanie pól tekstowych do lewej */
 }
 .EquipmentList {
-    display: grid;
-    justify-content: start; /* Aligns the grid content to the left */
+    display: flex; /* Użyj flexbox do układania elementów */
+    flex-direction: column; /* Ułożenie w kolumnie */
     padding-left: 0; /* Optional: Adjust to fine-tune the left padding */
 
 }
@@ -50,10 +50,6 @@
     transform: scale(1.2); /* Increases checkbox size */
 
 }
-
-
-
-
 
 .Button {
     text-align: center;
@@ -81,11 +77,23 @@ p {
     text-align: left; /* Wyrównanie tekstu potwierdzenia do lewej */
 }
 
-
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* Dostosowania dla ekranów o szerokości 768px i mniejszych */
     .Form {
-        grid-template-columns: 1fr; /* Jedna kolumna na małych ekranach */
+        padding: 15px; /* Zmniejszone padding dla mniejszych ekranów */
+        border-radius: 5px; /* Dostosowanie promieni krzywizny */
     }
 
+    .FormRow {
+        margin-bottom: 15px; /* Zmniejszenie marginesu */
+    }
+
+    .form-input-field {
+        font-size: 14px; /* Mniejszy rozmiar czcionki w polach formularza */
+    }
+
+    .RentingButton {
+        padding: 8px 12px; /* Zmniejszone padding dla przycisku */
+        font-size: 16px; /* Dostosowanie rozmiaru czcionki */
+    }
 
 }

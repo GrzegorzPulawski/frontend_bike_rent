@@ -64,7 +64,7 @@ const RentingList = () => {
                 {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}
             </div>
             <Grid container  className={classes.TableHeader}>
-                <Grid item xs={1} className={classes.HeaderCell}>Select</Grid>
+                <Grid item xs={1} className={classes.HeaderCell}>Wybierz</Grid>
                 <Grid item xs={1} className={classes.HeaderCell}>Id</Grid>
                 <Grid item xs={1} className={classes.HeaderCell}>Nazwisko</Grid>
                 <Grid item xs={1} className={classes.HeaderCell}>Data wypożyczenia</Grid>

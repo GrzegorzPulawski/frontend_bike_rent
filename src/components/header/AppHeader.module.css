@@ -5,12 +5,14 @@
     margin: auto;
     display: flex;
     align-items: center; /* Wyśrodkowanie w pionie */
+
 }
 
 .HeaderLeft {
     display: flex; /* Umożliwia ustawienie elementów w linii */
     align-items: center; /* Wyśrodkowanie w pionie */
     margin-left: 20px;
+    flex:1;
 }
 .HeaderTitle {
     font-size: 1.5rem;

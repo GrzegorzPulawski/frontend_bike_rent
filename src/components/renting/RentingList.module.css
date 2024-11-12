@@ -3,23 +3,34 @@
     font-weight: bold;
     padding: 10px 0;
     text-align: center;
+    display: flex; /* Zmiana na flexbox */
+    flex-wrap: wrap; /* Umożliwienie zawijania elementów w nowym wierszu */
+    justify-content: space-between; /* Rozłożenie komórek */
 }
 
 .HeaderCell {
     padding: 10px 5px;
     text-align: center;
     border-bottom: 2px solid #ccc;
+    flex: 1 1 100px; /* Ustawienie elastycznej szerokości komórek */
+    min-width: 80px; /* U
 }
 
 .TableRow {
     padding: 10px 0;
     border-bottom: 1px solid #eee;
+    display: flex; /* Zmiana na flexbox */
+    flex-wrap: wrap; /* Umożliwienie zawijania elementów w nowym wierszu */
+    justify-content: space-between; /* Rozłożenie komórek */
 }
+
 
 .RowCell {
     padding: 10px 5px;
     text-align: center;
     font-size: 0.9rem;
+    flex: 1 1 100px; /* Ustawienie elastycznej szerokości komórek */
+    min-width: 80px; /* Ustalenie minimalnej szerokości komórek */
 }
 
 .TableRow:nth-of-type(even) {
@@ -44,7 +55,29 @@
     background-color: #0056b3;
     color: white;
 }
+/* Responsywność */
+@media (max-width: 768px) { /* Dostosowania dla ekranów o szerokości 768px i mniejszych */
+    .HeaderCell,
+    .RowCell {
+        font-size: 0.8rem; /* Mniejszy rozmiar czcionki */
+        padding: 8px 3px; /* Mniejsze odstępy */
+    }
 
+    .ButtonContainer {
+        flex-direction: column; /* Umożliwienie przyciskom ułożenie w kolumnie */
+        align-items: center; /* Wyśrodkowanie przycisków */
+    }
+
+    .TableHeader {
+        font-size: 1rem; /* Dostosowane do mniejszych ekranów */
+    }
+
+    .CustomButton {
+        width: 100%; /* Umożliwienie przyciskom wypełnienia kontenera */
+        max-width: 300px; /* Ustalenie max szerokości przycisku */
+        padding: 12px 0; /* Zwiększenie poduszek */
+    }
+}
 
 
 

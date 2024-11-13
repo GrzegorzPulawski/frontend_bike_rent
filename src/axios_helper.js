@@ -1,11 +1,6 @@
 import axios from "axios";
 
-const isDevelopment = process.env.NODE_ENV === 'development';
-
-axios.defaults.baseURL = isDevelopment
-    ? 'http://localhost:8080'
-    : 'https://smart-ski-a8fba8950c38.herokuapp.com';
-
+axios.defaults.baseURL ="https://smart-ski-a8fba8950c38.herokuapp.com";
 axios.defaults.headers["Content-Type"] = 'application/json';
 
 export const getAuthToken =() => {

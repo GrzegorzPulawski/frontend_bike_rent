@@ -13,7 +13,7 @@
     text-align: center;
     border-bottom: 2px solid #ccc;
     flex: 1 1 100px; /* Ustawienie elastycznej szerokości komórek */
-    min-width: 80px; /* U
+    min-width: 80px;
 }
 
 .TableRow {

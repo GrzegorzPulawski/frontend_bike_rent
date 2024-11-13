@@ -9,6 +9,7 @@
     margin: 0 auto;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
+
 }
 
 .FormRow {
@@ -27,18 +28,23 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
-    text-align: left; /* Wyrównanie pól tekstowych do lewej */
+
 }
 .EquipmentList {
-    display: flex; /* Użyj flexbox do układania elementów */
-    flex-direction: column; /* Ułożenie w kolumnie */
-    padding-left: 0; /* Optional: Adjust to fine-tune the left padding */
-
+    flex-direction: column;
+    max-width: 300px;
+    background-color: #f1f1f1;
+    font-weight: bold;
+    padding: 10px 10px 10px 10px;
+    text-align:left;
+    display: -ms-flexbox; /* Zmiana na flexbox */
+    flex-wrap: wrap; /* Umożliwienie zawijania elementów w nowym wierszu */
+    justify-content: space-between;
 }
 
 .EquipmentList div {
     display: flex; /* Flexbox to align items on the same line */
-    align-items: center; /* Aligns checkbox and text vertically on the same height */
+    align-items: flex-start; /* Aligns checkbox and text vertically on the same height */
     margin-bottom: 10px; /* Adds spacing between each row */
     white-space: nowrap; /* Zapobiega zawijaniu tekstu */
 
@@ -46,8 +52,10 @@
 
 
 .EquipmentList input[type="checkbox"] {
-    margin-right: 10px; /* Adds space between the checkbox and the label */
-    transform: scale(1.2); /* Increases checkbox size */
+    margin-left: 0px; /* Adds space between the checkbox and the label */
+    transform: scale(1.2);
+    display: flex;
+
 
 }
 

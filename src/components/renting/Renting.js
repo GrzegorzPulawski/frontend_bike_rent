@@ -71,18 +71,18 @@ function Renting() {
             <Container className={classes.Form}>
                 <Row>
                     <Col className={classes.FormRow}>
-                        <label className={'form-input-label'}>Wyszukaj klienta po nazwisku:</label>
+                        <label className={classes.formInputLabel}>Wyszukaj klienta po nazwisku:</label>
                         <input
                             type="text"
                             value={searchQuery}
                             onChange={handleSearch}
                             placeholder="Wpisz nazwisko klienta"
-                            className={'form-input-field'}
+                            className={classes.formInputField}
                         />
                         <select
                             value={selectedClient}
                             onChange={(e) => setSelectedClient(e.target.value)}
-                            className={'form-input-field'}
+                            className={classes.formInputField}
                         >
                             <option value="">Wybierz klienta</option>
                             {filteredClients.map(client => (
@@ -93,7 +93,7 @@ function Renting() {
                         </select>
                     </Col>
                     <Col className={classes.FormRow}>
-                        <label className={'form-input-label'}>Wybierz sprzęt do wypożyczenia:</label>
+                        <label className={classes.formInputLabel}>Wybierz sprzęt:</label>
                         <div className={classes.EquipmentList}>
                             {equipment.map(equip => (
                                 <div key={equip.idEquipment}>

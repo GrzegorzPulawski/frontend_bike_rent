@@ -1,6 +1,7 @@
 import axios from "axios";
 
 axios.defaults.baseURL ="https://smart-ski-a8fba8950c38.herokuapp.com";
+//axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.headers["Content-Type"] = 'application/json';
 
 export const getAuthToken =() => {

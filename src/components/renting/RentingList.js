@@ -2,11 +2,10 @@ import React, {useEffect, useState} from "react";
 import {Grid, Checkbox} from "@mui/material";
 import classes from "./RentingList.module.css"
 import {request} from "../../axios_helper";
-import moment from "moment";
 import ReturnRenting from "./ReturnRenting";
 import {Alert, Button} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-
+import moment from 'moment-timezone';
 
 const RentingList = () => {
     const [listRenting, setRentingList] = useState([]);
@@ -77,11 +76,11 @@ const RentingList = () => {
                 listRenting.map(value => {
                     //Formatuję datę wypozyczenia
                     var dataWypo = value.dateRenting;
-                    var dateRentingFormat = moment(dataWypo).format('DD/MM/YY HH:mm'); // Corrected to 'mm' for minutes
+                    var dateRentingFormat = moment(dataWypo).tz('Europe/Warsaw').format('DD/MM/YY HH:mm'); // Corrected to 'mm' for minutes
 
                     // Formatuję datę zwrotu
                     var dataZwro = value.dateOfReturn;
-                    var dateOfReturnFormat = moment(dataZwro).format('DD/MM/YY HH:mm'); // Corrected to 'mm' for minutes
+                    var dateOfReturnFormat = moment(dataZwro).tz('Europe/Warsaw').format('DD/MM/YY HH:mm'); // Corrected to 'mm' for minutes
 
 
                     return (<Grid container  className={classes.TableRow} key={value.idRenting}>

@@ -5,6 +5,7 @@ import {request} from "../../axios_helper";
 
 const FormClient = () => {
     const [formData, setFormData] = useState({
+
         firstName: '',
         lastName: '',
         identityCard: '',

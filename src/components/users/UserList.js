@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import {request} from "../../axios_helper";
+import {request, isUserInRole} from "../../axios_helper";
+
 
 const UserList = () => {
     // State do przechowywania listy użytkowników
     const [users, setUsers] = useState([]);
+    const[hasAccess, setHasAccess]= useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    // Funkcja do pobrania danych z backendu
+    useEffect(() => {
+        // Sprawdzaj rolę bezpośrednio
+        if (isUserInRole('DEVEL')) {
+            setHasAccess(true); // Użytkownik ma dostęp
+            fetchUsers(); // Wywołaj funkcję do pobrania użytkowników
+        } else {
+            setHasAccess(false);
+            setErrorMessage("Brak dostępu do listy użytkowników."); // Ustaw komunikat o błędzie
+        }
+    }, []);
+
     const fetchUsers = async () => {
         try {
-            const response = await request('get', '/api/user/all');
+            const response = await request('GET', '/api/user/all');
             setUsers(response.data);
         } catch (error) {
             console.error('Błąd podczas pobierania użytkowników:', error);
         }
     };
+    if (!hasAccess) {
+        return <div>{errorMessage}</div>; // Wyświetlanie komunikatu o błędzie
+    }
 
-    // Pobieranie danych po pierwszym renderze komponentu
-    useEffect(() => {
-        fetchUsers();
-    }, []);
 
     return (
         <div>

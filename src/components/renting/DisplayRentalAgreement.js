@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid } from "@mui/material";
-import moment from "moment";
+import moment from 'moment-timezone';
 import classes from "./DisplayRentalAgreement.module.css";
 import {Button} from "react-bootstrap";
 import {useEffect,useState} from "react";
@@ -11,7 +11,7 @@ function DisplayRentalAgreement({ renting }) {
 
     const [userDetails, setUserDetails] = useState({ firstName: '', lastName: '' });
     // Format the renting date
-    const dateRentingFormat = moment(renting.dateRenting).format('DD/MM/YY HH:mm');
+    const dateRentingFormat = moment(renting.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm');
 
     useEffect(() => {
         // Fetch user details from the getUserDetails endpoint

@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
+import moment from 'moment-timezone';
+
+// Optional: Set default timezone for Moment.js
+moment.tz.setDefault("Europe/Warsaw");
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

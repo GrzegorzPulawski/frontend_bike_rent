@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import styles from "./LoginForm.module.css";
+import {isUserInRole} from "../../axios_helper";
 
 export default class LoginForm extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ export default class LoginForm extends React.Component {
             login: "",
             password: "",
             onLogin: props.onLogin,
-            onRegister: props.onRegister
+            onRegister: props.onRegister,
         };
     }
 
@@ -27,6 +28,7 @@ export default class LoginForm extends React.Component {
     };
 
     onSubmitRegister = (e) => {
+
         this.state.onRegister(
             e,
             this.state.firstName,

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import AuthContent from "./AuthContent";
-import {request, setAuthToken} from "../../axios_helper";
+import {request, setAuthToken, isUserInRole} from "../../axios_helper";
 import LoginForm from '../login/LoginForm'
 import Buttons from '../login/Buttons'
 import WelcomeContent from "./WelcomeContent";
 import MessagesContent from './MessagesContent';
 
 export default class AppContent extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -16,6 +17,7 @@ export default class AppContent extends React.Component {
             userDetails: { firstName: ' ' }
         };
     };
+
     login = () => {
         this.setState({componentToShow: "login", errorMessage: "" });
     };
@@ -53,8 +55,14 @@ export default class AppContent extends React.Component {
                 this.setState({ componentToShow: "welcome" });
             });
     };
+
     onRegister = (e, firstName, lastName, username, password) => {
         e.preventDefault();
+        if (!isUserInRole('DEVEL')) {
+            this.setState({ errorMessage: "Brak dostępu: tylko deweloperzy mogą rejestrować nowych użytkowników." });
+            return; // Zatrzymaj proces rejestracji
+        }
+
         request("POST", "/api/auth/register", {
             firstName: firstName,
             lastName: lastName,
@@ -69,6 +77,7 @@ export default class AppContent extends React.Component {
             this.setState({componentToShow: "welcome", errorMessage:"Błąd w rejestracji"})
         });
     };
+
     render() {
         return (
             <div>
@@ -76,13 +85,9 @@ export default class AppContent extends React.Component {
                 {this.state.errorMessage && <p style={{ color: "red" }}>{this.state.errorMessage}</p>}
                 {this.state.logoutMessage && <p style={{ color: "green" }}>{this.state.logoutMessage}</p>}
                 {this.state.componentToShow === "welcome" && <WelcomeContent/>}
-                {this.state.componentToShow === "messages" && (
-                    // Przekazujemy actionType do AuthContent, aby wiedziało, który komunikat wyświetlić
-                    <AuthContent actionType="login" />
+                {this.state.componentToShow === "messages" && (<AuthContent actionType="login" />
                 ) && <MessagesContent userDetails={this.state.userDetails} />}
                 {this.state.componentToShow === "login" && <LoginForm onLogin={this.onLogin} onRegister={this.onRegister}/>}
-
-
 
             </div>
         )

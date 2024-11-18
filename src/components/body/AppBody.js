@@ -14,7 +14,7 @@ import EquipmentDelete from "../equipment/EquipmentDelete";
 import DailyRevenueReport from "../reports/DailyRevenueReport";
 import DeleteClient from "../client/DeleteClient";
 import AppContent from "../security/AppContent";
-import UserList from "../login/UserList";
+import UserList from "../users/UserList";
 
 const AppBody = () => {
 

@@ -1,4 +1,4 @@
-import  { request, getAuthToken, setAuthToken } from "../../axios_helper";
+import  { request, getAuthToken, setAuthToken} from "../../axios_helper";
 import {useState, useEffect} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import React from "react";
@@ -6,11 +6,13 @@ import classes from "./ClientList.module.css";
 import {useNavigate} from "react-router-dom";
 import Button from '@mui/material/Button';
 
+
 const ClientList =  () => {
     const [clientList1, setterClientList] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() =>{
+
           request('get','/api/clients')
 
             .then((response)=>{

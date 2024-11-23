@@ -15,6 +15,7 @@ import DailyRevenueReport from "../reports/DailyRevenueReport";
 import DeleteClient from "../client/DeleteClient";
 import AppContent from "../security/AppContent";
 import UserList from "../users/UserList";
+import PrintAgreements from "../renting/PrintAgreements";
 
 const AppBody = () => {
 
@@ -35,6 +36,7 @@ const AppBody = () => {
                 <Route path={"/deleteClient"} element={<DeleteClient/>}></Route>
                 <Route path={"/newlogin"} element={<AppContent/>}></Route>
                 <Route path={"/user-list"} element={<UserList/>}></Route>
+                <Route path="/printAgreements" element={<PrintAgreements />} />
             </Routes>
         </div>
     );

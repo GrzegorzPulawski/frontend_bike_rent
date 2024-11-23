@@ -1,0 +1,18 @@
+@media print {
+    .TableRow {
+        background-color: white !important;
+        color: black !important;
+        border: none;
+    }
+
+    .TableRow h4, .TableRow div {
+        color: black !important;
+    }
+
+    .AppHeader {
+        display: none; /* Ukryj nagłówek aplikacji */
+    }
+    .ButtonPrint {
+        display: none; /* Opcjonalnie, ukryj przycisk drukowania */
+    }
+}

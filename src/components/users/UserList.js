@@ -43,6 +43,7 @@ const UserList = () => {
                     <th>Nip firmy</th>
                     <th>Login</th>
                     <th>Rola</th>
+                    <th>Czas wypo kalendarzowy</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,6 +54,7 @@ const UserList = () => {
                         <td>{user.lastName}</td>
                         <td>{user.login}</td>
                         <td>{user.role}</td>
+                        <td>{user.calendar ? "Tak" : "Nie"}</td>
                     </tr>
                 ))}
                 </tbody>

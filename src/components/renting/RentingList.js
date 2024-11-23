@@ -35,10 +35,29 @@ const RentingList = () => {
         });
     };
     // Potwierdzenie i przekierowanie do umowy
-    const handleConfirmSelection = () => {
+    const handleConfirmSelection1 = () => {
         if (selectedRentings.length > 0) {
             // Przekierowanie do komponentu RentalAgreement z ID umowy
             navigate("/rentalAgreement", { state: { rentingId: selectedRentings[0] } }); // Zakładam, że wybierasz tylko jedną umowę
+        } else {
+            setErrorMessage("Proszę zaznaczyć co najmniej jedną umowę.");
+        }
+    };
+    const handleConfirmSelection = async () => {
+        if (selectedRentings.length > 0) {
+            try {
+                const response = await request('post', '/api/rentings/print', {idRentings: selectedRentings });
+                if (response.status === 200) {
+                    console.log('Navigating with data:', response.data); // Debug log
+                    navigate("/printAgreements", { state: { rentings: response.data } });
+                } else {
+                    setErrorMessage("Błąd podczas drukowania umów.");
+                }
+            } catch (error) {
+                setErrorMessage("Błąd podczas drukowania umów.");
+                console.error("Error during print request:", error);
+                console.error("Error response:", error.response);
+            }
         } else {
             setErrorMessage("Proszę zaznaczyć co najmniej jedną umowę.");
         }
@@ -48,7 +67,7 @@ const RentingList = () => {
         <div>
             <div className={classes.ButtonContainer}>
                 <Button
-                    variant="primary" // Change the variant for a different color
+                    variant="primary"
                     onClick={handleConfirmSelection}
                     disabled={selectedRentings.length === 0}
                     className={`btn-lg ${classes.CustomButton}`} // Adding custom classes
@@ -74,14 +93,13 @@ const RentingList = () => {
             </Grid>
             {
                 listRenting.map(value => {
-                    //Formatuję datę wypozyczenia
-                    var dataWypo = value.dateRenting;
-                    var dateRentingFormat = moment(dataWypo).tz('Europe/Warsaw').format('DD/MM/YY HH:mm'); // Corrected to 'mm' for minutes
+                    // Formatuj datę wypożyczenia
+                    const dateRentingFormat = moment(value.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm');
 
-                    // Formatuję datę zwrotu
-                    var dataZwro = value.dateOfReturn;
-                    var dateOfReturnFormat = moment(dataZwro).tz('Europe/Warsaw').format('DD/MM/YY HH:mm'); // Corrected to 'mm' for minutes
-
+                    // Ustal jak wyświetlić datę zwrotu
+                    const dateOfReturnFormat = value.dateOfReturn
+                        ? moment(value.dateOfReturn).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')
+                        : 'Wynajem w toku';
 
                     return (<Grid container  className={classes.TableRow} key={value.idRenting}>
                             <Grid item xs={1}>

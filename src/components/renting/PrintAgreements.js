@@ -32,7 +32,6 @@ const PrintAgreements = () => {
                 <div ref={componentRef} style={{ padding: '20px' } }>
                 <h3>Lista Umów Wypożyczeń</h3>
                 <h4> Na wypożyczenie sprzętu zimowego</h4>
-                <h4>Od firmy:, która ma NIP:</h4>
                 <div>Płatność za usługę nastąpi przy zwrocie sprzętu, w cyklu 24 godzinnym za dobę lub cyklu dziennym (Czytaj regulamin wypożyczalni).
                 Klient zobowiązuję się zwrócić sprzęt w stanie niepogorszonym. W przypadku uszkodzenia, kradzieży zobowiązuje się do pokrycia kosztów odtworzenia.</div>
 

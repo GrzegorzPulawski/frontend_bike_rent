@@ -15,7 +15,7 @@ const ReturnRenting = ({ selectedRentings, setSuccessMessage, setErrorMessage })
                     setSuccessMessage(`Zwrot wypożyczenia z Nr ID: ${idRenting} został pomyślnie zatwierdzony.`);
                     setTimeout(() => {
                         window.location.reload(); // Refresh the page after 5 seconds
-                    }, 2000);
+                    }, 1000);
                 })
                 .catch((error) => {
                     setErrorMessage(`Błąd zwrotu dla wypożyczenia z Nr ID: ${idRenting}: ${error.message}`);

@@ -49,7 +49,7 @@ function Renting() {
                 setSelectedEquipment([]);
                 setTimeout(() => {
                     navigate("/rentingList");
-                }, 3000);
+                }, 1000);
             })
             .catch(error => {
                 setConfirmationMessage("Wystąpił błąd podczas tworzenia wypożyczenia!");

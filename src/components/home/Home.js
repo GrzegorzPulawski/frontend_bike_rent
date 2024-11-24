@@ -45,11 +45,11 @@ function Home() {
                             <Card.Text className={styles.CardText}>
                                 Wybierz klienta z rozwijanej listy. Nowo dodany klient będzie na samej górze.
                                 Zaznacz sprzęt który chcesz wypożyczyć i kliknij utwórz wypożyczenie.
-                                Program po 3 sekundach przeniesie Cię do listy wypożyczeń.         .
+                                Program po 2 sekundach przeniesie Cię do listy wypożyczeń.         .
 
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer className={styles.CardFooter}> Wskazówka: Możesz jednocześnie zaznaczyć dowolną ilość sprzętu który chcesz wypożyczyć </Card.Footer>
+                        <Card.Footer className={styles.CardFooter}> Wskazówka: Możesz jednocześnie zaznaczyć dowolną ilość sprzętu który chcesz wypożyczyć dla jednego klienta </Card.Footer>
                     </Card>
                 </Col>
                 <Col className={styles.Col}>
@@ -60,14 +60,14 @@ function Home() {
                             </Card.Title>
                             <Card.Text className={styles.CardText}>
                                 Zaznacz wypożyczenie na podstawie którego wydrukujesz umowę z klientem.
-                                (Najnowsza będzie na górze.) Wciśnij Wyrukuj Umowę. Kasujesz za wypożyczenie przy zwrocie.
-                                Tutaj też zrobisz zwrot wypożyczenia. Zaznacz wypożyczenie do zwrotu.
+                                (Możesz zaznaczyć kilka umów). Wciśnij Wyrukuj Umowę. Kasujesz za wypożyczenie przy zwrocie.
+                                Tutaj też zrobisz zwrot wypożyczenia. Zaznacz Wypożyczenia do zwrotu.
                                 Naciśnij Zatwierdź Zwroty. Znajdź ponownie na liście zakończone wypożyczenie i odczytaj informacje:
                                 Data Zwrotu, Kwota Do Zapłaty, Ilość Dni Wypożyczenia.
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer className={styles.CardFooter}>Wskazówka: możesz zrobić zwrot wielu zaznaczonych wypożyczeń jednocześnie.
-                            Wydruk umowy tylko po jednej na raz</Card.Footer>
+                        <Card.Footer className={styles.CardFooter}>Wskazówka: Możesz zrobić zwrot wielu zaznaczonych wypożyczeń jednocześnie.
+                            </Card.Footer>
                     </Card>
                 </Col>
                 <Col className={styles.Col}>
@@ -98,15 +98,15 @@ function Home() {
                                 Wprowadż datę, dla której system ma wygenerować raport.
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer className={styles.CardFooter}>Informacja: System nalicza pierwszą dobę po stworzeniu wypożyczenia, kolejną dobę po 24 godzinach od wypożyczenia.
-                            Na przykład za 25 godzin wypożyczenia zapłacisz za dwie doby.
+                        <Card.Footer className={styles.CardFooter}>Ważne: System nalicza opłaty za wypożyczenie w czasie kalendarzowym(dzień) lub 24 godzinnym.
+                            Podaj adminstratorowi, który system wybierasz.
                         </Card.Footer>
                     </Card>
                 </Col>
             </Row>
             {/* Stopka z informacją */}
             <footer className={styles.footer}>
-                <p>Program napisała firma Mandragora. Kontakt: Krzysiek 698 653 421, Grzegorz 502 109 609</p>
+                <p>Program napisała firma Mandragora. Kontakt: Grzegorz 502 109 609</p>
             </footer>
         </>
 

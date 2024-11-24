@@ -29,21 +29,17 @@ const PrintAgreements = () => {
             <div className={classes.ButtonPrint}>
             <button onClick={handleSimplePrint} style={{ marginBottom: '20px' }}>Drukuj wszystkie umowy</button>
             </div>
-                <div ref={componentRef} style={{ padding: '20px' } }>
-                <h3>Lista Umów Wypożyczeń</h3>
-                <h4> Na wypożyczenie sprzętu zimowego</h4>
+                <div ref={componentRef} style={{ padding: '0px' } }>
+                <h3>Lista Umów Na Wypożyczenie Sprzętu Zimowego</h3>
                 <div>Płatność za usługę nastąpi przy zwrocie sprzętu, w cyklu 24 godzinnym za dobę lub cyklu dziennym (Czytaj regulamin wypożyczalni).
                 Klient zobowiązuję się zwrócić sprzęt w stanie niepogorszonym. W przypadku uszkodzenia, kradzieży zobowiązuje się do pokrycia kosztów odtworzenia.</div>
 
                 {rentings.map((renting) => (
-                    <Paper key={renting.idRenting} elevation={3} style={{ margin: '10px 0', padding: '15px' }}>
-                        <h4>Umowa wypożyczenia nr: {renting.idRenting}</h4>
-                        <p>Data wypożyczenia: {moment(renting.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')}</p>
+                    <Paper key={renting.idRenting} elevation={3} style={{ margin: '10px 10px', padding: '5px' }}>
+                        <h4>Data wypożyczenia: {moment.utc(renting.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')}, Umowa nr: {renting.idRenting}</h4>
                         <p>Klient Pani/Pan: {renting.firstName} {renting.lastName}</p>
-                        <p>Nr telefonu kontaktowego: {renting.phoneNumber}</p>
-                        <p>Nr dowodu: {renting.identityCard}</p>
-                        <p>Wypożycza komplet zimowy o nazwie : {renting.nameEquipment}</p>
-                        <p> W cenie za dobę: {renting.priceEquipment} zł</p>
+                        <p>Nr telefonu: {renting.phoneNumber}, Nr dowodu: {renting.identityCard}</p>
+                        <p>Wypożycza sprzęt zimowy o nazwie : {renting.nameEquipment}, W cenie za dobę/dzień: {renting.priceEquipment} zł</p>
                         <div justifyContent={"flex-end"}>CZYTELNY PODPIS KLIENTA:</div>
                     </Paper>
                 ))}

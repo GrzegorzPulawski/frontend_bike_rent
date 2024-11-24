@@ -93,13 +93,12 @@ const RentingList = () => {
             </Grid>
             {
                 listRenting.map(value => {
-                    // Formatuj datę wypożyczenia
-                    const dateRentingFormat = moment(value.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm');
-
-                    // Ustal jak wyświetlić datę zwrotu
+                    //formatowanie daty
+                    const dateRentingFormat = moment.utc(value.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm');
                     const dateOfReturnFormat = value.dateOfReturn
-                        ? moment(value.dateOfReturn).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')
+                        ? moment.utc(value.dateOfReturn).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')
                         : 'Wynajem w toku';
+
 
                     return (<Grid container  className={classes.TableRow} key={value.idRenting}>
                             <Grid item xs={1}>

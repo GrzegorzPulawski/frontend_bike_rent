@@ -1,5 +1,4 @@
 import * as React from 'react';
-import classNames from 'classnames';
 import styles from "./LoginForm.module.css";
 import {isUserInRole} from "../../axios_helper";
 
@@ -40,12 +39,12 @@ export default class LoginForm extends React.Component {
 
     render() {
         return (
-            <div className="row justify-content: center ">
-                <div className="col-4">
-                    <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tab-list">
+            <div className={styles.row}>
+                <div className={styles.col-4}>
+                    <ul className={`${styles.nav} nav nav-pills nav-justified mb-3 btn btn-secondary`} id="ex1" role="tab-list">
                         <li className="nav-item" role="presentation">
                             <button
-                                className={classNames("nav-link", this.state.active === "login" ? "active" : "")}
+                                className={`${styles.navLink} nav-link ${this.state.active === "login" ? "active" : ""}`}
                                 id="tab-login"
                                 onClick={() => this.setState({ active: "login" })}
                             >
@@ -54,7 +53,7 @@ export default class LoginForm extends React.Component {
                         </li>
                         <li className="nav-item" role="presentation">
                             <button
-                                className={classNames("nav-link", this.state.active === "register" ? "active" : "")}
+                                className={`${styles.navLink} nav-link ${this.state.active === "register" ? "active" : ""}`}
                                 id="tab-register"
                                 onClick={() => this.setState({ active: "register" })}
                             >

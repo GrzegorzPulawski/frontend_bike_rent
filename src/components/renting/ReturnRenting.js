@@ -1,27 +1,24 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import connection, {request} from "../../axios_helper";
+import  {request} from "../../axios_helper";
 import classes from "./ReturnRenting.module.css";
 
-const ReturnRenting = ({ selectedRentings, setSuccessMessage, setErrorMessage }) => {
+const ReturnRenting = ({ selectedRentings, setSuccessMessage, setErrorMessage, onReturnSuccess, onReturnNavigate}) => {
 
-
-    const submitReturns = () => {
-        selectedRentings.forEach(idRenting => {
-            const updateRenting = {}; // You can add properties here if needed
-
-            request("PUT", `/api/rentings/return/${idRenting}`, updateRenting)
-                .then((response) => {
-                    setSuccessMessage(`Zwrot wypożyczenia z Nr ID: ${idRenting} został pomyślnie zatwierdzony.`);
-                    setTimeout(() => {
-                        window.location.reload(); // Refresh the page after 5 seconds
-                    }, 1000);
-                })
-                .catch((error) => {
-                    setErrorMessage(`Błąd zwrotu dla wypożyczenia z Nr ID: ${idRenting}: ${error.message}`);
-                });
-        });
-    };
+    const submitReturns = async () => {
+            try {
+                const requests = selectedRentings.map(idRenting =>
+                    request("PUT", `/api/rentings/return/${idRenting}`, {})
+                );
+                await Promise.all(requests);
+                    setSuccessMessage(`Wszystkie wypożyczenia zostały pomyślnie zatwierdzone.`);
+                    onReturnSuccess();
+                onReturnNavigate(); // Wywołaj funkcję nawigacji po udanym zwróceniu
+                }
+                catch(error) {
+                    setErrorMessage(`Błąd zwrotu: ${error.message}`);
+                }
+        };
 
     return (
         <div className={classes.ButtonContainer}>
@@ -36,5 +33,4 @@ const ReturnRenting = ({ selectedRentings, setSuccessMessage, setErrorMessage })
         </div>
     );
 };
-
 export default ReturnRenting;

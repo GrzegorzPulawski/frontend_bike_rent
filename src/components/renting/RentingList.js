@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {Grid, Checkbox} from "@mui/material";
+import {Grid, Checkbox, TableRow} from "@mui/material";
 import classes from "./RentingList.module.css"
 import {request} from "../../axios_helper";
 import ReturnRenting from "./ReturnRenting";
 import {Alert, Button} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import moment from 'moment-timezone';
+
 
 const RentingList = () => {
     const [listRenting, setRentingList] = useState([]);
@@ -14,16 +15,17 @@ const RentingList = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        request('get',"/api/rentings")
-            .then((response)=>{
-                console.log(response);
-                setRentingList(response.data)
-            })
-            .catch((error)=>{
-                console.log(error);
-            });
-    },[]);
+    useEffect(() => {
+        const fetchRentings = async () => {
+            try {
+                const response = await request('get', "/api/rentings");
+                setRentingList(response.data);
+            } catch (error) {
+                console.error("Error fetching rentings:", error);
+            }
+        };
+        fetchRentings();
+    }, []);
     // Handle selecting/unselecting rentals
     const handleCheckboxChange = (idRenting) => {
         setSelectedRentings((prevSelected) => {
@@ -43,6 +45,7 @@ const RentingList = () => {
             setErrorMessage("Proszę zaznaczyć co najmniej jedną umowę.");
         }
     };
+    //Logika przekierowania do Listy umow
     const handleConfirmSelection = async () => {
         if (selectedRentings.length > 0) {
             try {
@@ -62,7 +65,14 @@ const RentingList = () => {
             setErrorMessage("Proszę zaznaczyć co najmniej jedną umowę.");
         }
     };
-
+    const handleReturnSuccess = async () => {
+        //Fetch updated renting list after successful return
+        const response = await request('get', '/api/rentings');
+        setRentingList(response.data);
+    }
+    const handleNavigateToRecentlyReturned = () => {
+        navigate('/show-currently-returned');
+    };
     return(
         <div>
             <div className={classes.ButtonContainer}>
@@ -73,11 +83,15 @@ const RentingList = () => {
                     className={`btn-lg ${classes.CustomButton}`} // Adding custom classes
                 >Wydrukuj umowę wypożyczenia
                 </Button>
-            <ReturnRenting
+
+                 <ReturnRenting
                 selectedRentings={selectedRentings}
                 setSuccessMessage={setSuccessMessage}
                 setErrorMessage={setErrorMessage}
-            />
+                onReturnSuccess={handleReturnSuccess}
+                onReturnNavigate={handleNavigateToRecentlyReturned} // Przekazanie funkcji nawigacji
+                 />
+
                 {successMessage && <Alert variant="success" className="mt-3">{successMessage}</Alert>}
                 {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}
             </div>
@@ -93,14 +107,20 @@ const RentingList = () => {
             </Grid>
             {
                 listRenting.map(value => {
+                    console.log(value);
                     //formatowanie daty
                     const dateRentingFormat = moment.utc(value.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm');
                     const dateOfReturnFormat = value.dateOfReturn
                         ? moment.utc(value.dateOfReturn).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')
                         : 'Wynajem w toku';
 
+                    // Ustawienie klasy w wierszu
+                    const rowClass = `${classes.TableRow} ${value.dateOfReturn ? 'returned' : ''}`;
 
-                    return (<Grid container  className={classes.TableRow} key={value.idRenting}>
+                    return (<Grid container
+                                  className={rowClass}
+                                  key={value.idRenting}>
+
                             <Grid item xs={1}>
                                 <Checkbox
                                     checked={selectedRentings.includes(value.idRenting)}

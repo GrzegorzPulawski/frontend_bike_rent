@@ -1,3 +1,6 @@
+.TableRow.returned {
+    background-color: #28a745; /* Delikatny zielony odcień dla zwróconych wypożyczeń */
+}
 .TableHeader {
     background-color: #f1f1f1;
     font-weight: bold;
@@ -55,6 +58,7 @@
     background-color: #0056b3;
     color: white;
 }
+
 /* Responsywność */
 @media (max-width: 768px) { /* Dostosowania dla ekranów o szerokości 768px i mniejszych */
     .HeaderCell,
@@ -77,6 +81,7 @@
         max-width: 300px; /* Ustalenie max szerokości przycisku */
         padding: 12px 0; /* Zwiększenie poduszek */
     }
+
 }
 
 

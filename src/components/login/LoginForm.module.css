@@ -1,14 +1,59 @@
-.tab-container {
+
+.row {
     display: flex;
-    justify-content: center; /* Wyśrodkowanie w poziomie */
-    margin-bottom: 20px; /* Dodatkowy margines dolny, aby odseparować od formularza */
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.nav-pills {
-    width: 100%; /* Ustalenie szerokości na 100% kontenera */
-    text-align: center; /* Wyśrodkowanie elementów w liście */
+.col-4 {
+    width: 33.33%;
+}
+
+.nav {
+    margin-bottom: 20px;
 }
 
 .nav-item {
-    margin: 0 10px; /* Dostosuj margines w poziomie między przyciskami */
+    flex: 1;
+}
+
+.nav-link {
+    text-align: center;
+    width: 100%;
+}
+
+.nav-link.active {
+    background-color: #007bff;
+    color: white;
+
+}
+
+.form-outline {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+}
+
+.form-label {
+    position: absolute;
+    left: 10px;
+    top: -10px;
+    font-size: 14px;
+    color: #343a40;
+}
+
+.btn-primary {
+    background-color: #007bff; /* Domyślny kolor */
+    color: white; /* Kolor tekstu */
+    border: lawngreen; /* Brak obramowania */
+    padding: 10px 20px; /* Odstępy wewnętrzne */
+    border-radius: 5px; /* Zaokrąglone rogi */
+    transition: background-color 0.3s; /* Gładka zmiana koloru */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Przyciemnienie koloru przy najechaniu */
 }

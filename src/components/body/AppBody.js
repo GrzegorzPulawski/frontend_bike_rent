@@ -16,6 +16,7 @@ import DeleteClient from "../client/DeleteClient";
 import AppContent from "../security/AppContent";
 import UserList from "../users/UserList";
 import PrintAgreements from "../renting/PrintAgreements";
+import ShowCurrentlyReturned from "../renting/ShowCurrentlyReturned";
 
 const AppBody = () => {
 
@@ -37,6 +38,7 @@ const AppBody = () => {
                 <Route path={"/newlogin"} element={<AppContent/>}></Route>
                 <Route path={"/user-list"} element={<UserList/>}></Route>
                 <Route path="/printAgreements" element={<PrintAgreements />} />
+                <Route path="/show-currently-returned" element={<ShowCurrentlyReturned />} />
             </Routes>
         </div>
     );

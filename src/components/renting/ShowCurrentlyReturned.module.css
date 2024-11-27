@@ -1,0 +1,14 @@
+.header {
+    font-weight: bold;
+    background-color: #f8f9fa; /* Jasnoszare tło dla nagłówka */
+    padding: 10px 0;
+}
+
+.rowCustom {
+    padding: 8px 0; /* Padding dla wierszy */
+}
+
+.colCustom {
+    border: 1px solid #dee2e6; /* Dodanie obramowania dla kolumn */
+    padding: 8px; /* Padding wewnętrzny */
+}

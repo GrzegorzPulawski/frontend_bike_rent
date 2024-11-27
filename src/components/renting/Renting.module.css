@@ -1,107 +1,73 @@
 /* Renting.module.css */
-
 .Form {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    max-width: 600px;
-    margin: 0 auto;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    text-align: left;
-
+    /* existing styles */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Add transition */
 }
 
-.FormRow {
-    margin-bottom: 20px;
-
+.Form:hover {
+    background-color: #ffffff; /* Changes background color on hover */
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1); /* Slightly enhance the shadow effect */
 }
 
-.form-input-label {
-    font-weight: bold;
-    display: list-item;
-    color: #333;
-}
-
-.form-input-field {
-    width: 100%;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-
-}
-.EquipmentList {
-    flex-direction: column;
-    max-width: 300px;
-    background-color: #f1f1f1;
-    font-weight: bold;
-    padding: 10px 10px 10px 10px;
-    text-align:left;
-    display: -ms-flexbox; /* Zmiana na flexbox */
-    flex-wrap: wrap; /* Umożliwienie zawijania elementów w nowym wierszu */
-    justify-content: space-between;
-}
-
-.EquipmentList div {
-    display: flex; /* Flexbox to align items on the same line */
-    align-items: flex-start; /* Aligns checkbox and text vertically on the same height */
-    margin-bottom: 10px; /* Adds spacing between each row */
-    white-space: nowrap; /* Zapobiega zawijaniu tekstu */
-
-}
-
-
-.EquipmentList input[type="checkbox"] {
-    margin-left: 0px; /* Adds space between the checkbox and the label */
-    transform: scale(1.2);
-    display: flex;
-
-
-}
-
-.Button {
-    text-align: center;
-    margin-top: 20px;
+.form-input-field:hover {
+    border: 1px solid #007bff; /* Focused border color */
 }
 
 .RentingButton {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    /* existing styles */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.RentingButton:hover {
-    background-color: #0056b3;
+.RentingButton:active {
+    background-color: #0056b3; /* Darker color when button is pressed */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-p {
-    font-size: 14px;
-    color: #28a745;
-    margin-top: 10px;
-    text-align: left; /* Wyrównanie tekstu potwierdzenia do lewej */
+/* Improved Checkbox Appearance */
+.EquipmentList input[type="checkbox"] {
+    transform: scale(1.5); /* Make checkboxes larger */
+    margin-right: 10px; /* Space between checkbox and label */
 }
-
-@media (max-width: 768px) { /* Dostosowania dla ekranów o szerokości 768px i mniejszych */
+@media (max-width: 768px) {
     .Form {
-        padding: 15px; /* Zmniejszone padding dla mniejszych ekranów */
+        padding: 10px; /* Zmniejszone padding dla mniejszych ekranów */
         border-radius: 5px; /* Dostosowanie promieni krzywizny */
     }
 
     .FormRow {
+        flex-direction: column; /* Zmiana układu na kolumnowy na mniejszych ekranach */
         margin-bottom: 15px; /* Zmniejszenie marginesu */
     }
 
+    .form-input-label {
+        font-size: 14px; /* Mniejszy rozmiar czcionki dla etykiet */
+    }
+
     .form-input-field {
-        font-size: 14px; /* Mniejszy rozmiar czcionki w polach formularza */
+        font-size: 16px; /* Mniejszy rozmiar czcionki dla pól formularza */
+        padding: 8px; /* Większy padding dla lepszej interakcji */
     }
 
-    .RentingButton {
-        padding: 8px 12px; /* Zmniejszone padding dla przycisku */
-        font-size: 16px; /* Dostosowanie rozmiaru czcionki */
+    .EquipmentList {
+        max-width: 100%; /* Rozszerzenie listy do 100% dostępnej szerokości */
     }
 
+    .EquipmentList div {
+        flex-direction: row; /* Utrzymanie elementów w wierszu */
+        align-items: center; /* Wyśrodkowanie checkboxa z tekstem */
+    }
+
+    .Button {
+        margin-top: 10px; /* Zmniejszenie górnego marginesu przycisków w mobilnych */
+    }
+
+    .RentingButton, .Button button {
+        width: 100%; /* Przycisk zajmuje 100% szerokości */
+        padding: 12px; /* Większy padding dla wygodnej interakcji */
+        font-size: 18px; /* Większy rozmiar czcionki dla przycisków */
+    }
+
+    p {
+        font-size: 16px; /* Utrzymanie czytelności powiadomień */
+    }
 }

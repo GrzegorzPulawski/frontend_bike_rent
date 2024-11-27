@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import moment from 'moment-timezone';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 // Optional: Set default timezone for Moment.js
 moment.tz.setDefault("Europe/Warsaw");
 

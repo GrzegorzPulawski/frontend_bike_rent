@@ -14,6 +14,7 @@ export default  class AppHeader extends React.Component {
                         <div className={classes.HeaderTitle}>Smart Ski Rent</div>
                     </Link>
                 </div>
+
                 <div className={classes.HeaderRight}>
                     <Link to={"/newlogin"}>
                         <div>Login</div>
@@ -27,6 +28,9 @@ export default  class AppHeader extends React.Component {
                     </Link>
                     <Link to={"/renting"}>
                         <div>Wypożycz</div>
+                    </Link>
+                    <Link to={"/show-currently-returned"}>
+                        <div>Aktualne zwroty</div>
                     </Link>
                     <Link to={"/list"}>
                         <div>Sprzęt</div>

@@ -49,7 +49,7 @@ function Renting() {
                 setSelectedEquipment([]);
                 setTimeout(() => {
                     navigate("/rentingList");
-                }, 1000);
+                }, 100);
             })
             .catch(error => {
                 setConfirmationMessage("Wystąpił błąd podczas tworzenia wypożyczenia!");
@@ -69,28 +69,49 @@ function Renting() {
     return (
         <div>
             <Container className={classes.Form}>
+                <Row className={classes.Button}>
+                    {confirmationMessage && <p>{confirmationMessage}</p>}
+                    <Col>
+                    <Button variant="primary" onClick={submit} className={classes.RentingButton}>
+                        Utwórz wypożyczenie
+                    </Button>
+                    </Col>
+                </Row>
+
+                <Row className={classes.Button}>
+                    <Col>
+                        <Button variant="outline-primary" onClick={() => navigate('/rentingList')} className={classes.RentingButton}>
+                            Zobacz listę wypożyczeń
+                        </Button>
+                    </Col>
+                </Row>
                 <Row>
                     <Col className={classes.FormRow}>
-                        <label className={classes.formInputLabel}>Wyszukaj klienta po nazwisku:</label>
-                        <input
-                            type="text"
-                            value={searchQuery}
-                            onChange={handleSearch}
-                            placeholder="Wpisz nazwisko klienta"
-                            className={classes.formInputField}
-                        />
-                        <select
-                            value={selectedClient}
-                            onChange={(e) => setSelectedClient(e.target.value)}
-                            className={classes.formInputField}
-                        >
-                            <option value="">Wybierz klienta</option>
-                            {filteredClients.map(client => (
-                                <option key={client.idClient} value={client.idClient}>
-                                    {client.lastName} {client.firstName}
-                                </option>
-                            ))}
-                        </select>
+                        <div>
+                            <label className={classes.formInputLabel}>Wyszukaj klienta po nazwisku:</label>
+                            <input
+                                type="text"
+                                value={searchQuery}
+                                onChange={handleSearch}
+                                placeholder="Wpisz nazwisko klienta"
+                                className={classes.formInputField}
+                            />
+                        </div>
+                        <div>
+                            <label className={classes.formInputLabel}>Wybierz klienta:</label>
+                            <select
+                                value={selectedClient}
+                                onChange={(e) => setSelectedClient(e.target.value)}
+                                className={classes.formInputField}
+                            >
+                                <option value="">Wybierz klienta</option>
+                                {filteredClients.map(client => (
+                                    <option key={client.idClient} value={client.idClient}>
+                                        {client.lastName} {client.firstName}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </Col>
                     <Col className={classes.FormRow}>
                         <label className={classes.formInputLabel}>Wybierz sprzęt:</label>
@@ -107,19 +128,6 @@ function Renting() {
                                 </div>
                             ))}
                         </div>
-                    </Col>
-                </Row>
-
-                <Row className={classes.Button}>
-                    {confirmationMessage && <p>{confirmationMessage}</p>}
-                    <Button variant={"light"} onClick={submit} className={classes.RentingButton}>Utwórz wypożyczenie</Button>
-                </Row>
-
-                <Row className={classes.Button}>
-                    <Col>
-                        <Button variant="primary" onClick={() => navigate('/rentingList')} className={classes.RentingButton}>
-                            Zobacz listę wypożyczeń
-                        </Button>
                     </Col>
                 </Row>
             </Container>

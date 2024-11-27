@@ -50,21 +50,21 @@ const ClientList =  () => {
 
             <Container className={classes.FormRow}>
                 <Row>
-                    <Col>Id</Col>
-                    <Col>Imię</Col>
-                    <Col>Nazwisko</Col>
-                    <Col>Numer dowodu</Col>
-                    <Col>Numer telefonu</Col>
+                    <Col md={1}>Id</Col>
+                    <Col md={2}>Imię</Col>
+                    <Col md={2}>Nazwisko</Col>
+                    <Col md={2}>Numer dowodu</Col>
+                    <Col md={2}>Numer telefonu</Col>
                 </Row>
             </Container>
             {clientList1.map(value => (
                 <Container key={value.idClient} className={classes.FormRow}>
                     <Row>
-                        <Col md={3}>{value.idClient}</Col>
-                        <Col md={3}>{value.firstName}</Col>
-                        <Col md={3}>{value.lastName}</Col>
-                        <Col md={3}>{value.identityCard}</Col>
-                        <Col md={3}>{value.phoneNumber}</Col>
+                        <Col md={1}>{value.idClient}</Col>
+                        <Col md={2}>{value.firstName}</Col>
+                        <Col md={2}>{value.lastName}</Col>
+                        <Col md={2}>{value.identityCard}</Col>
+                        <Col md={2}>{value.phoneNumber}</Col>
                     </Row>
                 </Container>
                 ))}

@@ -35,8 +35,8 @@ const UserList = () => {
     return (
         <div>
             <h2>Lista Użytkowników</h2>
-            <table>
-                <thead>
+            <table className="table table-striped table-bordered">
+                <thead className="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Nazwa firmy</th>

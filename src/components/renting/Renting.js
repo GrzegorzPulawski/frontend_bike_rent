@@ -104,7 +104,7 @@ function Renting() {
                                 onChange={(e) => setSelectedClient(e.target.value)}
                                 className={classes.formInputField}
                             >
-                                <option value="">Wybierz klienta</option>
+                                <option value="">Kliknij</option>
                                 {filteredClients.map(client => (
                                     <option key={client.idClient} value={client.idClient}>
                                         {client.lastName} {client.firstName}

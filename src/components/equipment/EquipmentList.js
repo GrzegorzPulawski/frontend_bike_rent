@@ -34,7 +34,7 @@ const EquipmentList = () => {
 
     return (
         <div className={classes.Equipment}>
-            <h2>Lista sprzętu - opcje dostęne tylko dla szefa </h2>
+            <h2>Lista sprzętu</h2>
 
             <Button
                 variant="contained"

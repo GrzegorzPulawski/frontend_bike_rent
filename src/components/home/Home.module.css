@@ -65,7 +65,7 @@
     text-align: justify;
     padding: 10px;
 }
-.Footer {
+.footer {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -76,6 +76,11 @@
     width: 100%; /* Szerokość kontenera */
     text-align: left; /* Wyrównanie tekstu do lewej strony */
     z-index: 1000;
+}
+
+
+.content {
+    flex: 1; /* Sprawia, że zawartość zajmuje maksymalną przestrzeń */
 }
 
 @media (max-width: 1024px) {
@@ -90,12 +95,4 @@
         flex-basis: 100%; /* Jedna kolumna na małych ekranach */
         max-width: 100%;
     }
-}
-.footer {
-    background-color: #f1f1f1;
-    text-align: center;
-    padding: 5px;
-    width: calc(91vw - 19px);
-    font-size: 14px;
-    margin-top: auto; /* Może być użyte, jeśli jest w flexbox/grid */
 }

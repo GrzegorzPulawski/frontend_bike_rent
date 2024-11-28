@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Grid, Checkbox, TableRow} from "@mui/material";
+import { Checkbox} from "@mui/material";
 import classes from "./RentingList.module.css"
 import {request} from "../../axios_helper";
 import ReturnRenting from "./ReturnRenting";
-import {Alert, Button} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {Alert, Button, Col, Row, Container} from "react-bootstrap";
+import { useNavigate} from "react-router-dom";
 import moment from 'moment-timezone';
 
 
@@ -95,20 +95,19 @@ const RentingList = () => {
                 {successMessage && <Alert variant="success" className="mt-3">{successMessage}</Alert>}
                 {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}
             </div>
-            <Grid container  className={classes.TableHeader}>
-                <Grid item xs={1} className={classes.HeaderCell}>Wybierz</Grid>
-                <Grid item xs={1} className={classes.HeaderCell}>Id</Grid>
-                <Grid item xs={1} className={classes.HeaderCell}>Nazwisko</Grid>
-                <Grid item xs={1} className={classes.HeaderCell}>Data wypożyczenia</Grid>
-                <Grid item xs={1} className={classes.HeaderCell}>Sprzęt</Grid>
-                <Grid item xs={1} className={classes.HeaderCell}>Data zwrotu</Grid>
-                <Grid item xs={1} className={classes.HeaderCell}>Cena całkowita</Grid>
-                <Grid item xs={1} className={classes.HeaderCell}>Ilość dni</Grid>
-            </Grid>
-            {
-                listRenting.map(value => {
-                    console.log(value);
-                    //formatowanie daty
+            <Container>
+                <Row className={classes.TableHeader}>
+                    <Col xs={1} className={classes.HeaderCell}>Wybierz</Col>
+                    <Col xs={1} className={classes.HeaderCell}>Id</Col>
+                    <Col xs={1} className={classes.HeaderCell}>Nazwisko</Col>
+                    <Col xs={1} className={classes.HeaderCell}>Data wypożyczenia</Col>
+                    <Col xs={1} className={classes.HeaderCell}>Sprzęt</Col>
+                    <Col xs={1} className={classes.HeaderCell}>Data zwrotu</Col>
+                    <Col xs={1} className={classes.HeaderCell}>Cena całkowita</Col>
+                    <Col xs={1} className={classes.HeaderCell}>Ilość dni</Col>
+                </Row>
+                {listRenting.map(value => {
+                    // formatowanie daty
                     const dateRentingFormat = moment.utc(value.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm');
                     const dateOfReturnFormat = value.dateOfReturn
                         ? moment.utc(value.dateOfReturn).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')
@@ -117,24 +116,25 @@ const RentingList = () => {
                     // Ustawienie klasy w wierszu
                     const rowClass = `${classes.TableRow} ${value.dateOfReturn ? 'returned' : ''}`;
 
-                    return (<Grid container
-                                  className={rowClass}
-                                  key={value.idRenting}>
-
-                            <Grid item xs={1}>
+                    return (
+                        <Row className={rowClass} key={value.idRenting}>
+                            <Col xs={1}>
                                 <Checkbox
                                     checked={selectedRentings.includes(value.idRenting)}
                                     onChange={() => handleCheckboxChange(value.idRenting)}
                                 />
-                            </Grid>
-                        <Grid item xs={1}className={classes.RowCell}>{value.idRenting}</Grid>
-                        <Grid item xs={1}className={classes.RowCell}>{value.lastName}</Grid>
-                        <Grid item xs={1}className={classes.RowCell}>{dateRentingFormat}</Grid>
-                        <Grid item xs={1}className={classes.RowCell}>{value.nameEquipment}</Grid>
-                        <Grid item xs={1}className={classes.RowCell}>{dateOfReturnFormat}</Grid>
-                        <Grid item xs={1}className={classes.RowCell}>{value.priceOfDuration}</Grid>
-                        <Grid item xs={1}className={classes.RowCell}>{value.daysOfRental}</Grid>
-                    </Grid>)
+                            </Col>
+                            <Col xs={1} className={classes.RowCell}>{value.idRenting}</Col>
+                            <Col xs={1} className={classes.RowCell}>{value.lastName}</Col>
+                            <Col xs={1} className={classes.RowCell}>{dateRentingFormat}</Col>
+                            <Col xs={1} className={classes.RowCell}>{value.nameEquipment}</Col>
+                            <Col xs={1} className={classes.RowCell}>{dateOfReturnFormat}</Col>
+                            <Col xs={1} className={classes.RowCell}>{value.priceOfDuration}</Col>
+                            <Col xs={1} className={classes.RowCell}>{value.daysOfRental}</Col>
+                        </Row>
+                    );
+                })}
+            </Container>
                 })
             }
 

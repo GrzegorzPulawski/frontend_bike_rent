@@ -1,63 +1,35 @@
-.TableRow.returned {
-    background-color: #28a745; /* Delikatny zielony odcień dla zwróconych wypożyczeń */
-}
 .TableHeader {
-    background-color: #f1f1f1;
-    font-weight: bold;
-    padding: 10px 0;
-    text-align: center;
-    display: flex; /* Zmiana na flexbox */
-    flex-wrap: wrap; /* Umożliwienie zawijania elementów w nowym wierszu */
-    justify-content: space-between; /* Rozłożenie komórek */
+    background-color: #f8f9fa; /* Jasne tło dla nagłówka */
+    font-weight: bold; /* Pogrubienie tekstu nagłówka */
+    text-align: left; /* Wyrównanie tekstu do lewej */
+    border-bottom: 2px solid #dee2e6; /* Dolna ramka dla nagłówka */
+    padding: 10px; /* Odstęp wewnętrzny w nagłówku */
 }
 
 .HeaderCell {
-    padding: 10px 5px;
-    text-align: center;
-    border-bottom: 2px solid #ccc;
-    flex: 1 1 100px; /* Ustawienie elastycznej szerokości komórek */
-    min-width: 80px;
+    padding: 10px; /* Odstęp wewnętrzny dla komórek nagłówka */
 }
 
 .TableRow {
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    display: flex; /* Zmiana na flexbox */
-    flex-wrap: wrap; /* Umożliwienie zawijania elementów w nowym wierszu */
-    justify-content: space-between; /* Rozłożenie komórek */
+    border-bottom: 1px solid #dee2e6; /* Dolna krawędź dla wierszy tabeli */
+    padding: 10px; /* Odstęp wewnętrzny w wierszach */
 }
-
 
 .RowCell {
-    padding: 10px 5px;
-    text-align: center;
-    font-size: 0.9rem;
-    flex: 1 1 100px; /* Ustawienie elastycznej szerokości komórek */
-    min-width: 80px; /* Ustalenie minimalnej szerokości komórek */
+    padding: 10px; /* Odstęp wewnętrzny dla komórek danych */
 }
 
-.TableRow:nth-of-type(even) {
-    background-color: #fafafa;
-}
-.ButtonContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    align-items: center; /* This will vertically align the buttons */
+/* Opcjonalnie: zmiana koloru wiersza po najechaniu */
+.TableRow:hover {
+    background-color: #f1f1f1; /* Podświetlenie wiersza podczas najechania */
 }
 
-.CustomButton {
-    padding: 12px 4px;
-    font-size: 18px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-    margin-right: 10px; /* Add some margin to separate the buttons */
+/* Styl dla checkboxów, aby były bardziej widoczne */
+input[type="checkbox"] {
+    transform: scale(1.2); /* Powiększenie checkboxa */
+    margin: 0; /* Usunięcie dodatkowego marginesu */
 }
 
-.CustomButton:hover {
-    background-color: #0056b3;
-    color: white;
-}
 
 /* Responsywność */
 @media (max-width: 768px) { /* Dostosowania dla ekranów o szerokości 768px i mniejszych */

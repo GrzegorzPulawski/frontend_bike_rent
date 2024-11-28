@@ -1,33 +1,51 @@
 /* Renting.module.css */
 .Form {
-    /* existing styles */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Add transition */
+    max-width: 800px;
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Padding around the form */
+    border: 1px solid #ccc; /* Optional: border around the form */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
 }
 
-.Form:hover {
-    background-color: #ffffff; /* Changes background color on hover */
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1); /* Slightly enhance the shadow effect */
-}
-
-.form-input-field:hover {
-    border: 1px solid #007bff; /* Focused border color */
+.Button {
+    margin-bottom: 20px; /* Space between button rows */
+    text-align: center; /* Center-align buttons */
 }
 
 .RentingButton {
-    /* existing styles */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Full-width buttons */
+    padding: 10px; /* Padding for buttons */
+    font-size: 16px; /* Font size */
 }
 
-.RentingButton:active {
-    background-color: #0056b3; /* Darker color when button is pressed */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+.FormRow {
+    margin-bottom: 15px; /* Space between form rows */
 }
 
-/* Improved Checkbox Appearance */
-.EquipmentList input[type="checkbox"] {
-    transform: scale(1.5); /* Make checkboxes larger */
-    margin-right: 10px; /* Space between checkbox and label */
+.formInputLabel {
+    display: block; /* Display label as block element */
+    margin-bottom: 5px; /* Space below label */
+    font-weight: bold; /* Bold label text */
 }
+
+.formInputField {
+    width: 100%; /* Full width for input fields and select */
+    padding: 10px; /* Padding */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding in width */
+    font-size: 14px; /* Font size */
+}
+
+
+input[type="checkbox"] {
+
+    transform: translateY(25px); /* Dostosowanie położenia checkboxa w górę */
+}
+
+
+
 @media (max-width: 768px) {
     .Form {
         padding: 10px; /* Zmniejszone padding dla mniejszych ekranów */

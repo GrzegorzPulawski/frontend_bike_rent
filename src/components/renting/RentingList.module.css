@@ -1,61 +1,20 @@
-.TableHeader {
-    background-color: #f8f9fa; /* Jasne tło dla nagłówka */
-    font-weight: bold; /* Pogrubienie tekstu nagłówka */
-    text-align: left; /* Wyrównanie tekstu do lewej */
-    border-bottom: 2px solid #dee2e6; /* Dolna ramka dla nagłówka */
-    padding: 10px; /* Odstęp wewnętrzny w nagłówku */
+.mt-3 {
+    margin-top: 1rem; /* Standard margin */
 }
 
-.HeaderCell {
-    padding: 10px; /* Odstęp wewnętrzny dla komórek nagłówka */
+.me-2 {
+    margin-right: 0.5rem; /* Margin for Bootstrap button separation */
 }
 
-.TableRow {
-    border-bottom: 1px solid #dee2e6; /* Dolna krawędź dla wierszy tabeli */
-    padding: 10px; /* Odstęp wewnętrzny w wierszach */
+/* Styles for returned rows */
+.bg-success {
+    background-color: #28a745 !important;
 }
-
-.RowCell {
-    padding: 10px; /* Odstęp wewnętrzny dla komórek danych */
+.checkbox {
+    transform: translateY(-25px); /* Adjust this value to fine-tune the vertical position */
 }
-
-/* Opcjonalnie: zmiana koloru wiersza po najechaniu */
-.TableRow:hover {
-    background-color: #f1f1f1; /* Podświetlenie wiersza podczas najechania */
-}
-
-/* Styl dla checkboxów, aby były bardziej widoczne */
-input[type="checkbox"] {
-    transform: scale(1.2); /* Powiększenie checkboxa */
-    margin: 0; /* Usunięcie dodatkowego marginesu */
-}
-
-
-/* Responsywność */
-@media (max-width: 768px) { /* Dostosowania dla ekranów o szerokości 768px i mniejszych */
-    .HeaderCell,
-    .RowCell {
-        font-size: 0.8rem; /* Mniejszy rozmiar czcionki */
-        padding: 8px 3px; /* Mniejsze odstępy */
+@media (max-width: 768px) {
+    .checkbox {
+        transform: translateY(-12px); /* Smaller adjustment for mobile, if needed */
     }
-
-    .ButtonContainer {
-        flex-direction: column; /* Umożliwienie przyciskom ułożenie w kolumnie */
-        align-items: center; /* Wyśrodkowanie przycisków */
-    }
-
-    .TableHeader {
-        font-size: 1rem; /* Dostosowane do mniejszych ekranów */
-    }
-
-    .CustomButton {
-        width: 100%; /* Umożliwienie przyciskom wypełnienia kontenera */
-        max-width: 300px; /* Ustalenie max szerokości przycisku */
-        padding: 12px 0; /* Zwiększenie poduszek */
-    }
-
 }
-
-
-
-

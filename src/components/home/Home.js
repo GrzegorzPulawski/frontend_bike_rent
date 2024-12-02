@@ -18,7 +18,7 @@ function Home() {
                                 Login
                             </Card.Title>
                             <Card.Text className={styles.CardText}>
-                                Logujesz się przy pomocy nazwy i hasła. Zwróć uwagę na wielkość liter.
+                                Logujesz się przy pomocy nazwy i hasła. Program sam wyloguje użytkownika po 1 godzinie.
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer className={styles.CardFooter}> Ważne: Podaj adminstartorwi, który cykl wypożyczenia: dobowy(24h), czy kalendarzowy(dzień), będziesz używał</Card.Footer>

@@ -9,7 +9,6 @@ import FormClient from "../client/FormClient";
 import Renting from "../renting/Renting";
 import RentingList from "../renting/RentingList";
 import ReturnRenting from "../renting/ReturnRenting";
-import RentalAgreement from "../renting/RentalAgreement";
 import EquipmentDelete from "../equipment/EquipmentDelete";
 import DailyRevenueReport from "../reports/DailyRevenueReport";
 import DeleteClient from "../client/DeleteClient";
@@ -31,7 +30,6 @@ const AppBody = () => {
                 <Route path={"/renting"} element={<Renting/>}></Route>
                 <Route path={"/rentingList"} element={<RentingList/>}></Route>
                 <Route path={"/returnRenting"} element={<ReturnRenting/>}></Route>
-                <Route path={"/rentalAgreement"} element={<RentalAgreement/>}></Route>
                 <Route path={"/equipmentDelete"} element={<EquipmentDelete/>}></Route>
                 <Route path={"/dailyReport"} element={<DailyRevenueReport/>}></Route>
                 <Route path={"/deleteClient"} element={<DeleteClient/>}></Route>

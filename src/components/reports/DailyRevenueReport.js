@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Alert } from 'react-bootstrap';
 import  {request} from "../../axios_helper";
-import classes from "./DailyRevenueReport.module.css"
+import styles from "./DailyRevenueReport.module.css"
 
 const DailyRevenueReport = () => {
     const [date, setDate] = useState('');
@@ -21,9 +21,8 @@ const DailyRevenueReport = () => {
             console.error(error);
         }
     };
-
     return (
-        <Container>
+        <Container className={styles.container}>
             <h2>Raport dzienny przychodów</h2>
             <form onSubmit={handleSubmit}>
                 <Row>
@@ -38,7 +37,7 @@ const DailyRevenueReport = () => {
                         />
                     </Col>
                     <Col>
-                        <Button type="submit" variant="primary">Generuj raport</Button>
+                        <Button type="submit" variant="primary" className={styles.button}>Generuj raport</Button>
                     </Col>
                 </Row>
             </form>

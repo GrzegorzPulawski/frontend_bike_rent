@@ -67,12 +67,12 @@ const RentingList = () => {
     };
     return (
         <div>
-            <div className="d-flex justify-content-center align-items-center mt-3">
+            <div className="d-flex flex-column flex-md-row justify-content-center align-items-center mt-3">
                 <Button
                     variant="primary"
                     onClick={handleConfirmSelection}
                     disabled={selectedRentings.length === 0}
-                    className="btn-lg me-2"
+                    className="btn-lg me-2 mb-2 mb-md-0"  // 'mb-2' dla marginesu na mniejszych ekranach
                 >
                     Wydrukuj umowę wypożyczenia
                 </Button>
@@ -88,45 +88,47 @@ const RentingList = () => {
 
             {successMessage && <Alert variant="success" className="mt-3">{successMessage}</Alert>}
             {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}
-        <Container>
-            <Row className="bg-light fw-bold text-center py-2 mb-3">
-                <Col >Wybierz</Col>
-                <Col >Id</Col>
-                <Col >Nazwisko</Col>
-                <Col >Data wypożyczenia</Col>
-                <Col >Sprzęt</Col>
-                <Col >Data zwrotu</Col>
-                <Col >Cena całkowita</Col>
-                <Col >Ilość dni</Col>
-            </Row>
-            {
-                listRenting.map(value => {
-                    const dateRentingFormat = moment.utc(value.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm');
-                    const dateOfReturnFormat = value.dateOfReturn
-                        ? moment.utc(value.dateOfReturn).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')
-                        : 'Wynajem w toku';
 
-                    return (
-                        <Row className={`py-2 border-bottom text-center justify-content-between ${value.dateOfReturn ? 'bg-success text-white' : ''}`} key={value.idRenting}>
-                            <Col >
-                                <Form.Check
-                                    type="checkbox"
-                                    checked={selectedRentings.includes(value.idRenting)}
-                                    onChange={() => handleCheckboxChange(value.idRenting)}
-                                    className={styles.checkbox}
-                                />
-                            </Col>
-                            <Col >{value.idRenting}</Col>
-                            <Col >{value.lastName}</Col>
-                            <Col >{dateRentingFormat}</Col>
-                            <Col >{value.nameEquipment}</Col>
-                            <Col >{dateOfReturnFormat}</Col>
-                            <Col >{value.priceOfDuration}</Col>
-                            <Col >{value.daysOfRental}</Col>
-                        </Row>
-                    );
-                })
-            }</Container>
+            <Container>
+                <Row className="bg-light fw-bold text-center py-2 mb-3">
+                    <Col xs={1}>Wybierz</Col>
+                    <Col xs={1}>Id</Col>
+                    <Col xs={2}>Nazwisko</Col>
+                    <Col xs={2}>Data wypożyczenia</Col>
+                    <Col xs={2}>Sprzęt</Col>
+                    <Col xs={2}>Data zwrotu</Col>
+                    <Col xs={1}>Cena całkowita</Col>
+                    <Col xs={1}>Ilość dni</Col>
+                </Row>
+                {
+                    listRenting.map(value => {
+                        const dateRentingFormat = moment.utc(value.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm');
+                        const dateOfReturnFormat = value.dateOfReturn
+                            ? moment.utc(value.dateOfReturn).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')
+                            : 'Wynajem w toku';
+
+                        return (
+                            <Row className={`py-2 border-bottom text-center justify-content-between ${value.dateOfReturn ? 'bg-success text-white' : ''}`} key={value.idRenting}>
+                                <Col xs={1}>
+                                    <Form.Check
+                                        type="checkbox"
+                                        checked={selectedRentings.includes(value.idRenting)}
+                                        onChange={() => handleCheckboxChange(value.idRenting)}
+                                        className={styles.checkbox}
+                                    />
+                                </Col>
+                                <Col xs={1}>{value.idRenting}</Col>
+                                <Col xs={2}>{value.lastName}</Col>
+                                <Col xs={2}>{dateRentingFormat}</Col>
+                                <Col xs={2}>{value.nameEquipment}</Col>
+                                <Col xs={2}>{dateOfReturnFormat}</Col>
+                                <Col xs={1}>{value.priceOfDuration}</Col>
+                                <Col xs={1}>{value.daysOfRental}</Col>
+                            </Row>
+                        );
+                    })
+                }
+            </Container>
         </div>
     );
 }

@@ -14,7 +14,23 @@
     transform: translateY(-25px); /* Adjust this value to fine-tune the vertical position */
 }
 @media (max-width: 768px) {
-    .checkbox {
-        transform: translateY(-12px); /* Smaller adjustment for mobile, if needed */
+    .container {
+        padding: 15px; /* Mniejszy padding na małych ekranach */
+    }
+
+    h2 {
+        font-size: 1.5rem; /* Zmniejszony rozmiar nagłówka */
+    }
+
+    /* Użycie większego paddingu dla kolumn w nagłówku */
+    .bg-light {
+        padding: 10px; /* Padding dla nagłówka tabeli */
+    }
+
+    /* Poprawienie paddingu dla wszystkich wierszy tabeli */
+    .py-2 {
+        padding-top: 8px; /* Mniejszy padding górny */
+        padding-bottom: 8px; /* Mniejszy padding dolny */
     }
 }
+

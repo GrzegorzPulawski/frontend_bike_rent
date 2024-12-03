@@ -1,11 +1,9 @@
-import  { request, getAuthToken, setAuthToken} from "../../axios_helper";
+import  { request} from "../../axios_helper";
 import {useState, useEffect} from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row, Button} from "react-bootstrap";
 import React from "react";
 import classes from "./ClientList.module.css";
 import {useNavigate} from "react-router-dom";
-import Button from '@mui/material/Button';
-
 
 const ClientList =  () => {
     const [clientList1, setterClientList] = useState([]);
@@ -56,15 +54,13 @@ const ClientList =  () => {
                     />
                 </div>
             <Button
-                variant="contained"
-                color="primary"
+                variant="primary"
                 onClick={goToAddClient}
                 style={{ margin: '10px' }}>
                 Dodaj Klienta
             </Button>
             <Button
-                variant="contained"
-                color="primary"
+                variant="primary"
                 onClick={goToDeleteClient}
                 style={{ margin: '10px' }}>
                 Usuń Klienta

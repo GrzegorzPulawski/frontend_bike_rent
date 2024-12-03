@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Paper } from '@mui/material';
 import moment from 'moment-timezone';
 import { useReactToPrint } from 'react-to-print';
 import classes from "./PrintAgreements.module.css";
+import {Card} from "react-bootstrap";
 
 const PrintAgreements = () => {
     const location = useLocation();
@@ -35,13 +35,13 @@ const PrintAgreements = () => {
                 Klient zobowiązuję się zwrócić sprzęt w stanie niepogorszonym. W przypadku uszkodzenia, kradzieży zobowiązuje się do pokrycia kosztów odtworzenia.</div>
 
                 {rentings.map((renting) => (
-                    <Paper key={renting.idRenting} elevation={3} style={{ margin: '10px 10px', padding: '5px' }}>
+                    <Card key={renting.idRenting}  style={{ margin: '10px 10px', padding: '5px' }}>
                         <h4>Data wypożyczenia: {moment.utc(renting.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')}, Umowa nr: {renting.idRenting}</h4>
                         <p>Klient Pani/Pan: {renting.firstName} {renting.lastName}</p>
                         <p>Nr telefonu: {renting.phoneNumber}, Nr dowodu: {renting.identityCard}</p>
                         <p>Wypożycza sprzęt zimowy o nazwie : {renting.nameEquipment}, W cenie za dobę/dzień: {renting.priceEquipment} zł</p>
                         <div justifyContent={"flex-end"}>CZYTELNY PODPIS KLIENTA:</div>
-                    </Paper>
+                    </Card>
                 ))}
             </div>
         </div>

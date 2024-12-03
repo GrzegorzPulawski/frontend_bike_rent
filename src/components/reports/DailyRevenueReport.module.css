@@ -1,83 +1,60 @@
 /* DailyRevenueReport.module.css */
 
-.Container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    max-width: 600px;
-    margin: 0 auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.container {
+    padding: 20px; /* Padding dla kontenera */
+    background-color: #f9f9f9; /* Kolor tła */
+    border-radius: 8px; /* Zaokrąglenie krawędzi */
+    max-width: 600px; /* Maksymalna szerokość kontenera */
+    margin: auto; /* Wyśrodkowanie kontenera */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Cień */
 }
 
 h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
+    text-align: center; /* Wyśrodkowanie nagłówka */
+    color: #333; /* Kolor nagłówka */
+    margin-bottom: 20px; /* Margines dolny */
 }
 
 label {
-    font-weight: bold;
-    color: #333;
+    font-weight: bold; /* Pogrubienie etykiety */
+    margin-right: 10px; /* Odstęp od elementu input */
 }
 
 input[type="date"] {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 100%;
-    max-width: 300px;
-    box-sizing: border-box;
-    font-size: 16px;
+    padding: 5px; /* Padding wewnętrzny */
+    border-radius: 5px; /* Zaokrąglenie krawędzi */
+    border: 1px solid #ccc; /* Ramka */
+    width: 100%; /* Pełna szerokość */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Cień */
 }
 
 input[type="date"]:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: #007bff; /* Kolor ramki po focie */
+    outline: none; /* Usunięcie domyślnego konturu */
 }
 
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 16px;
+.button {
+    margin-top: 20px; /* Margines dla przycisku */
+    width: 100%; /* Pełna szerokość */
 }
 
-button:hover {
-    background-color: #0056b3;
+.alert {
+    margin-top: 20px; /* Margines dla alertów */
 }
+@media (max-width: 768px) {
+    .container {
+        padding: 15px; /* Mniejszy padding na małych ekranach */
+    }
 
-.Alert {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: 500;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 20px auto; /* Center the alert */
-}
+    h2 {
+        font-size: 1.5rem; /* Zmniejszony rozmiar nagłówka */
+    }
 
-.Alert-success {
-    background-color: #e9f7ef;
-    color: #2d6a4f;
-    border: 1px solid #b7e4c7;
-}
+    input[type="date"] {
+        padding: 8px; /* Miększy padding w polu daty */
+    }
 
-.Alert-danger {
-    background-color: #f8d7da;
-    color: #842029;
-    border: 1px solid #f5c6cb;
+    .button {
+        margin-top: 10px; /* Mniejszy margines dla przycisków */
+    }
 }

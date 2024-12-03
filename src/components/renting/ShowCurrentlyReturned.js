@@ -4,12 +4,15 @@ import styles from "./ShowCurrentlyReturned.module.css";
 import {Container,Col,Row, Button} from "react-bootstrap";
 import moment from "moment-timezone";
 import jsPDF from 'jspdf';
+import classes from "./Renting.module.css";
+import {useNavigate} from "react-router-dom";
 
 const ShowCurrentlyReturned = () => {
     const [recentlyReturned, setRecentlyReturned] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [selectedItems, setSelectedItems] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchRecentlyReturned = async () => {
@@ -84,6 +87,13 @@ const ShowCurrentlyReturned = () => {
     return (
         <Container className="table-responsive">
             <h3>Aktualne zwroty</h3>
+            <Row className={classes.Button}>
+                <Col>
+                    <Button variant="primary" onClick={() => navigate('/rentingList')} className={classes.RentingButton}>
+                        Wróć do listy wypożyczeń
+                    </Button>
+                </Col>
+            </Row>
                 <Row className={`${styles.header} mb-2`}>
                 <Col><strong>Wybierz</strong></Col>
                 <Col><strong>Id</strong></Col>

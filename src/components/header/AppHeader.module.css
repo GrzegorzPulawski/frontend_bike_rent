@@ -1,19 +1,22 @@
 .AppHeader {
     background-color: var(--header);
     height: 50px;
-    width: 90vw;
-    margin: auto;
+    width: calc(97vw - 8px);
+    position: sticky; /* Ustawienie jako sticky */
+    top: 0; /* Przyklejenie do góry */
+    z-index: 1000; /* Upewnij się, że nagłówek jest na wierzchu */
     display: flex;
     align-items: center; /* Wyśrodkowanie w pionie */
-
+    margin: auto;
 }
 
 .HeaderLeft {
     display: flex; /* Umożliwia ustawienie elementów w linii */
     align-items: center; /* Wyśrodkowanie w pionie */
     margin-left: 20px;
-    flex:1;
+    flex: 1;
 }
+
 .HeaderTitle {
     font-size: 1.5rem;
     font-weight: bold;
@@ -21,8 +24,16 @@
     text-decoration: none;
     transition: color 0.3s ease; /* Smooth hover effect */
 }
+
 .HeaderTitle:hover {
-    color: #ffcc00; /* Change text color on hover */
+    color: #ffcc00; /* Zmiana koloru tekstu przy najechaniu */
+}
+
+.HeaderRight {
+    margin-left: auto; /* Wyrównanie do prawej */
+    display: flex; /* Umożliwia ustawienie elementów w linii */
+    flex-wrap: wrap; /* Pozwala przyciskom na złamanie w nowym wierszu */
+    justify-content: flex-end; /* Wyrównanie do prawej */
 }
 
 .HeaderRight div {
@@ -31,38 +42,31 @@
     font-size: large;
     color: azure;
 }
-.HeaderRight {
-    margin-left: auto;
-    height: auto;
-    display: flex; /* Umożliwia ustawienie elementów w linii */
-    flex-wrap: wrap; /* Pozwala przyciskom na złamanie w nowym wierszu */
-    justify-content: flex-end; /* Wyrównanie do prawej */
-}
 
 .HeaderUser {
     margin-left: 20px;
     font-size: 1rem;
     color: #ffffff;
-    opacity: 0.9; /* Slightly dimmed text */
+    opacity: 0.9; /* Lekko przyciemniony tekst */
 }
 
 @media print {
     .AppHeader {
-        display: none; /* Ukryj nagłówek aplikacji */
-    }
-    .ButtonPrint {
-        display: none; /* Opcjonalnie, ukryj przycisk drukowania */
+        display: none; /* Ukryj nagłówek aplikacji przy drukowaniu */
     }
 }
+
 @media (max-width: 768px) { /* Dla ekranów o szerokości 768px i mniejszych */
     .AppHeader {
+        height: auto; /* Dostosuj wysokość dla mniejszych ekranów */
         flex-direction: column; /* Zmiana kierunku na kolumnę */
-        height: auto; /* Dostosuj wysokość */
+        align-items: flex-start; /* Wyrównanie do początku */
     }
 
     .HeaderLeft {
         margin: 10px 0; /* Dostosowanie marginesów */
         flex: none; /* Resetowanie elastyczności dla HeaderLeft */
+        width: 100%; /* Upewnij się, że element zajmuje pełną szerokość */
     }
 
     .HeaderRight {

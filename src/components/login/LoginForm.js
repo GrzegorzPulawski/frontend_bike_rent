@@ -12,7 +12,7 @@ export default class LoginForm extends React.Component {
             login: "",
             password: "",
             onLogin: props.onLogin,
-            onRegister: props.onRegister,
+            onRegister: props.onRegister
         };
     }
 
@@ -23,20 +23,18 @@ export default class LoginForm extends React.Component {
     };
 
     onSubmitLogin = (e) => {
-        this.state.onLogin(e, this.state.login, this.state.password);
+        this.state.onLogin(e, this.state.login, this.state.password)
     };
 
     onSubmitRegister = (e) => {
-
-        this.state.onRegister(
-            e,
-            this.state.firstName,
-            this.state.lastName,
-            this.state.login,
-            this.state.password
-        );
-    }
-
+            this.state.onRegister(
+                e,
+                this.state.firstName,
+                this.state.lastName,
+                this.state.login,
+                this.state.password
+            );
+        }
     render() {
         return (
             <div className={styles.row}>
@@ -100,7 +98,7 @@ export default class LoginForm extends React.Component {
                                             className="form-control"
                                             onChange={this.onChangeHandler}
                                         />
-                                        <label className="form-label" htmlFor="firstName">Nazwa firmy</label>
+                                        <label className="form-label" htmlFor="firstName">Imię</label>
                                     </div>
                                     <div className="form-outline mb-4">
                                         <input
@@ -110,7 +108,7 @@ export default class LoginForm extends React.Component {
                                             className="form-control"
                                             onChange={this.onChangeHandler}
                                         />
-                                        <label className="form-label" htmlFor="lastName">NIP firmy</label>
+                                        <label className="form-label" htmlFor="lastName">Nazwisko</label>
                                     </div>
                                     <div className="form-outline mb-4">
                                         <input
@@ -120,7 +118,7 @@ export default class LoginForm extends React.Component {
                                             className="form-control"
                                             onChange={this.onChangeHandler}
                                         />
-                                        <label className="form-label" htmlFor="login">Nazwa użytkownika</label>
+                                        <label className="form-label" htmlFor="login">Login</label>
                                     </div>
                                     <div className="form-outline mb-4">
                                         <input

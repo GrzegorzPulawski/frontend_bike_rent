@@ -4,7 +4,7 @@ const MessagesContent = ({ userDetails }) => {
     return (
         <div>
             <h1>Witaj, {userDetails.firstName}!</h1>
-            {/* Możesz dodać inne dane, które chcesz wyświetlić */}
+            <h4>Zalogowano poprawnie</h4>
         </div>
     );
 };

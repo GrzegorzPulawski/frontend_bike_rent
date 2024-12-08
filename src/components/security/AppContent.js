@@ -58,10 +58,6 @@ export default class AppContent extends React.Component {
 
     onRegister = (e, firstName, lastName, username, password) => {
         e.preventDefault();
-        if (!isUserInRole('DEVEL')) {
-            this.setState({ errorMessage: "Brak dostępu: tylko deweloperzy mogą rejestrować nowych użytkowników." });
-            return; // Zatrzymaj proces rejestracji
-        }
 
         request("POST", "/api/auth/register", {
             firstName: firstName,

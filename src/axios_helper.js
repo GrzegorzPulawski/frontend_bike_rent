@@ -11,18 +11,20 @@ export const getAuthToken =() => {
 export const setAuthToken = (token) => {
      window.localStorage.setItem("auth_token", token);
 };
-export const getUserRole = () => {
-    const token = getAuthToken();
-    if (token) {
-        const decoded = jwtDecode(token);
+
+export const getUserRole = (token) => {
+    if (!token) { throw new Error("No token provided");
+    } try { const decoded = jwtDecode(token);
         return decoded.role;
-    }
-    return null;
+    } catch (error) { throw new Error("Invalid token specified: " + error.message); }
 };
 export const isUserInRole = (role) => {
-    const userRole = getUserRole();
-    return userRole === role;
-};
+    try { const token = getAuthToken();
+        if (!token) { return false; }
+        const userRole = getUserRole(token);
+        return userRole === role;
+    } catch (error) { console.error(error.message); return false; } };
+
 export const request = (method, url, data) => {
     let headers = {};
     if (getAuthToken() !== null && getAuthToken() !== "null"){

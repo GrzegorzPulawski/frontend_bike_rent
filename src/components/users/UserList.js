@@ -39,11 +39,11 @@ const UserList = () => {
                 <thead className="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Nazwa firmy</th>
-                    <th>Nip firmy</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
                     <th>Login</th>
                     <th>Rola</th>
-                    <th>Czas wypo kalendarzowy</th>
+                    <th>Czas kalendarzowy</th>
                 </tr>
                 </thead>
                 <tbody>

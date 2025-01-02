@@ -93,6 +93,7 @@ const RentingList = () => {
                 <Row className="bg-light fw-bold text-center py-2 mb-3">
                     <Col xs={1}>Wybierz</Col>
                     <Col xs={1}>Id</Col>
+                    <Col xs={1}>Imię</Col>
                     <Col xs={2}>Nazwisko</Col>
                     <Col xs={2}>Data wypożyczenia</Col>
                     <Col xs={2}>Sprzęt</Col>
@@ -118,6 +119,7 @@ const RentingList = () => {
                                     />
                                 </Col>
                                 <Col xs={1}>{value.idRenting}</Col>
+                                <Col xs={1}>{value.firstName}</Col>
                                 <Col xs={2}>{value.lastName}</Col>
                                 <Col xs={2}>{dateRentingFormat}</Col>
                                 <Col xs={2}>{value.nameEquipment}</Col>

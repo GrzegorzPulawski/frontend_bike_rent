@@ -35,7 +35,7 @@ export default  class AppHeader extends React.Component {
                     <Link to={"/list"}>
                         <div>Sprzęt</div>
                     </Link>
-                    <Link to={"/dailyReport"}>
+                    <Link to={"/reports"}>
                         <div>Raporty</div>
                     </Link>
                 </div>

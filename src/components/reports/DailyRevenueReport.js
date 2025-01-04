@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Button, Alert } from 'react-bootstrap';
 import  {request} from "../../axios_helper";
 import styles from "./DailyRevenueReport.module.css"
+import {useNavigate} from "react-router-dom";
 
 const DailyRevenueReport = () => {
     const [date, setDate] = useState('');
     const [revenue, setRevenue] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,6 +22,9 @@ const DailyRevenueReport = () => {
             setErrorMessage('Wystąpił błąd podczas pobierania raportu.');
             console.error(error);
         }
+    };
+    const handleNavigateToAllReturned = () => {
+        navigate('/show-all-returned'); // Navigate to the ShowAllReturned page
     };
     return (
         <Container className={styles.container}>
@@ -52,6 +57,7 @@ const DailyRevenueReport = () => {
                     {errorMessage}
                 </Alert>
             )}
+
         </Container>
     );
 };

@@ -16,6 +16,9 @@ import AppContent from "../security/AppContent";
 import UserList from "../users/UserList";
 import PrintAgreements from "../renting/PrintAgreements";
 import ShowCurrentlyReturned from "../renting/ShowCurrentlyReturned";
+import ShowAllReturned from "../reports/ShowAllReturned";
+import Reports from "../reports/Reports";
+import ShowDailyReturned from "../reports/ShowDailyReturned";
 
 const AppBody = () => {
 
@@ -31,12 +34,15 @@ const AppBody = () => {
                 <Route path={"/rentingList"} element={<RentingList/>}></Route>
                 <Route path={"/returnRenting"} element={<ReturnRenting/>}></Route>
                 <Route path={"/equipmentDelete"} element={<EquipmentDelete/>}></Route>
-                <Route path={"/dailyReport"} element={<DailyRevenueReport/>}></Route>
+                <Route path={"/daily-report"} element={<DailyRevenueReport/>}></Route>
                 <Route path={"/deleteClient"} element={<DeleteClient/>}></Route>
                 <Route path={"/newlogin"} element={<AppContent/>}></Route>
                 <Route path={"/user-list"} element={<UserList/>}></Route>
                 <Route path="/printAgreements" element={<PrintAgreements />} />
                 <Route path="/show-currently-returned" element={<ShowCurrentlyReturned />} />
+                <Route path="/show-all-returned" element={<ShowAllReturned />} />
+                <Route path="/reports" element={<Reports />} />
+                <Route path="/show-daily-returned" element={<ShowDailyReturned />} />
             </Routes>
         </div>
     );

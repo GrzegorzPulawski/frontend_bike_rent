@@ -12,6 +12,7 @@ function Renting() {
     const [equipment, setEquipment] = useState([]);
     const [selectedEquipment, setSelectedEquipment] = useState([]);
     const [confirmationMessage, setConfirmationMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -37,11 +38,13 @@ function Renting() {
     };
 
     const submit = () => {
+        if (loading) return;
+
         const createRenting = {
             idClient: selectedClient, // Selected client ID
             idEquipment: selectedEquipment // Selected equipment IDs
         };
-
+        setLoading(true); // Set loading to true
         request("POST",'/api/rentings', createRenting)
             .then(response => {
                 setConfirmationMessage("Utworzono wypożyczenie!");
@@ -49,10 +52,13 @@ function Renting() {
                 setSelectedEquipment([]);
                 setTimeout(() => {
                     navigate("/rentingList");
-                }, 100);
+                });
             })
             .catch(error => {
                 setConfirmationMessage("Wystąpił błąd podczas tworzenia wypożyczenia!");
+            })
+            .finally(() => {
+                setLoading(false); // Reset loading status
             });
     };
 
@@ -72,8 +78,8 @@ function Renting() {
                 <Row className={classes.Button}>
                     {confirmationMessage && <p>{confirmationMessage}</p>}
                     <Col>
-                    <Button variant="primary" onClick={submit} className={classes.RentingButton}>
-                        Utwórz wypożyczenie
+                    <Button variant="primary" onClick={submit} disabled={loading} className={classes.RentingButton}>
+                        {loading ? 'Zapisuję...' : 'Utwórz Wypożyczenie'}
                     </Button>
                     </Col>
                 </Row>

@@ -94,7 +94,7 @@ const RentingList = () => {
                     <Col xs={1}>Wybierz</Col>
                     <Col xs={1}>Id</Col>
                     <Col xs={1}>Imię</Col>
-                    <Col xs={2}>Nazwisko</Col>
+                    <Col xs={1}>Nazwisko</Col>
                     <Col xs={2}>Data wypożyczenia</Col>
                     <Col xs={2}>Sprzęt</Col>
                     <Col xs={2}>Data zwrotu</Col>
@@ -102,7 +102,9 @@ const RentingList = () => {
                     <Col xs={1}>Ilość dni</Col>
                 </Row>
                 {
-                    listRenting.map(value => {
+                    listRenting
+                        .filter(value => !value.dateOfReturn) // Only include rentals that are not returned
+                        .map(value => {
                         const dateRentingFormat = moment.utc(value.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm');
                         const dateOfReturnFormat = value.dateOfReturn
                             ? moment.utc(value.dateOfReturn).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')
@@ -120,7 +122,7 @@ const RentingList = () => {
                                 </Col>
                                 <Col xs={1}>{value.idRenting}</Col>
                                 <Col xs={1}>{value.firstName}</Col>
-                                <Col xs={2}>{value.lastName}</Col>
+                                <Col xs={1}>{value.lastName}</Col>
                                 <Col xs={2}>{dateRentingFormat}</Col>
                                 <Col xs={2}>{value.nameEquipment}</Col>
                                 <Col xs={2}>{dateOfReturnFormat}</Col>

@@ -23,7 +23,7 @@ const ReturnRenting = ({ selectedRentings, setSuccessMessage, setErrorMessage, o
     return (
         <div className={classes.ButtonContainer}>
             <Button
-                variant="primary" // Change the variant for a different color
+                variant="danger" // Change the variant for a different color
                 onClick={submitReturns}
                 disabled={selectedRentings.length === 0}
                 className={`btn-lg ${classes.CustomButton}`} // Adding custom classes

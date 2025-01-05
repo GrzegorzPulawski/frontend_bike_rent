@@ -15,6 +15,9 @@ const ReportMenu = () => {
     const handleNavigateToDailyReturned = () => {
         navigate('/show-daily-returned');
     }
+    const handleNavigateRentalCreated = () => {
+        navigate('/daily-rented-report');
+    }
     return (
         <Container className="mt-5">
             <h2>Menu Raportów</h2>
@@ -31,7 +34,12 @@ const ReportMenu = () => {
                 </Col>
                 <Col xs={4} className="mb-3">
                     <Button variant="primary" onClick={handleNavigateToDailyReturned} className="w-100">
-                        Dzienne Zwrócone Wypożyczenia
+                        Zwrócone Wypożyczenia w Dniu
+                    </Button>
+                </Col>
+                <Col xs={4} className="mb-3">
+                    <Button variant="primary" onClick={handleNavigateRentalCreated} className="w-100">
+                        Utworzone Wypożyczenia w Dniu
                     </Button>
                 </Col>
             </Row>

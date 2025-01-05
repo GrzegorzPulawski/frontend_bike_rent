@@ -32,15 +32,14 @@ const RentingList = () => {
     };
 
     const filteredRentings = listRenting
-      .filter(value => value.dateOfReturn && moment(value.dateOfReturn).isSame(selectedDate, 'day')); // Filter for rentals returned on the selected date
-//.filter(value => !value.dateOfReturn && value.dateRenting && moment(value.dateRenting).isSame(selectedDate, 'day'));
+    .filter(value =>  value.dateRenting && moment(value.dateRenting).isSame(selectedDate, 'day'));
     const totalRentalsCount = filteredRentings.length;
-    const totalPrice = filteredRentings.reduce((sum, value) => sum + value.priceOfDuration, 0);
+
 
     return (
         <div>
             <Container>
-                <h2>Lista zwróconych wypożyczeń w dniu</h2>
+                <h2>Lista utworzonych wypożyczeń w dniu</h2>
 
                 <Form.Group>
                     <Form.Label>Wybierz datę:</Form.Label>
@@ -62,13 +61,11 @@ const RentingList = () => {
 
                 <Row className="bg-light fw-bold text-center py-2 mb-3 mt-3">
                     <Col xs={1}>Id</Col>
-                    <Col xs={1}>Imię</Col>
+                    <Col xs={2}>Imię</Col>
                     <Col xs={2}>Nazwisko</Col>
                     <Col xs={2}>Data wypożyczenia</Col>
                     <Col xs={2}>Sprzęt</Col>
-                    <Col xs={2}>Data zwrotu</Col>
-                    <Col xs={1}>Cena całkowita</Col>
-                    <Col xs={1}>Ilość dni</Col>
+                    <Col xs={3}>Cena</Col>
                 </Row>
                 {
                     filteredRentings.length > 0 ? (
@@ -79,35 +76,27 @@ const RentingList = () => {
                             return (
                                 <Row className={`py-2 border-bottom text-center justify-content-between`} key={value.idRenting}>
                                     <Col xs={1}>{value.idRenting}</Col>
-                                    <Col xs={1}>{value.firstName}</Col>
+                                    <Col xs={2}>{value.firstName}</Col>
                                     <Col xs={2}>{value.lastName}</Col>
                                     <Col xs={2}>{dateRentingFormat}</Col>
                                     <Col xs={2}>{value.nameEquipment}</Col>
-                                    <Col xs={2}>{dateOfReturnFormat}</Col>
-                                    <Col xs={1}>{value.priceOfDuration}</Col>
-                                    <Col xs={1}>{value.daysOfRental}</Col>
+                                    <Col xs={3}>{value.priceEquipment}</Col>
                                 </Row>
                             );
                         })
                     ) : (
                         <Row>
-                            <Col className="text-center">Brak zwróconych wypożyczeń na tę datę.</Col>
+                            <Col className="text-center">Brak utworzonych wypożyczeń na tę datę.</Col>
                         </Row>
                     )
                 } {filteredRentings.length > 0 && (
                 <Row className="fw-bold text-center mt-3">
-                    <Col xs={8}>Ilość zwróconych wypożyczeń w ciągu dnia:</Col>
+                    <Col xs={8}>Ilość utworzonych wypożyczeń w ciągu dnia:</Col>
                     <Col xs={2}>{totalRentalsCount} wypożyczeń</Col>
                     <Col xs={2}></Col>
                 </Row>
             )}
-                {filteredRentings.length > 0 && (
-                    <Row className="fw-bold text-center mt-3">
-                        <Col xs={8}>Suma całkowita:</Col>
-                        <Col xs={2}>{totalPrice} PLN</Col>
-                        <Col xs={2}></Col>
-                    </Row>
-                )}
+
             </Container>
         </div>
     );

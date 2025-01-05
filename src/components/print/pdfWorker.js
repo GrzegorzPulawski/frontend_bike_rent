@@ -6,7 +6,7 @@ export const generatePdf = (recentlyReturned, selectedItems) => {
 
     doc.addFont('fonts/Roboto-Medium.ttf', 'Roboto-Medium', 'normal');
     doc.setFont('Roboto-Medium');
-    doc.setFontSize(12);
+    doc.setFontSize(10);
 
     let verticalPosition = 10; // Starting from the top
     const marginX = 10;        // Left margin
@@ -16,7 +16,8 @@ export const generatePdf = (recentlyReturned, selectedItems) => {
 
     recentlyReturned.forEach((item) => {
         if (selectedItems.includes(item.idRenting)) {
-            doc.text(`Potwierdzenie przyjecia zwrotu sprzętu Nr: ${item.idRenting}`, marginX, verticalPosition + 10);
+            doc.text(`Potwierdzenie przyjecia `, marginX, verticalPosition + 5);
+            doc.text(`zwrotu sprzętu Nr: ${item.idRenting}`, marginX, verticalPosition + 10);
             doc.text(`Imię: ${item.firstName}`, marginX, verticalPosition + 20);
             doc.text(`Nazwisko: ${item.lastName}`, marginX, verticalPosition + 25);
             doc.text(`Data wypożyczenia: ${moment.utc(item.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')}`, marginX, verticalPosition + 30);

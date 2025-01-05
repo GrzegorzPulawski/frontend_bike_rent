@@ -68,6 +68,7 @@ const RentingList = () => {
     return (
         <div>
             <div className="d-flex flex-column flex-md-row justify-content-center align-items-center mt-3">
+                <Col xs={6} className="text-start">
                 <Button
                     variant="primary"
                     onClick={handleConfirmSelection}
@@ -76,7 +77,7 @@ const RentingList = () => {
                 >
                     Wydrukuj umowę wypożyczenia
                 </Button>
-
+                </Col>
                 <ReturnRenting
                     selectedRentings={selectedRentings}
                     setSuccessMessage={setSuccessMessage}

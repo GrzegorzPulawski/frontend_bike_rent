@@ -19,6 +19,7 @@ import ShowCurrentlyReturned from "../renting/ShowCurrentlyReturned";
 import ShowAllReturned from "../reports/ShowAllReturned";
 import Reports from "../reports/Reports";
 import ShowDailyReturned from "../reports/ShowDailyReturned";
+import DailyRentedReport from "../reports/DailyRentedReport";
 
 const AppBody = () => {
 
@@ -43,6 +44,7 @@ const AppBody = () => {
                 <Route path="/show-all-returned" element={<ShowAllReturned />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/show-daily-returned" element={<ShowDailyReturned />} />
+                <Route path="/daily-rented-report" element={<DailyRentedReport />} />
             </Routes>
         </div>
     );

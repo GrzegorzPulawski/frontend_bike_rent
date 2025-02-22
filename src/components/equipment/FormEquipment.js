@@ -3,9 +3,19 @@ import classes from "./FormEquipment.module.css";
 import  {request, isUserInRole} from "../../axios_helper";
 import {useState,useEffect} from "react";
 
+const SizeBike = {
+    XS: "XS",
+    S: "S",
+    M: "M",
+    L: "L",
+    XL: "XL"
+};
 
 function FormEquipment() {
     const [name, setName] = useState('');
+    const [frame, setFrame] = useState ('');
+    const [size, setSize]= useState (SizeBike.M);
+    const [available, setAvailable] = useState(true);
     const [price, setPrice] = useState('');
     const [confirmationMessage, setConfirmationMessage] = useState(''); // Nowy stan dla potwierdzenia
     const[hasAccess, setHasAccess]= useState(false);
@@ -26,7 +36,11 @@ function FormEquipment() {
 
         let createEquipment = {
             'nameEquipment': name,
+            'frameNumber' : frame,
+            'size': size,
+            'available' : true,
             'priceEquipment': price
+
         };
         if (hasAccess) {
             request("POST", "/api/equipments/add", createEquipment)
@@ -34,6 +48,9 @@ function FormEquipment() {
                     console.log("Odpowiedź serwera:", response);
                     setConfirmationMessage("Sprzęt został pomyślnie dodany!"); // Ustawiamy komunikat sukcesu
                     setName(''); // Resetujemy pola po udanym dodaniu
+                    setFrame('');
+                    setSize(SizeBike.M);
+                    setAvailable(true);
                     setPrice('');
                 })
                 .catch((error) => {
@@ -44,17 +61,48 @@ function FormEquipment() {
                 setConfirmationMessage("Brak dostępu do dodawania sprzętu.");
             }
     };
+    const handleAvailableChange = (e) =>{
+        setAvailable(e.target.checked);
+    }
 
     return (
         <div className={classes.FormEquipment}>
             <div className={classes.GridContainer}>
-                <label htmlFor="input name">Nazwa Sprzętu</label>
+
+                <label htmlFor="input-name">Nazwa roweru</label>
                 <input
                     id={'input-name'}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <label htmlFor="{'input-price'}">Cena sprzętu</label>
+                <label htmlFor="input-frame">Nr ramy</label>
+                <input
+                    id={'input-frame'}
+                    value={frame}
+                    onChange={(e) => setFrame(e.target.value)}
+                />
+                <label htmlFor="input-size">Rozmiar roweru</label>
+                <select
+                    id="input-size"
+                    value={size}
+                    onChange={(e) => setSize(e.target.value)}
+                >
+                    {Object.values(SizeBike).map((sizeValue) => (
+                        <option key={sizeValue} value={sizeValue}>
+                            {sizeValue}
+                        </option>
+                    ))}
+                </select>
+                <div className={classes.FormGroup}>
+                <label htmlFor="input-available">Czy dostępny</label>
+                <input
+                    type="checkbox"
+                    id="input-available"
+                    checked={available}
+                    onChange={handleAvailableChange}
+                />
+                </div>
+                <label htmlFor="input-price">Cena roweru</label>
                 <input
                     id={'input-price'}
                     type="number"
@@ -62,6 +110,7 @@ function FormEquipment() {
                     onChange={(e) => setPrice(e.target.value)}
                 />
             </div>
+
             <button className={classes.Confirm} onClick={submitEquipment}>Zatwierdź</button>
             {/* Wyświetlanie komunikatu potwierdzenia */}
             {confirmationMessage && <p>{confirmationMessage}</p>}

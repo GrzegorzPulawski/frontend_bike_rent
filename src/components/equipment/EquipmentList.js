@@ -44,16 +44,22 @@ const EquipmentList = () => {
 
             <div className={classes.EquipmentTableHeader}>
                 <Row>
-                    <Col xs={4} sm={4}>Id</Col>
-                    <Col xs={4} sm={4}>Nazwa sprzętu</Col>
-                    <Col xs={4} sm={4}>Cena</Col>
+                    <Col xs={2} sm={1}>Id</Col>
+                    <Col xs={2} sm={2}>Nazwa Roweru</Col>
+                    <Col xs={2} sm={2}>Nr ramy</Col>
+                    <Col xs={2} sm={2}>Rozmiar</Col>
+                    <Col xs={2} sm={2}>Czy dostępny</Col>
+                    <Col xs={2} sm={2}>Cena</Col>
                 </Row>
             </div>
             {nazwaZmiennej.map((value) => (
                 <Row className={classes.EquipmentTableRow} key={value.idEquipment}>
-                    <Col xs={4} sm={4}>{value.idEquipment}</Col>
-                    <Col xs={4} sm={4}>{value.nameEquipment}</Col>
-                    <Col xs={4} sm={4}>{value.priceEquipment}</Col>
+                    <Col xs={1} sm={1}>{value.idEquipment}</Col>
+                    <Col xs={2} sm={2}>{value.nameEquipment}</Col>
+                    <Col xs={2} sm={2}>{value.frameNumber}</Col>
+                    <Col xs={2} sm={2}>{value.size}</Col>
+                    <Col xs={2} sm ={2}><input type="checkbox" checked={value.available} readOnly className="checkbox-style" /></Col>
+                    <Col xs={2} sm={2}>{value.priceEquipment}</Col>
                 </Row>
             ))}
             <Button

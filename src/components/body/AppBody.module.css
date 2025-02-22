@@ -1,5 +1,6 @@
 .AppBody{
     background-color: var(--body);
+    border-color: var(--border-color);
     width: calc(97vw - 8px);
     min-height: calc(100vh - 78px);
     margin: 10px auto auto;

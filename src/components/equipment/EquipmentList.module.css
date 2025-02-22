@@ -1,7 +1,8 @@
+
 .Equipment {
     padding: 20px;
     background-color: #f9f9f9;
-    border-radius: 8px;
+    border-radius: 9px;
     max-width: 800px; /* Utrzymanie maksymalnej szerokości kontenera */
     margin: 0 auto; /* Wycentrowanie kontenera */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Cień dla kontenera */
@@ -28,7 +29,7 @@ button:hover {
 }
 
 .EquipmentTableHeader {
-    display: grid; /* Uża siatkę dla nagłówka */
+    display: grid; /* Użycie siatki dla nagłówka */
     background-color: #fff; /* Tło nagłówka */
     padding: 15px; /* Padding dla nagłówka */
     border-bottom: 2px solid #ccc; /* Dolna ramka nagłówka */
@@ -38,13 +39,19 @@ button:hover {
 }
 
 .EquipmentTableRow {
-    display: flex; /* Użycie siatki dla wierszy */
-    grid-template-columns: 2fr 2fr 1fr; /* Proporcjonalne kolumny */
-    background-color: #fff; /* Tło wierszy */
-    padding: 15px; /* Padding dla wierszy */
-    border-bottom: 2px solid #ccc; /* Dolna ramka dla wierszy */
-    color: #333; /* Kolor tekstu */
+    display: flex; /* Use flexbox for rows */
+    align-items: center; /* Vertically center items in the row */
+    background-color: #fff; /* Background color for rows */
+    padding: 15px; /* Padding for rows */
+    border-bottom: 2px solid #ccc; /* Bottom border for rows */
+    color: #333; /* Text color */
 }
+.checkbox-style {
+    margin: 0; /* Reset margin */
+    align-self: center; /* Center the checkbox vertically within the flex container */
+    vertical-align: middle; /* Align it with the text */
+}
+
 
 .EquipmentTableRow:hover {
     background-color: #f1f1f1; /* Efekt hover dla wierszy */

@@ -1,5 +1,6 @@
 .AppHeader {
     background-color: var(--header);
+    border-color: var(--border-color);
     height: 50px;
     width: calc(97vw - 8px);
     position: sticky; /* Ustawienie jako sticky */

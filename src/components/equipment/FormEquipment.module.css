@@ -12,16 +12,11 @@
     grid-template-columns: 1fr; /* Jedna kolumna */
     gap: 10px; /* Odstęp między wierszami */
 }
-
-label {
-    font-weight: bold; /* Pogrubienie etykiet */
+.FormGroup {
+    display: flex;
+    align-items: baseline;
 }
 
-input {
-    padding: 10px; /* Padding dla inputów */
-    border: 1px solid #ccc; /* Ramka dla inputów */
-    border-radius: 4px; /* Zaokrąglone rogi inputów */
-}
 
 button.Confirm {
     margin-top: 10px; /* Margines górny dla przycisku */

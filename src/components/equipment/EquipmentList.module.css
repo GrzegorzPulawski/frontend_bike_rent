@@ -52,7 +52,10 @@ button:hover {
     vertical-align: middle; /* Align it with the text */
 }
 
-
+.SelectedRow {
+    background-color: #e0f7fa; /* Light blue background for selected row */
+    cursor: pointer;
+}
 .EquipmentTableRow:hover {
     background-color: #f1f1f1; /* Efekt hover dla wierszy */
 }

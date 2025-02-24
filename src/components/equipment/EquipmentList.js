@@ -38,7 +38,7 @@ const EquipmentList = () => {
     }
     const goToRentEquipment = () =>{
         if (selectedEquipment){
-            navigate(`/rentEquipment/${selectedEquipment.idEquipment}`);
+            navigate(`/equipment-details/${selectedEquipment.idEquipment}`);
         } else {
         alert("Proszę wybrać sprzęt do wypożyczenia."); // Alert if no equipment is selected
         }
@@ -60,7 +60,7 @@ const EquipmentList = () => {
                 style={{ margin: '10px' }}
                 disabled={!selectedEquipment} // Disable button if no equipment is selected
             >
-                Wypożycz Sprzęt
+                Zobacz detale Roweru
             </Button>
             <div className={classes.EquipmentTableHeader}>
                 <Row>

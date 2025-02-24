@@ -20,7 +20,7 @@ import ShowAllReturned from "../reports/ShowAllReturned";
 import Reports from "../reports/Reports";
 import ShowDailyReturned from "../reports/ShowDailyReturned";
 import DailyRentedReport from "../reports/DailyRentedReport";
-import RentEquipment from "../renting/RentEquipment";
+import EquipmentDetails from "../equipment/EquipmentDetails";
 
 const AppBody = () => {
 
@@ -46,7 +46,7 @@ const AppBody = () => {
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/show-daily-returned" element={<ShowDailyReturned />} />
                 <Route path="/daily-rented-report" element={<DailyRentedReport />} />
-                <Route path="/rentEquipment/{id}" element={<RentEquipment />} />
+                <Route path="/equipment-details/:id" element={<EquipmentDetails />} />
             </Routes>
         </div>
     );

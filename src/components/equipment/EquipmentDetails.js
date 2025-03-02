@@ -4,7 +4,7 @@ import { request } from "../../axios_helper";
 import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
 
 const EquipmentDetails = () => {
-    const { id } = useParams(); // Get equipment ID from the URL
+    const { id } = useParams();
     const navigate = useNavigate();
     const [equipment, setEquipment] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -19,19 +19,19 @@ const EquipmentDetails = () => {
         const fetchEquipment = async () => {
             try {
                 const response = await request("get", `/api/equipments/details/${id}`);
-                setEquipment(response.data); // Set equipment data
+                setEquipment(response.data);
             } catch (err) {
                 if (err.response && err.response.status === 404) {
-                    setError("Equipment not found"); // Handle 404 error
+                    setError("Equipment not found");
                 } else {
-                    setError("An error occurred while fetching equipment details"); // Handle other errors
+                    setError("An error occurred while fetching equipment details");
                 }
             } finally {
-                setLoading(false); // Set loading to false
+                setLoading(false);
             }
         };
 
-        fetchEquipment(); // Fetch equipment details
+        fetchEquipment();
     }, [id]);
 
     // Fetch clients for the renting form
@@ -39,13 +39,13 @@ const EquipmentDetails = () => {
         const fetchClients = async () => {
             try {
                 const response = await request("get", "/api/clients");
-                setClients(response.data); // Set clients data
+                setClients(response.data);
             } catch (err) {
                 console.error("Error fetching clients:", err);
             }
         };
 
-        fetchClients(); // Fetch clients
+        fetchClients();
     }, []);
 
     // Handle renting submission
@@ -53,46 +53,47 @@ const EquipmentDetails = () => {
         if (rentingLoading) return;
 
         const createRenting = {
-            idClient: selectedClient, // Selected client ID
-            idEquipment: [equipment.idEquipment], // Use the current equipment ID
+            idClient: selectedClient,
+            idEquipment: [equipment.idEquipment],
         };
 
-        setRentingLoading(true); // Set loading to true
+        setRentingLoading(true);
         try {
             const response = await request("post", "/api/rentings", createRenting);
             setConfirmationMessage("Renting created successfully!");
             setTimeout(() => {
-                navigate("/rentingList"); // Redirect to renting list after success
+                navigate("/rentingList");
             }, 2000);
         } catch (err) {
             setConfirmationMessage("An error occurred while creating the renting!");
         } finally {
-            setRentingLoading(false); // Reset loading status
+            setRentingLoading(false);
         }
     };
 
     if (loading) {
-        return <div>Loading...</div>; // Display loading message
+        return <div>Loading...</div>;
     }
 
     if (error) {
-        return <div>{error}</div>; // Display error message
+        return <div>{error}</div>;
     }
 
     if (!equipment) {
-        return <div>No equipment data available</div>; // Handle case where equipment is null
+        return <div>No equipment data available</div>;
     }
+
     return (
-        <Container>
+        <Container className="p-4 bg-light rounded-3 shadow-sm">
             <Row>
                 <Col>
-                    <h2>Equipment Details</h2>
+                    <h2 className="text-success">Detale Roweru</h2>
                     <p><strong>ID:</strong> {equipment.idEquipment}</p>
-                    <p><strong>Name:</strong> {equipment.nameEquipment}</p>
-                    <p><strong>Frame Number:</strong> {equipment.frameNumber}</p>
-                    <p><strong>Size:</strong> {equipment.size}</p>
-                    <p><strong>Available:</strong> {equipment.available ? "Yes" : "No"}</p>
-                    <p><strong>Price:</strong> ${equipment.priceEquipment}</p>
+                    <p><strong>Nazwa:</strong> {equipment.nameEquipment}</p>
+                    <p><strong>Numer ramy:</strong> {equipment.frameNumber}</p>
+                    <p><strong>Wielkość ramy:</strong> {equipment.size}</p>
+                    <p><strong>Czy dostępny:</strong> {equipment.available ? "Tak" : "Nie"}</p>
+                    <p><strong>Cena za dobę:</strong> {equipment.priceEquipment} Zł</p>
                 </Col>
             </Row>
 
@@ -100,19 +101,19 @@ const EquipmentDetails = () => {
             <Row>
                 <Col>
                     {!equipment.available ? (
-                        <Alert variant="warning">Sprzęt jest już wypożyczony</Alert>
+                        <Alert variant="warning" className="mt-4">Sprzęt jest już wypożyczony</Alert>
                     ) : (
                         <>
-                            <h3>Rent this Equipment</h3>
-                            <Form>
-                                <Form.Group controlId="clientSelect">
-                                    <Form.Label>Select Client:</Form.Label>
+                            <h3 className="text-success mt-4">Wypożycz ten rower</h3>
+                            <Form className="mt-3">
+                                <Form.Group controlId="clientSelect" className="mb-3">
+                                    <Form.Label>Wybierz klienta:</Form.Label>
                                     <Form.Control
                                         as="select"
                                         value={selectedClient}
                                         onChange={(e) => setSelectedClient(e.target.value)}
                                     >
-                                        <option value="">Select a client</option>
+                                        <option value="">Wybierz klienta</option>
                                         {clients.map((client) => (
                                             <option key={client.idClient} value={client.idClient}>
                                                 {client.lastName} {client.firstName}
@@ -122,16 +123,18 @@ const EquipmentDetails = () => {
                                 </Form.Group>
 
                                 <Button
-                                    variant="primary"
+                                    variant="success" // Green button
                                     onClick={handleRentEquipment}
                                     disabled={rentingLoading || !selectedClient}
-                                    className="mt-3"
+                                    className="w-100" // Full-width button
                                 >
                                     {rentingLoading ? "Processing..." : "Rent Equipment"}
                                 </Button>
                             </Form>
 
-                            {confirmationMessage && <p className="mt-3">{confirmationMessage}</p>}
+                            {confirmationMessage && (
+                                <p className="text-success mt-3">{confirmationMessage}</p>
+                            )}
                         </>
                     )}
                 </Col>

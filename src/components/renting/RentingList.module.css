@@ -10,9 +10,7 @@
 .bg-success {
     background-color: #28a745 !important;
 }
-.checkbox {
-    transform: translateY(-25px); /* Adjust this value to fine-tune the vertical position */
-}
+
 @media (max-width: 768px) {
     .container {
         padding: 15px; /* Mniejszy padding na małych ekranach */

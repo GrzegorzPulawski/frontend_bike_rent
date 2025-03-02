@@ -3,7 +3,7 @@ import {request} from "../../axios_helper";
 import styles from "./ShowCurrentlyReturned.module.css";
 import {Container,Col,Row, Button} from "react-bootstrap";
 import moment from "moment-timezone";
-import classes from "./Renting.module.css";
+
 import {useNavigate} from "react-router-dom";
 
 const ShowCurrentlyReturned = () => {
@@ -47,9 +47,9 @@ const ShowCurrentlyReturned = () => {
     return (
         <Container className="table-responsive">
             <h3>Aktualne zwroty</h3>
-            <Row className={classes.Button}>
+            <Row className={styles.button}>
                 <Col>
-                    <Button variant="primary" onClick={() => navigate('/rentingList')} className={classes.RentingButton}>
+                    <Button variant="primary" onClick={() => navigate('/rentingList')} >
                         Wróć do listy wypożyczeń
                     </Button>
                 </Col>

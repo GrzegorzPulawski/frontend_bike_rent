@@ -115,7 +115,7 @@ const RentingList = () => {
                             <Row className={`py-2 border-bottom text-center justify-content-between ${value.dateOfReturn ? 'bg-success text-white' : ''}`} key={value.idRenting}>
                                 <Col xs={1}>
                                     <Form.Check
-                                        type="checkbox"
+                                        type="switch"
                                         checked={selectedRentings.includes(value.idRenting)}
                                         onChange={() => handleCheckboxChange(value.idRenting)}
                                         className={styles.checkbox}

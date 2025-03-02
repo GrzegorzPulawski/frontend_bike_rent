@@ -12,3 +12,12 @@
     border: 1px solid #dee2e6; /* Dodanie obramowania dla kolumn */
     padding: 8px; /* Padding wewnętrzny */
 }
+.button {
+    background-color: #007bff; /* Kolor tła przycisku */
+    color: white; /* Kolor tekstu */
+    padding: 10px 20px; /* Padding przycisku */
+    border-radius: 5px; /* Zaokrąglenie krawędzi */
+    border: none; /* Usunięcie domyślnej ramki */
+    cursor: pointer; /* Zmiana kursora na wskaźnik */
+    transition: background-color 0.3s ease; /* Płynna zmiana koloru tła */
+}

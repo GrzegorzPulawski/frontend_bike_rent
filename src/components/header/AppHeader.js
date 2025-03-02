@@ -26,8 +26,8 @@ export default  class AppHeader extends React.Component {
                     <Link to={"/clientlist"}>
                         <div>Klient</div>
                     </Link>
-                    <Link to={"/renting"}>
-                        <div>Wypożycz</div>
+                    <Link to={"/rentinglist"}>
+                        <div>Lista wypożyczeń</div>
                     </Link>
                     <Link to={"/show-currently-returned"}>
                         <div>Aktualne zwroty</div>

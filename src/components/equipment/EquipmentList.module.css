@@ -15,7 +15,7 @@ h2 {
 }
 
 button {
-    background-color: #007bff; /* Kolor tła przycisku */
+    background-color: #56c238; /* Kolor tła przycisku */
     color: white; /* Kolor tekstu */
     padding: 10px 20px; /* Padding przycisku */
     border-radius: 5px; /* Zaokrąglenie krawędzi */
@@ -25,7 +25,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3; /* Kolor tła przycisku przy najechaniu */
+    background-color: #13f140; /* Kolor tła przycisku przy najechaniu */
 }
 
 .EquipmentTableHeader {
@@ -39,17 +39,13 @@ button:hover {
 }
 
 .EquipmentTableRow {
-    display: flex; /* Use flexbox for rows */
+    display: flex;/* Use flexbox for rows */
     align-items: center; /* Vertically center items in the row */
     background-color: #fff; /* Background color for rows */
     padding: 15px; /* Padding for rows */
     border-bottom: 2px solid #ccc; /* Bottom border for rows */
     color: #333; /* Text color */
-}
-.checkbox-style {
-    margin: 0; /* Reset margin */
-    align-self: center; /* Center the checkbox vertically within the flex container */
-    vertical-align: middle; /* Align it with the text */
+    transform: translateY(25px);
 }
 
 .SelectedRow {

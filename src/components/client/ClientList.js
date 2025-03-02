@@ -54,19 +54,19 @@ const ClientList =  () => {
                     />
                 </div>
             <Button
-                variant="primary"
+                variant="success"
                 onClick={goToAddClient}
                 style={{ margin: '10px' }}>
                 Dodaj Klienta
             </Button>
             <Button
-                variant="primary"
+                variant="success"
                 onClick={goToDeleteClient}
                 style={{ margin: '10px' }}>
                 Usuń Klienta
             </Button>
 
-            <Container className={classes.FormRow}>
+            <Container className="p-4 bg-light rounded-2 shadow-sm fw-bold"  >
                 <Row>
                     <Col md={1}>Id</Col>
                     <Col md={2}>Imię</Col>

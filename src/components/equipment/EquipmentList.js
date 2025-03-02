@@ -4,6 +4,7 @@ import { request } from "../../axios_helper.js";
 import { useNavigate } from "react-router-dom";
 import { Button, Container, Row, Col } from "react-bootstrap";
 
+
 const EquipmentList = () => {
     const [nazwaZmiennej, setterDoKolekcji] = useState([]);
     const [selectedEquipment, setSelectedEquipment] = useState(null);
@@ -55,7 +56,7 @@ const EquipmentList = () => {
                 Dodaj Sprzęt
             </Button>
             <Button
-                variant="success"
+                variant="secondary"
                 onClick={goToRentEquipment}
                 style={{ margin: '10px' }}
                 disabled={!selectedEquipment} // Disable button if no equipment is selected
@@ -64,10 +65,11 @@ const EquipmentList = () => {
             </Button>
             <div className={classes.EquipmentTableHeader}>
                 <Row>
+                    <Col xs={2} sm={1}>Wybierz</Col>
                     <Col xs={2} sm={1}>Id</Col>
                     <Col xs={2} sm={2}>Nazwa Roweru</Col>
                     <Col xs={2} sm={2}>Nr ramy</Col>
-                    <Col xs={2} sm={2}>Rozmiar</Col>
+                    <Col xs={2} sm={1}>Rozmiar</Col>
                     <Col xs={2} sm={2}>Czy dostępny</Col>
                     <Col xs={2} sm={2}>Cena</Col>
                 </Row>
@@ -80,7 +82,7 @@ const EquipmentList = () => {
             >
                 <Col xs={1} sm={1}>
                     <input
-                        type="radio"
+                        type="checkbox"
                         name="selectedEquipment"
                         checked={selectedEquipment?.idEquipment === value.idEquipment}
                         readOnly
@@ -89,15 +91,15 @@ const EquipmentList = () => {
                     <Col xs={1} sm={1}>{value.idEquipment}</Col>
                     <Col xs={2} sm={2}>{value.nameEquipment}</Col>
                     <Col xs={2} sm={2}>{value.frameNumber}</Col>
-                    <Col xs={2} sm={2}>{value.size}</Col>
-                    <Col xs={2} sm ={2}><input type="checkbox" checked={value.available} readOnly className="checkbox-style" /></Col>
+                    <Col xs={2} sm={1}>{value.size}</Col>
+                    <Col xs={2} sm ={2}><input type="radio" checked={value.available} readOnly /></Col>
                     <Col xs={2} sm={2}>{value.priceEquipment}</Col>
                 </Row>
             ))}
             <Button
                 variant="primary"
                 onClick={goToDeleteEquipment}
-                style={{ margin: '10px' }}>
+                style={{ margin: '20px' }}>
                 Usuń Sprzęt
             </Button>
         </Container>

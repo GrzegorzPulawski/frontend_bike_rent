@@ -6,7 +6,6 @@ import EquipmentList from "../equipment/EquipmentList";
 import FormEquipment from "../equipment/FormEquipment";
 import ClientList from "../client/ClientList";
 import FormClient from "../client/FormClient";
-import Renting from "../renting/Renting";
 import RentingList from "../renting/RentingList";
 import ReturnRenting from "../renting/ReturnRenting";
 import EquipmentDelete from "../equipment/EquipmentDelete";
@@ -32,7 +31,6 @@ const AppBody = () => {
                 <Route path={"/clientlist"} element={<ClientList/>}> </Route>
                 <Route path={"/formequipment"} element={<FormEquipment/>}></Route>
                 <Route path={"/formClient"} element={<FormClient/>}></Route>
-                <Route path={"/renting"} element={<Renting/>}></Route>
                 <Route path={"/rentingList"} element={<RentingList/>}></Route>
                 <Route path={"/returnRenting"} element={<ReturnRenting/>}></Route>
                 <Route path={"/equipmentDelete"} element={<EquipmentDelete/>}></Route>

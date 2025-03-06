@@ -43,6 +43,11 @@
     font-size: large;
     color: azure;
 }
+.HeaderRight div:hover {
+    color: #ffcc00; /* Change text color on hover */
+    transform: scale(1.1); /* Slightly increase size on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
 
 .HeaderUser {
     margin-left: 20px;

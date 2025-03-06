@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {request} from "../../axios_helper";
+import {Button} from "react-bootstrap";
 
 const DeleteClient = () => {
     const [idClient, setIdClient] = useState('');
@@ -29,7 +30,7 @@ const DeleteClient = () => {
                 placeholder="Wprowadź ID klienta"
             />
         </div>
-            <button onClick={handleDelete}>Usuń klienta</button>
+            <Button variant={"danger"} onClick={handleDelete}>Usuń klienta</Button>
 
             {message && <p>{message}</p>}
         </div>

@@ -18,7 +18,7 @@ const RentingList = () => {
     useEffect(() => {
         const fetchRentings = async () => {
             try {
-                const response = await request('get', "/api/rentings");
+                const response = await request('get', "/api/rentings/recentlyRenting");
                 setRentingList(response.data);
             } catch (error) {
                 console.error("Error fetching rentings:", error);
@@ -59,7 +59,7 @@ const RentingList = () => {
     };
     const handleReturnSuccess = async () => {
         //Fetch updated renting list after successful return
-        const response = await request('get', '/api/rentings');
+        const response = await request('get', '/api/rentings/recentlyRenting');
         setRentingList(response.data);
     }
     const handleNavigateToRecentlyReturned = () => {
@@ -70,7 +70,7 @@ const RentingList = () => {
             <div className="d-flex flex-column flex-md-row justify-content-center align-items-center mt-3">
                 <Col xs={6} className="text-start">
                 <Button
-                    variant="primary"
+                    variant="warning"
                     onClick={handleConfirmSelection}
                     disabled={selectedRentings.length === 0}
                     className="btn-lg me-2 mb-2 mb-md-0"  // 'mb-2' dla marginesu na mniejszych ekranach
@@ -97,22 +97,16 @@ const RentingList = () => {
                     <Col xs={1}>Imię</Col>
                     <Col xs={1}>Nazwisko</Col>
                     <Col xs={2}>Data wypożyczenia</Col>
-                    <Col xs={2}>Sprzęt</Col>
-                    <Col xs={2}>Data zwrotu</Col>
-                    <Col xs={1}>Cena całkowita</Col>
-                    <Col xs={1}>Ilość dni</Col>
+                    <Col xs={2}>Rower</Col>
+                    <Col xs={2}>Nr ramy</Col>
                 </Row>
                 {
                     listRenting
-                        .filter(value => !value.dateOfReturn) // Only include rentals that are not returned
                         .map(value => {
                         const dateRentingFormat = moment.utc(value.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm');
-                        const dateOfReturnFormat = value.dateOfReturn
-                            ? moment.utc(value.dateOfReturn).tz('Europe/Warsaw').format('DD/MM/YY HH:mm')
-                            : 'Wynajem w toku';
 
                         return (
-                            <Row className={`py-2 border-bottom text-center justify-content-between ${value.dateOfReturn ? 'bg-success text-white' : ''}`} key={value.idRenting}>
+                            <Row className={`py-2 border-bottom text-center }`} key={value.idRenting}>
                                 <Col xs={1}>
                                     <Form.Check
                                         type="switch"
@@ -126,9 +120,7 @@ const RentingList = () => {
                                 <Col xs={1}>{value.lastName}</Col>
                                 <Col xs={2}>{dateRentingFormat}</Col>
                                 <Col xs={2}>{value.nameEquipment}</Col>
-                                <Col xs={2}>{dateOfReturnFormat}</Col>
-                                <Col xs={1}>{value.priceOfDuration}</Col>
-                                <Col xs={1}>{value.daysOfRental}</Col>
+                                <Col xs={2}>{value.frameNumber || "N/A"}</Col>
                             </Row>
                         );
                     })

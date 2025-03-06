@@ -60,12 +60,12 @@ const EquipmentDetails = () => {
         setRentingLoading(true);
         try {
             const response = await request("post", "/api/rentings", createRenting);
-            setConfirmationMessage("Renting created successfully!");
+            setConfirmationMessage("Sprzęt pomyślnie wypożyczono!");
             setTimeout(() => {
                 navigate("/rentingList");
             }, 2000);
         } catch (err) {
-            setConfirmationMessage("An error occurred while creating the renting!");
+            setConfirmationMessage("Błąd podczas kreowania wypożyczenia!");
         } finally {
             setRentingLoading(false);
         }
@@ -80,20 +80,42 @@ const EquipmentDetails = () => {
     }
 
     if (!equipment) {
-        return <div>No equipment data available</div>;
+        return <div>Sprzęt niedostępny</div>;
     }
 
     return (
         <Container className="p-4 bg-light rounded-3 shadow-sm">
             <Row>
                 <Col>
-                    <h2 className="text-success">Detale Roweru</h2>
-                    <p><strong>ID:</strong> {equipment.idEquipment}</p>
-                    <p><strong>Nazwa:</strong> {equipment.nameEquipment}</p>
-                    <p><strong>Numer ramy:</strong> {equipment.frameNumber}</p>
-                    <p><strong>Wielkość ramy:</strong> {equipment.size}</p>
-                    <p><strong>Czy dostępny:</strong> {equipment.available ? "Tak" : "Nie"}</p>
-                    <p><strong>Cena za dobę:</strong> {equipment.priceEquipment} Zł</p>
+                    <h2 className="text-secondary-emphasis mb-4">
+                        Detale Roweru
+                    </h2>
+                    <div className="card p-3 mb-3">
+                        <p className="mb-2">
+                            <strong className="text-primary"><i className="bi bi-tag me-2"></i>ID:</strong> {equipment.idEquipment}
+                        </p>
+                        <p className="mb-2">
+                            <strong className="text-primary"><i className="bi bi-card-text me-2"></i>Nazwa:</strong> {equipment.nameEquipment}
+                        </p>
+                        <p className="mb-2">
+                            <strong className="text-primary"><i className="bi bi-upc-scan me-2"></i>Numer ramy:</strong> {equipment.frameNumber}
+                        </p>
+                        <p className="mb-2">
+                            <strong className="text-primary"><i className="bi bi-rulers me-2"></i>Wielkość ramy:</strong> {equipment.size}
+                        </p>
+                        <p className="mb-2">
+                            <strong className="text-primary"><i className="bi bi-bicycle me-2"></i>Typ roweru:</strong> {equipment.type}
+                        </p>
+                        <p className="mb-2">
+                            <strong className="text-primary"><i className="bi bi-check-circle me-2"></i>Czy dostępny:</strong>
+                            <span className={`badge ${equipment.available ? 'bg-success' : 'bg-danger'} ms-2`}>
+                        {equipment.available ? "Tak" : "Nie"}
+                    </span>
+                        </p>
+                        <p className="mb-0">
+                            <strong className="text-primary"><i className="bi bi-currency-exchange me-2"></i>Cena za dobę:</strong> {equipment.priceEquipment} Zł
+                        </p>
+                    </div>
                 </Col>
             </Row>
 
@@ -128,7 +150,7 @@ const EquipmentDetails = () => {
                                     disabled={rentingLoading || !selectedClient}
                                     className="w-100" // Full-width button
                                 >
-                                    {rentingLoading ? "Processing..." : "Rent Equipment"}
+                                    {rentingLoading ? "Processing..." : "Wypożycz ten rower"}
                                 </Button>
                             </Form>
 

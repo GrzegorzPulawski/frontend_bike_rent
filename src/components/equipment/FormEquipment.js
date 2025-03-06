@@ -10,12 +10,22 @@ const SizeBike = {
     L: "L",
     XL: "XL"
 };
+const TypeBike ={
+    SZOSOWY:"SZOSOWY",
+    MTB:"MTB",
+    CROSSOWY:"CROSSOWY",
+    MIEJSKI:"MIEJSKI",
+    TREKINGOWY:"TREKINGOWY"
+
+};
 
 function FormEquipment() {
     const [name, setName] = useState('');
     const [frame, setFrame] = useState ('');
     const [size, setSize]= useState (SizeBike.M);
+    const [type, setType]= useState(TypeBike.MTB);
     const [available, setAvailable] = useState(true);
+    const [electric, setElectric] = useState(false);
     const [price, setPrice] = useState('');
     const [confirmationMessage, setConfirmationMessage] = useState(''); // Nowy stan dla potwierdzenia
     const[hasAccess, setHasAccess]= useState(false);
@@ -38,7 +48,9 @@ function FormEquipment() {
             'nameEquipment': name,
             'frameNumber' : frame,
             'size': size,
+            'type': type,
             'available' : true,
+            'electric': electric,
             'priceEquipment': price
 
         };
@@ -47,10 +59,16 @@ function FormEquipment() {
                 .then((response) => {
                     console.log("Odpowiedź serwera:", response);
                     setConfirmationMessage("Sprzęt został pomyślnie dodany!"); // Ustawiamy komunikat sukcesu
+                    setTimeout(() => {
+                        setConfirmationMessage(""); // Reset the message to an empty string
+                    }, 5000);
+
                     setName(''); // Resetujemy pola po udanym dodaniu
                     setFrame('');
                     setSize(SizeBike.M);
+                    setType(TypeBike.MTB);
                     setAvailable(true);
+                    setElectric(false);
                     setPrice('');
                 })
                 .catch((error) => {
@@ -61,8 +79,9 @@ function FormEquipment() {
                 setConfirmationMessage("Brak dostępu do dodawania sprzętu.");
             }
     };
-    const handleAvailableChange = (e) =>{
-        setAvailable(e.target.checked);
+
+    const handleElectricChange = (e) =>{
+        setElectric(e.target.checked);
     }
 
     return (
@@ -93,14 +112,27 @@ function FormEquipment() {
                         </option>
                     ))}
                 </select>
-                <div className={classes.FormGroup}>
-                <label htmlFor="input-available">Czy dostępny</label>
-                <input
-                    type="checkbox"
-                    id="input-available"
-                    checked={available}
-                    onChange={handleAvailableChange}
-                />
+                <label htmlFor="input-type">Typ roweru</label>
+                <select
+                    id="input-type"
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                >
+                    {Object.values(TypeBike).map((typeValue) => (
+                        <option key={typeValue} value={typeValue}>
+                            {typeValue}
+                        </option>
+                    ))}
+                </select>
+
+                    <div className={classes.FormGroup}>
+                    <label htmlFor="input-electric">Czy elektryk</label>
+                    <input
+                        type="checkbox"
+                        id="input-electric"
+                        checked={electric}
+                        onChange={handleElectricChange}
+                    />
                 </div>
                 <label htmlFor="input-price">Cena roweru</label>
                 <input

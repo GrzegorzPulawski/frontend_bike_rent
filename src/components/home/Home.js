@@ -7,7 +7,7 @@ function Home() {
         <div className="wrapper">
         <div className="content">
              <div className={styles.ImageContainer}>
-            <img src="https://picsum.photos/id/1036/1200/800" alt="Main" />
+            <img src="https://picsum.photos/id/859/1200/800" alt="Main" />
         </div>
             <Row className={styles.Row}>
                 <Col className={styles.Col}>
@@ -18,7 +18,7 @@ function Home() {
                                 Login
                             </Card.Title>
                             <Card.Text className={styles.CardText}>
-                                Logujesz się przy pomocy nazwy i hasła. Program sam wyloguje użytkownika po 1 godzinie.
+                                Logujesz się przy pomocy nazwy i hasła. Program sam wyloguje użytkownika po 5 godzinach.
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer className={styles.CardFooter}> Ważne: Podaj adminstartorwi, który cykl wypożyczenia: dobowy(24h), czy kalendarzowy(dzień), będziesz używał</Card.Footer>
@@ -29,42 +29,25 @@ function Home() {
                             <Card.Title className={styles.CardTitle}>
                                 Klient
                             </Card.Title>
-                            <Card.Text className={styles.CardText}>
-                                Nowo dodany klient będzie Ci się wyświetlał na początku listy.
+                            <Card.Text className={styles.CardText}>Możesz dodać i usunąć klienta. Wyszukujemy klienta po nazwisku.
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer className={styles.CardFooter}> Ważne: Pamiętaj aby wprowadzić nazwisko klienta. Pożniej wyszukujemy po nazwisku</Card.Footer>
+                        <Card.Footer className={styles.CardFooter}> Wskazówka: Wyświetla się tylko ostatnio dodany klient. </Card.Footer>
                     </Card>
                 </Col>
+
                 <Col className={styles.Col}>
                     <Card className={styles.Card}>
                         <Card.Body>
                             <Card.Title className={styles.CardTitle}>
-                                Wypożycz
+                                Aktualne wypożyczenia
                             </Card.Title>
                             <Card.Text className={styles.CardText}>
-                                Wybierz klienta z rozwijanej listy. Dodany klient będzie na górze listy.
-                                Zaznacz sprzęt który chcesz wypożyczyć i *Zatwierdż*.
-                                Program wyświetli Listę wypożyczeń.       .
-                                Zaznacz wypożyczenia na podstawie którego wydrukujesz umowę z klientem.
-                                Wciśnij *Wyrukuj Umowę*.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer className={styles.CardFooter}> Wskazówka: Możesz jednocześnie zaznaczyć dowolną ilość sprzętu który chcesz wypożyczyć dla jednego klienta </Card.Footer>
-                    </Card>
-                </Col>
-                <Col className={styles.Col}>
-                    <Card className={styles.Card}>
-                        <Card.Body>
-                            <Card.Title className={styles.CardTitle}>
-                                Lista wypożyczeń
-                            </Card.Title>
-                            <Card.Text className={styles.CardText}>
-                                Tutaj zrobisz zwrot wypożyczeń. Zaznacz Wypożyczenia do zwrotu.
+                                Tutaj zrobisz zwrot wypożyczeń. Zaznacz Wypożyczenie do zwrotu.
                                 Naciśnij *Zatwierdź Zwroty*. program przekieruje Cię do Aktualnych zwrotów.
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer className={styles.CardFooter}>Wskazówka: Możesz zrobić zwrot wielu zaznaczonych wypożyczeń jednocześnie.
+                        <Card.Footer className={styles.CardFooter}>Wskazówka: Możesz tutaj wydrukować Umowę Wypożyczenia.
                             </Card.Footer>
                     </Card>
                 </Col>
@@ -72,13 +55,13 @@ function Home() {
                     <Card className={styles.Card}>
                         <Card.Body>
                             <Card.Title className={styles.CardTitle}>
-                                Akualne zawroty
+                                Akualne zwroty
                             </Card.Title>
                             <Card.Text className={styles.CardText}>
-                                Tutaj wyświetlają się aktualne zwroty, tzn. z 15 ostatnich minut. Możesz podliczyć należność i przyjąć wpłatę od klienta.
+                                Tutaj wyświetlają się aktualne zwroty, tzn. z 60 ostatnich minut. Możesz podliczyć należność i przyjąć wpłatę od klienta.
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer className={styles.CardFooter}>Wskazówka: 15 minut;-)
+                        <Card.Footer className={styles.CardFooter}>Wskazówka: Możesz z tego miejsca wydrukować potwierdzenie zwrotu dla klienta.
                         </Card.Footer>
                     </Card>
                 </Col>
@@ -89,14 +72,25 @@ function Home() {
                                 Sprzęt
                             </Card.Title>
                             <Card.Text className={styles.CardText}>
-                                Możesz dodać dowolna ilość kompletów, oraz je usuwać z bazy danych.
-                                Logika wypożyczenie polega na wielokrotnym wypożyczeniu tego samego zestawu.
-                                Tak powiniśmy tworzyć nazwy zestawu aby było wiadomo o co chodzi, np. Buty snowbordowe lub Narty dorosły.
-                                Cena może zawierać grosze, np. 45,50.
+                                Możesz dodać dowolna ilość rowerów, oraz je usuwać z bazy danych.
+                                Zastosowano logikę stanów magazynowych, czyli jeśli rower jest wypożyczony, to jest niedostępny do wypożyczneia.
+                                Wybierz rower i wejdź w Detale roweru w celu Wypożyczenia.
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer className={styles.CardFooter}>Wskazówka: Stwórz Narty dorosły1, Narty dorosły2, itd.
-                            Myślę że do 4, aby do jednego klienta jednorazowo, tworząc umowę, przypisać 4 komplety</Card.Footer>
+                        <Card.Footer className={styles.CardFooter}>Wskazówka: </Card.Footer>
+                    </Card>
+                </Col>
+                <Col className={styles.Col}>
+                    <Card className={styles.Card}>
+                        <Card.Body>
+                            <Card.Title className={styles.CardTitle}>
+                                Detale roweru
+                            </Card.Title>
+                            <Card.Text className={styles.CardText}>
+                              Wybierz z listy nazwisko klienta i kliknij Wypożyczenie.
+                            </Card.Text>
+                        </Card.Body>
+                        <Card.Footer className={styles.CardFooter}>Wskazówka: </Card.Footer>
                     </Card>
                 </Col>
                 <Col className={styles.Col}>
@@ -107,7 +101,7 @@ function Home() {
                             </Card.Title>
                             <Card.Text className={styles.CardText}>
                                 Dostępny jest raport dzienny przychodów. Pamiętaj, że klient płaci, gdy zdaje sprzęt.
-                                Wprowadż datę, dla której system ma wygenerować raport.
+                                Kolejne raporty to: Utworzone wypożyczenia w dniu, Zwrócone wypożyczenia w dniu.
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer className={styles.CardFooter}>Ważne: System nalicza opłaty za wypożyczenie w czasie kalendarzowym(dzień) lub 24 godzinnym.

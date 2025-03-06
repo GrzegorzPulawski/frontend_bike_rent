@@ -11,7 +11,7 @@ export default  class AppHeader extends React.Component {
             <div className={classes.AppHeader}>
                 <div className={classes.HeaderLeft}>
                     <Link to={"/user-list"}>
-                        <div className={classes.HeaderTitle}>Smart Ski Rent</div>
+                        <div className={classes.HeaderTitle}>Smart Bike Rent</div>
                     </Link>
                 </div>
 
@@ -27,7 +27,7 @@ export default  class AppHeader extends React.Component {
                         <div>Klient</div>
                     </Link>
                     <Link to={"/rentinglist"}>
-                        <div>Lista wypożyczeń</div>
+                        <div>Aktualne wypożyczenia</div>
                     </Link>
                     <Link to={"/show-currently-returned"}>
                         <div>Aktualne zwroty</div>

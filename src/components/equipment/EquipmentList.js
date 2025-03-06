@@ -50,7 +50,7 @@ const EquipmentList = () => {
             <h2>Lista sprzętu</h2>
 
             <Button
-                variant="primary"
+                variant="success"
                 onClick={goToAddEquipment}
                 style={{ margin: '10px' }}>
                 Dodaj Sprzęt
@@ -70,6 +70,7 @@ const EquipmentList = () => {
                     <Col xs={2} sm={2}>Nazwa Roweru</Col>
                     <Col xs={2} sm={2}>Nr ramy</Col>
                     <Col xs={2} sm={1}>Rozmiar</Col>
+                    <Col xs={2} sm={1}>Typ</Col>
                     <Col xs={2} sm={2}>Czy dostępny</Col>
                     <Col xs={2} sm={2}>Cena</Col>
                 </Row>
@@ -92,12 +93,13 @@ const EquipmentList = () => {
                     <Col xs={2} sm={2}>{value.nameEquipment}</Col>
                     <Col xs={2} sm={2}>{value.frameNumber}</Col>
                     <Col xs={2} sm={1}>{value.size}</Col>
+                    <Col xs={2} sm={1}>{value.type}</Col>
                     <Col xs={2} sm ={2}><input type="radio" checked={value.available} readOnly /></Col>
                     <Col xs={2} sm={2}>{value.priceEquipment}</Col>
                 </Row>
             ))}
             <Button
-                variant="primary"
+                variant="danger"
                 onClick={goToDeleteEquipment}
                 style={{ margin: '20px' }}>
                 Usuń Sprzęt

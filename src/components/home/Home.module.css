@@ -65,19 +65,28 @@
     text-align: justify;
     padding: 10px;
 }
+
 .footer {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    padding: 10px;
-    font-size: 12px;
+    bottom: 0px;
+    left: 15px;
+    padding: 0px;
     color: #000;
     background-color: #f9f9f9;
-    width: 100%; /* Szerokość kontenera */
-    text-align: left; /* Wyrównanie tekstu do lewej strony */
+    width: 100%; /* Full width */
+    text-align: center; /* Align text to the left */
     z-index: 1000;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+
 }
 
+.footer:hover {
+    background-color: #e0e0e0; /* Change background color on hover */
+    padding: 20px; /* Increase padding on hover */
+    font-size: 16px; /* Increase font size on hover */
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Optional: Enhance shadow on hover */
+}
 
 .content {
     flex: 1; /* Sprawia, że zawartość zajmuje maksymalną przestrzeń */

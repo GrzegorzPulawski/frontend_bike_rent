@@ -6,12 +6,9 @@ const ReportMenu = () => {
     const navigate = useNavigate();
 
     const handleNavigateToDailyReport = () => {
-        navigate('/daily-report'); // Navigate to Daily Revenue Report
+        navigate('/daily-report');
     };
 
-    const handleNavigateToRentalsReturned = () => {
-        navigate('/show-all-returned'); // Navigate to Rentals Returned Report
-    };
     const handleNavigateToDailyReturned = () => {
         navigate('/show-daily-returned');
     }
@@ -25,11 +22,6 @@ const ReportMenu = () => {
                 <Col xs={4} className="mb-3">
                     <Button variant="primary" onClick={handleNavigateToDailyReport} className="w-100">
                         Raport Dzienny Przychodów
-                    </Button>
-                </Col>
-                <Col xs={4} className="mb-3">
-                    <Button variant="primary" onClick={handleNavigateToRentalsReturned} className="w-100">
-                        Wszystkie Zwrócone Wypożyczenia
                     </Button>
                 </Col>
                 <Col xs={4} className="mb-3">

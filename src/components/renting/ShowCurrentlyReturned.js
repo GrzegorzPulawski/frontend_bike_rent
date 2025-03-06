@@ -96,7 +96,7 @@ const ShowCurrentlyReturned = () => {
                 );
             })}
             <Button
-                variant="primary"
+                variant="success"
                 onClick={handlePrintConfirmations}
                 disabled={selectedItems.length === 0}
                 className="mt-3"

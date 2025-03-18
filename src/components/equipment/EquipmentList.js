@@ -8,7 +8,8 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 const EquipmentList = () => {
     const [nazwaZmiennej, setterDoKolekcji] = useState([]);
     const [selectedEquipment, setSelectedEquipment] = useState(null);
-
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredEquipment, setFilteredEquipment] = useState([]);
     const navigate = useNavigate(); // Hook do nawigacji
 
     useEffect(() => {
@@ -16,8 +17,10 @@ const EquipmentList = () => {
             .then((response) => {
                 if (Array.isArray(response.data)) {
                     setterDoKolekcji(response.data); // Ustaw dane, jeśli to tablica
+                    setFilteredEquipment(response.data);
                 } else {
                     setterDoKolekcji(response.data.equipments);
+                    setFilteredEquipment(response.data.equipments);
                 }
             })
             .catch((error) => {
@@ -44,11 +47,30 @@ const EquipmentList = () => {
         alert("Proszę wybrać sprzęt do wypożyczenia."); // Alert if no equipment is selected
         }
     };
+    const handleSearch = (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
 
+            // Filter equipments by frame Number
+            const filtered = nazwaZmiennej.filter(equipment =>
+                equipment.frameNumber.toLowerCase().includes(query.toLowerCase())
+            );
+            setFilteredEquipment(filtered);
+
+    };
     return (
         <Container className={classes.Equipment}>
             <h2>Lista sprzętu</h2>
-
+            <div>
+                <label className={classes.formInputLabel}>Wyszukaj rower po nr ramy:</label>
+                <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={handleSearch}
+                    placeholder="Wpisz nr ramy"
+                    className={classes.formInputField}
+                />
+            </div>
             <Button
                 variant="success"
                 onClick={goToAddEquipment}
@@ -75,7 +97,7 @@ const EquipmentList = () => {
                     <Col xs={2} sm={2}>Cena</Col>
                 </Row>
             </div>
-            {nazwaZmiennej.map((value) => (
+            {filteredEquipment.map((value) => (
                 <Row
                 className={`${classes.EquipmentTableRow} ${selectedEquipment?.idEquipment === value.idEquipment ? classes.SelectedRow : ''}`}
                 key={value.idEquipment}

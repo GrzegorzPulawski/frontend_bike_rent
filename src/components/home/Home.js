@@ -58,7 +58,7 @@ function Home() {
                                 Akualne zwroty
                             </Card.Title>
                             <Card.Text className={styles.CardText}>
-                                Tutaj wyświetlają się aktualne zwroty, tzn. z 60 ostatnich minut. Możesz podliczyć należność i przyjąć wpłatę od klienta.
+                                Tutaj wyświetlają się aktualne zwroty, tzn. z ostatnich 2 godzin. Możesz podliczyć należność i przyjąć wpłatę od klienta.
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer className={styles.CardFooter}>Wskazówka: Możesz z tego miejsca wydrukować potwierdzenie zwrotu dla klienta.
@@ -77,7 +77,7 @@ function Home() {
                                 Wybierz rower i wejdź w Detale roweru w celu Wypożyczenia.
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer className={styles.CardFooter}>Wskazówka: </Card.Footer>
+                        <Card.Footer className={styles.CardFooter}>Wskazówka: Jest dostepne wyszukiwanie sprzetu po numerze ramy. </Card.Footer>
                     </Card>
                 </Col>
                 <Col className={styles.Col}>

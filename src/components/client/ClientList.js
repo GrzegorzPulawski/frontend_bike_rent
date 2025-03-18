@@ -65,6 +65,8 @@ const ClientList = () => {
     };
 
     return (
+
+
         <div>
             <h2>Lista klientów</h2>
 

@@ -1,9 +1,10 @@
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
 
+axios.defaults.baseURL ="https://bike-rent-backend-f317c5c76639.herokuapp.com/";
 //axios.defaults.baseURL ="https://smart-ski-a8fba8950c38.herokuapp.com";
 //axios.defaults.baseURL ="https://backend-nakrawedzi-15a0f17618f3.herokuapp.com";
-axios.defaults.baseURL = "http://localhost:8080";
+//axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.headers["Content-Type"] = 'application/json';
 
 export const getAuthToken =() => {

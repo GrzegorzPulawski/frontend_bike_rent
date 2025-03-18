@@ -88,19 +88,19 @@ function FormEquipment() {
         <div className={classes.FormEquipment}>
             <div className={classes.GridContainer}>
 
-                <label htmlFor="input-name">Nazwa roweru</label>
+                <label htmlFor="input-name">Nazwa roweru:</label>
                 <input
                     id={'input-name'}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <label htmlFor="input-frame">Nr ramy</label>
+                <label htmlFor="input-frame">Nr ramy:</label>
                 <input
                     id={'input-frame'}
                     value={frame}
                     onChange={(e) => setFrame(e.target.value)}
                 />
-                <label htmlFor="input-size">Rozmiar roweru</label>
+                <label htmlFor="input-size">Rozmiar roweru:</label>
                 <select
                     id="input-size"
                     value={size}
@@ -112,7 +112,7 @@ function FormEquipment() {
                         </option>
                     ))}
                 </select>
-                <label htmlFor="input-type">Typ roweru</label>
+                <label htmlFor="input-type">Typ roweru:</label>
                 <select
                     id="input-type"
                     value={type}
@@ -126,7 +126,7 @@ function FormEquipment() {
                 </select>
 
                     <div className={classes.FormGroup}>
-                    <label htmlFor="input-electric">Czy elektryk</label>
+                    <label htmlFor="input-electric">Czy rower jest elektryczny:</label>
                     <input
                         type="checkbox"
                         id="input-electric"
@@ -134,7 +134,7 @@ function FormEquipment() {
                         onChange={handleElectricChange}
                     />
                 </div>
-                <label htmlFor="input-price">Cena roweru</label>
+                <label htmlFor="input-price">Cena roweru:</label>
                 <input
                     id={'input-price'}
                     type="number"

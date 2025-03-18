@@ -107,6 +107,12 @@ const EquipmentDetails = () => {
                             <strong className="text-primary"><i className="bi bi-bicycle me-2"></i>Typ roweru:</strong> {equipment.type}
                         </p>
                         <p className="mb-2">
+                            <strong className="text-primary"><i className="bi bi-check-circle me-2"></i>Czy elektryk:</strong>
+                            <span className={`badge ${equipment.electric ? 'bg-success' : 'bg-danger'} ms-2`}>
+                        {equipment.electric ? "Tak" : "Nie"}
+                    </span>
+                        </p>
+                        <p className="mb-2">
                             <strong className="text-primary"><i className="bi bi-check-circle me-2"></i>Czy dostępny:</strong>
                             <span className={`badge ${equipment.available ? 'bg-success' : 'bg-danger'} ms-2`}>
                         {equipment.available ? "Tak" : "Nie"}

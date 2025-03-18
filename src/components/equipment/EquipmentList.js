@@ -93,8 +93,9 @@ const EquipmentList = () => {
                     <Col xs={2} sm={2}>Nr ramy</Col>
                     <Col xs={2} sm={1}>Rozmiar</Col>
                     <Col xs={2} sm={1}>Typ</Col>
-                    <Col xs={2} sm={2}>Czy dostępny</Col>
-                    <Col xs={2} sm={2}>Cena</Col>
+                    <Col xs={2} sm={1}>Czy elektryk</Col>
+                    <Col xs={2} sm={1}>Czy dostępny</Col>
+                    <Col xs={2} sm={1}>Cena</Col>
                 </Row>
             </div>
             {filteredEquipment.map((value) => (
@@ -116,8 +117,9 @@ const EquipmentList = () => {
                     <Col xs={2} sm={2}>{value.frameNumber}</Col>
                     <Col xs={2} sm={1}>{value.size}</Col>
                     <Col xs={2} sm={1}>{value.type}</Col>
-                    <Col xs={2} sm ={2}><input type="radio" checked={value.available} readOnly /></Col>
-                    <Col xs={2} sm={2}>{value.priceEquipment}</Col>
+                    <Col xs={2} sm={1}><input type="radio" checked={value.electric} readOnly /> </Col>
+                    <Col xs={2} sm={1}><input type="radio" checked={value.available} readOnly /></Col>
+                    <Col xs={2} sm={1}>{value.priceEquipment}</Col>
                 </Row>
             ))}
             <Button

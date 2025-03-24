@@ -1,6 +1,7 @@
-:root{
-  --header: #13f140;
-  --body: #56c238;
-  --border-color: #574040;
+:root {
+  --body-bg: #121212; /* Deep black */
+  --border-color: #ff3a30; /* Vibrant red */
+  --secondary-border: #2a2a2a; /* Dark gray */
+  --content-bg: #1e1e1e; /* Slightly lighter black */
+  --text-primary: #e0e0e0; /* Light gray text */
 }
-

@@ -1,107 +1,82 @@
-.ImageContainer {
-    text-align: center; /* Centruje obraz */
-    margin-bottom: 20px;
-}
-
-.ImageContainer img {
-    width: 80%; /* Szerokość obrazka */
-    max-width: 1200px; /* Maksymalna szerokość obrazka */
-    height: auto; /* Automatyczna wysokość */
-    border-radius: 10px;
-}
-
-.Row {
+.wrapper {
     display: flex;
-    justify-content: center; /* Ustawia kolumny na środku */
-    flex-wrap: wrap; /* Pozwala na zawijanie kolumn na mniejszych ekranach */
-    margin: 20px 0;
-}
-.CardText {
-    color: black; /* Zmiana koloru na czarny */
-}
-
-
-.Col {
-    flex-basis: calc(33.333% - 20px); /* Trzy kolumny w jednym rzędzie z odstępem */
-    max-width: calc(33.333% - 20px); /* Zmniejsza szerokość kolumny */
-    margin: 10px;
-}
-
-.Card {
-    width: 100%; /* Pełna szerokość wewnątrz kolumny */
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.Card:hover {
-    transform: translateY(-5px); /* Efekt unoszenia karty */
-}
-
-.CardImg {
-    border-radius: 10px 10px 0 0;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.CardHeader,
-.CardFooter {
-    text-align: center;
-    padding: 10px;
-    color: ghostwhite;
-    font-size: 14px;
-}
-
-.CardTitle {
-    text-align: center;
-    margin-bottom: 10px;
-    color: ghostwhite;
-    font-size: 17px;
-}
-
-.CardText {
-    text-align: justify;
-    padding: 10px;
-}
-
-.footer {
-    position: fixed;
-    bottom: 0px;
-    left: 15px;
-    padding: 0px;
-    color: #000;
-    background-color: #f9f9f9;
-    width: 100%; /* Full width */
-    text-align: center; /* Align text to the left */
-    z-index: 1000;
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
-
-}
-
-.footer:hover {
-    background-color: #e0e0e0; /* Change background color on hover */
-    padding: 20px; /* Increase padding on hover */
-    font-size: 16px; /* Increase font size on hover */
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Optional: Enhance shadow on hover */
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f5f5f5;
 }
 
 .content {
-    flex: 1; /* Sprawia, że zawartość zajmuje maksymalną przestrzeń */
+    flex: 1;
+    padding: 20px;
 }
 
-@media (max-width: 1024px) {
-    .Col {
-        flex-basis: calc(50% - 20px); /* Dwie kolumny na średnich ekranach */
-        max-width: calc(50% - 20px);
-    }
+.imageContainer {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.mainImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cardRow {
+    margin: 0 -15px;
+}
+
+.cardCol {
+    padding: 15px;
+}
+
+.featureCard {
+    height: 100%;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featureCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cardTitle {
+    color: #333;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.cardText {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.cardFooter {
+    background-color: #f8f9fa;
+    border-top: 1px solid #eee;
+    color: #666;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.footer {
+    background-color: #1e1e1e;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 30px;
 }
 
 @media (max-width: 768px) {
-    .Col {
-        flex-basis: 100%; /* Jedna kolumna na małych ekranach */
-        max-width: 100%;
+    .cardCol {
+        margin-bottom: 20px;
+    }
+
+    .cardTitle {
+        font-size: 1.1rem;
     }
 }

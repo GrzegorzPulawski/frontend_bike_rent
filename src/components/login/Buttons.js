@@ -1,12 +1,22 @@
-import React from 'react';
 
-export default function Buttons(props) {
-    return(
-        <div className={"row"}>
-            <div clasName="col-md-12 text-center" style={{marginTop: "30px"}}>
-            <button onClick={props.login}>Login</button>
-            <button onClick={props.logout}>Logout</button>
+import React from 'react';
+import styles from './Buttons.module.css'; // Create this CSS module
+
+export default function Buttons({ login, logout }) {
+    return (
+        <div className={styles.buttonContainer}>
+            <button
+                onClick={login}
+                className={styles.loginButton}
+            >
+                Login
+            </button>
+            <button
+                onClick={logout}
+                className={styles.logoutButton}
+            >
+                Logout
+            </button>
         </div>
-        </div>
-    )
+    );
 }

@@ -1,138 +1,129 @@
 import * as React from 'react';
 import styles from "./LoginForm.module.css";
-import {isUserInRole} from "../../axios_helper";
 
 export default class LoginForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            active: "login", // Aktywny formularz
+            active: "login",
             firstName: "",
             lastName: "",
             login: "",
             password: "",
-            onLogin: props.onLogin,
-            onRegister: props.onRegister
+            errors: {}
         };
     }
 
-    onChangeHandler = (event) => {
-        let name = event.target.name;
-        let value = event.target.value;
-        this.setState({ [name]: value });
+    handleChange = (event) => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value,
+            errors: {
+                ...this.state.errors,
+                [name]: null
+            }
+        });
     };
 
-    onSubmitLogin = (e) => {
-        this.state.onLogin(e, this.state.login, this.state.password)
-    };
+    validateForm = () => {
+        const { active, firstName, lastName, login, password } = this.state;
+        const errors = {};
 
-    onSubmitRegister = (e) => {
-            this.state.onRegister(
-                e,
-                this.state.firstName,
-                this.state.lastName,
-                this.state.login,
-                this.state.password
-            );
+        if (!login.trim()) errors.login = "Login jest wymagany";
+        if (!password.trim()) errors.password = "Hasło jest wymagane";
+
+        if (active === "register") {
+            if (!firstName.trim()) errors.firstName = "Imię jest wymagane";
+            if (!lastName.trim()) errors.lastName = "Nazwisko jest wymagane";
+            if (password.length < 6) errors.password = "Hasło musi mieć minimum 6 znaków";
         }
+
+        this.setState({ errors });
+        return Object.keys(errors).length === 0;
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!this.validateForm()) return;
+
+        const { active, firstName, lastName, login, password } = this.state;
+        const { onLogin, onRegister } = this.props;
+
+        if (active === "login") {
+            onLogin(e, login, password);
+        } else {
+            onRegister(e, firstName, lastName, login, password);
+        }
+    };
+
+    renderFormField = (id, name, label, type = "text") => {
+        return (
+            <div className={styles.formOutline}>
+                <input
+                    type={type}
+                    id={id}
+                    name={name}
+                    className={`${styles.formControl} ${this.state.errors[name] ? styles.error : ""}`}
+                    value={this.state[name]}
+                    onChange={this.handleChange}
+                />
+                <label className={styles.formLabel} htmlFor={id}>
+                    {label}
+                </label>
+                {this.state.errors[name] && (
+                    <div className={styles.errorMessage}>
+                        {this.state.errors[name]}
+                    </div>
+                )}
+            </div>
+        );
+    };
+
     render() {
+        const { active } = this.state;
+
         return (
             <div className={styles.row}>
-                <div className={styles.col-4}>
-                    <ul className={`${styles.nav} nav nav-pills nav-justified mb-3 btn btn-secondary`} id="ex1" role="tab-list">
-                        <li className="nav-item" role="presentation">
+                <div className={styles.col4}>
+                    <ul className={styles.nav} role="tablist">
+                        <li className={styles.navItem} role="presentation">
                             <button
-                                className={`${styles.navLink} nav-link ${this.state.active === "login" ? "active" : ""}`}
-                                id="tab-login"
-                                onClick={() => this.setState({ active: "login" })}
+                                className={`${styles.navLink} ${active === "login" ? styles.active : ""}`}
+                                onClick={() => this.setState({ active: "login", errors: {} })}
                             >
                                 Logowanie
                             </button>
                         </li>
-                        <li className="nav-item" role="presentation">
+                        <li className={styles.navItem} role="presentation">
                             <button
-                                className={`${styles.navLink} nav-link ${this.state.active === "register" ? "active" : ""}`}
-                                id="tab-register"
-                                onClick={() => this.setState({ active: "register" })}
+                                className={`${styles.navLink} ${active === "register" ? styles.active : ""}`}
+                                onClick={() => this.setState({ active: "register", errors: {} })}
                             >
                                 Rejestracja
                             </button>
                         </li>
                     </ul>
-                    <div className="tab-content">
-                        {this.state.active === "login" && (
-                            <div>
-                                <form onSubmit={this.onSubmitLogin}>
-                                    <div className="form-outline mb-4">
-                                        <input
-                                            type="text"
-                                            id="loginName"
-                                            name="login"
-                                            className="form-control"
-                                            onChange={this.onChangeHandler}
-                                        />
-                                        <label className="form-label" htmlFor="loginName">Nazwa użytkownika</label>
-                                    </div>
-                                    <div className="form-outline mb-4">
-                                        <input
-                                            type="password"
-                                            id="loginPassword"
-                                            name="password"
-                                            className="form-control"
-                                            onChange={this.onChangeHandler}
-                                        />
-                                        <label className="form-label" htmlFor="loginPassword">Hasło</label>
-                                    </div>
-                                    <button type="submit" className="btn btn-primary btn-block mb-4">Zatwierdź</button>
-                                </form>
-                            </div>
-                        )}
-                        {this.state.active === "register" && (
-                            <div>
-                                <form onSubmit={this.onSubmitRegister}>
-                                    <div className="form-outline mb-4">
-                                        <input
-                                            type="text"
-                                            id="firstName"
-                                            name="firstName"
-                                            className="form-control"
-                                            onChange={this.onChangeHandler}
-                                        />
-                                        <label className="form-label" htmlFor="firstName">Imię</label>
-                                    </div>
-                                    <div className="form-outline mb-4">
-                                        <input
-                                            type="text"
-                                            id="lastName"
-                                            name="lastName"
-                                            className="form-control"
-                                            onChange={this.onChangeHandler}
-                                        />
-                                        <label className="form-label" htmlFor="lastName">Nazwisko</label>
-                                    </div>
-                                    <div className="form-outline mb-4">
-                                        <input
-                                            type="text"
-                                            id="login"
-                                            name="login"
-                                            className="form-control"
-                                            onChange={this.onChangeHandler}
-                                        />
-                                        <label className="form-label" htmlFor="login">Login</label>
-                                    </div>
-                                    <div className="form-outline mb-4">
-                                        <input
-                                            type="password"
-                                            id="password"
-                                            name="password"
-                                            className="form-control"
-                                            onChange={this.onChangeHandler}
-                                        />
-                                        <label className="form-label" htmlFor="password">Hasło</label>
-                                    </div>
-                                    <button type="submit" className="btn btn-primary btn-block mb-4">Zatwierdź</button>
-                                </form>
-                            </div>
+
+                    <div className={styles.tabContent}>
+                        {active === "login" ? (
+                            <form onSubmit={this.handleSubmit}>
+                                {this.renderFormField("loginName", "login", "Nazwa użytkownika")}
+                                {this.renderFormField("loginPassword", "password", "Hasło", "password")}
+                                <button type="submit" className={styles.btnPrimary}>
+                                    Zaloguj się
+                                </button>
+                            </form>
+                        ) : (
+                            <form onSubmit={this.handleSubmit}>
+                                {this.renderFormField("firstName", "firstName", "Imię")}
+                                {this.renderFormField("lastName", "lastName", "Nazwisko")}
+                                {this.renderFormField("registerLogin", "login", "Login")}
+                                {this.renderFormField("registerPassword", "password", "Hasło", "password")}
+                                <button type="submit" className={styles.btnPrimary}>
+                                    Zarejestruj się
+                                </button>
+                            </form>
                         )}
                     </div>
                 </div>

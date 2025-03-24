@@ -1,31 +1,37 @@
-import classes from "./EquipmentList.module.css";
+import styles from "./EquipmentList.module.css";
 import React, { useEffect, useState } from "react";
 import { request } from "../../axios_helper.js";
 import { useNavigate } from "react-router-dom";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Button, Container, Row, Col, Alert, Spinner } from "react-bootstrap";
 
 
 const EquipmentList = () => {
-    const [nazwaZmiennej, setterDoKolekcji] = useState([]);
+    const [equipments, setEquipments] = useState([]);
     const [selectedEquipment, setSelectedEquipment] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredEquipment, setFilteredEquipment] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const navigate = useNavigate(); // Hook do nawigacji
 
     useEffect(() => {
-        request('get', "/api/equipments")
-            .then((response) => {
-                if (Array.isArray(response.data)) {
-                    setterDoKolekcji(response.data); // Ustaw dane, jeśli to tablica
-                    setFilteredEquipment(response.data);
-                } else {
-                    setterDoKolekcji(response.data.equipments);
-                    setFilteredEquipment(response.data.equipments);
-                }
-            })
-            .catch((error) => {
-                console.log("Błąd podczas pobierania danych:", error);
-            });
+        const fetchEquipment = async () => {
+            try {
+                setLoading(true);
+                const response = await request('GET', "/api/equipments");
+                const data = Array.isArray(response.data)
+                    ? response.data
+                    : response.data.equipments;
+                setEquipments(data);
+                setFilteredEquipment(data);
+            } catch (error) {
+                setError("Błąd podczas pobierania danych sprzętu");
+                console.error("Error fetching equipment:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchEquipment();
     }, []);
 
     // Przekierowanie do komponentu FormEquipment
@@ -52,84 +58,131 @@ const EquipmentList = () => {
         setSearchQuery(query);
 
             // Filter equipments by frame Number
-            const filtered = nazwaZmiennej.filter(equipment =>
+            const filtered = equipments.filter(equipment =>
                 equipment.frameNumber.toLowerCase().includes(query.toLowerCase())
             );
             setFilteredEquipment(filtered);
 
     };
+    if (loading) return (
+        <div className={styles.loadingContainer}>
+            <Spinner animation="border" variant="danger" />
+            <p>Ładowanie listy sprzętu...</p>
+        </div>
+    );
+
+    if (error) return (
+        <Alert variant="danger" className={styles.errorAlert}>
+            {error}
+        </Alert>
+    );
     return (
-        <Container className={classes.Equipment}>
-            <h2>Lista sprzętu</h2>
-            <div>
-                <label className={classes.formInputLabel}>Wyszukaj rower po nr ramy:</label>
+        <Container className={styles.equipmentContainer}>
+            <h2 className={styles.pageTitle}>Lista sprzętu</h2>
+
+            {/* Search Bar */}
+            <div className={styles.searchGroup}>
+                <label className={styles.searchLabel}>
+                    Wyszukaj rower po nr ramy:
+                </label>
                 <input
                     type="text"
                     value={searchQuery}
                     onChange={handleSearch}
                     placeholder="Wpisz nr ramy"
-                    className={classes.formInputField}
+                    className={styles.searchInput}
                 />
             </div>
-            <Button
-                variant="success"
-                onClick={goToAddEquipment}
-                style={{ margin: '10px' }}>
-                Dodaj Sprzęt
-            </Button>
-            <Button
-                variant="secondary"
-                onClick={goToRentEquipment}
-                style={{ margin: '10px' }}
-                disabled={!selectedEquipment} // Disable button if no equipment is selected
-            >
-                Zobacz detale Roweru
-            </Button>
-            <div className={classes.EquipmentTableHeader}>
-                <Row>
-                    <Col xs={2} sm={1}>Wybierz</Col>
-                    <Col xs={2} sm={1}>Id</Col>
-                    <Col xs={2} sm={2}>Nazwa Roweru</Col>
-                    <Col xs={2} sm={2}>Nr ramy</Col>
-                    <Col xs={2} sm={1}>Rozmiar</Col>
-                    <Col xs={2} sm={1}>Typ</Col>
-                    <Col xs={2} sm={1}>Czy elektryk</Col>
-                    <Col xs={2} sm={1}>Czy dostępny</Col>
-                    <Col xs={2} sm={1}>Cena</Col>
-                </Row>
+
+            {/* Action Buttons */}
+            <div className={styles.buttonGroup}>
+                <Button
+                    variant="success"
+                    onClick={goToAddEquipment}
+                    className={styles.actionButton}
+                >
+                    Dodaj Sprzęt
+                </Button>
+                <Button
+                    variant="primary"
+                    onClick={goToRentEquipment}
+                    className={styles.actionButton}
+                    disabled={!selectedEquipment}
+                >
+                    Zobacz detale roweru
+                </Button>
+                <Button
+                    variant="danger"
+                    onClick={goToDeleteEquipment}
+                    className={styles.actionButton}
+                >
+                    Usuń Sprzęt
+                </Button>
             </div>
-            {filteredEquipment.map((value) => (
-                <Row
-                className={`${classes.EquipmentTableRow} ${selectedEquipment?.idEquipment === value.idEquipment ? classes.SelectedRow : ''}`}
-                key={value.idEquipment}
-                onClick={() => handleSelectEquipment(value)} // Select equipment on row click
-            >
-                <Col xs={1} sm={1}>
-                    <input
-                        type="checkbox"
-                        name="selectedEquipment"
-                        checked={selectedEquipment?.idEquipment === value.idEquipment}
-                        readOnly
-                    />
-                </Col>
-                    <Col xs={1} sm={1}>{value.idEquipment}</Col>
-                    <Col xs={2} sm={2}>{value.nameEquipment}</Col>
-                    <Col xs={2} sm={2}>{value.frameNumber}</Col>
-                    <Col xs={2} sm={1}>{value.size}</Col>
-                    <Col xs={2} sm={1}>{value.type}</Col>
-                    <Col xs={2} sm={1}><input type="radio" checked={value.electric} readOnly /> </Col>
-                    <Col xs={2} sm={1}><input type="radio" checked={value.available} readOnly /></Col>
-                    <Col xs={2} sm={1}>{value.priceEquipment}</Col>
+
+            {/* Equipment Table */}
+            <div className={styles.tableContainer}>
+                {/* Table Header */}
+                <Row className={styles.tableHeader}>
+                    <Col xs={1}>Wybierz</Col>
+                    <Col xs={1}>ID</Col>
+                    <Col xs={2}>Nazwa Roweru</Col>
+                    <Col xs={2}>Nr ramy</Col>
+                    <Col xs={1}>Rozmiar</Col>
+                    <Col xs={1}>Typ</Col>
+                    <Col xs={1}>Elektryk</Col>
+                    <Col xs={1}>Dostępny</Col>
+                    <Col xs={1}>Cena</Col>
                 </Row>
-            ))}
-            <Button
-                variant="danger"
-                onClick={goToDeleteEquipment}
-                style={{ margin: '20px' }}>
-                Usuń Sprzęt
-            </Button>
+
+                {/* Table Rows */}
+                {filteredEquipment.length > 0 ? (
+                    filteredEquipment.map((equipment) => (
+                        <Row
+                            key={equipment.idEquipment}
+                            className={`${styles.tableRow} ${
+                                selectedEquipment?.idEquipment === equipment.idEquipment
+                                    ? styles.selectedRow
+                                    : ''
+                            }`}
+                            onClick={() => handleSelectEquipment(equipment)}
+                        >
+                            <Col xs={1} className={styles.checkboxCol}>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedEquipment?.idEquipment === equipment.idEquipment}
+                                    readOnly
+                                    className={styles.checkbox}
+                                />
+                            </Col>
+                            <Col xs={1}>{equipment.idEquipment}</Col>
+                            <Col xs={2}>{equipment.nameEquipment}</Col>
+                            <Col xs={2}>{equipment.frameNumber}</Col>
+                            <Col xs={1}>{equipment.size}</Col>
+                            <Col xs={1}>{equipment.type}</Col>
+                            <Col xs={1}>
+                                <div className={`${styles.statusIndicator} ${
+                                    equipment.electric ? styles.active : styles.inactive
+                                }`} />
+                            </Col>
+                            <Col xs={1}>
+                                <div className={`${styles.statusIndicator} ${
+                                    equipment.available ? styles.active : styles.inactive
+                                }`} />
+                            </Col>
+                            <Col xs={1} className={styles.price}>
+                                {equipment.priceEquipment} zł
+                            </Col>
+                        </Row>
+                    ))
+                ) : (
+                    <Row className={styles.noResults}>
+                        <Col>Nie znaleziono sprzętu spełniającego kryteria</Col>
+                    </Row>
+                )}
+            </div>
         </Container>
     );
-}
+};
 
 export default EquipmentList;

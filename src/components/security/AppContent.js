@@ -1,91 +1,126 @@
 import * as React from 'react';
 import AuthContent from "./AuthContent";
-import {request, setAuthToken, isUserInRole} from "../../axios_helper";
-import LoginForm from '../login/LoginForm'
-import Buttons from '../login/Buttons'
-import WelcomeContent from "./WelcomeContent";
+import {request, setAuthToken} from "../../axios_helper";
+import LoginForm from '../login/LoginForm';
+import Buttons from '../login/Buttons';
+import WelcomeContent from "../login/WelcomeContent";
 import MessagesContent from './MessagesContent';
+import styles from './AppContent.module.css';
 
 export default class AppContent extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
             componentToShow: "welcome",
             errorMessage: "",
-            logoutMessage: "",
-            userDetails: { firstName: ' ' }
+            successMessage: "",
+            userDetails: null,
+            isAuthenticated: false
         };
-    };
+    }
 
     login = () => {
-        this.setState({componentToShow: "login", errorMessage: "" });
+        this.setState({
+            componentToShow: "login",
+            errorMessage: "",
+            successMessage: ""
+        });
     };
-    logout = () => {
-        this.setState({componentToShow: "welcome",
-        logoutMessage: "Wylogowano użytkownika"});
 
+    logout = () => {
         setAuthToken(null);
+        sessionStorage.removeItem('userDetails');
+        this.setState({
+            componentToShow: "welcome",
+            isAuthenticated: false,
+            successMessage: "Wylogowano pomyślnie",
+            userDetails: null
+        });
     };
-    showMessages = () => {
-        this.setState({ componentToShow: "messages" });
-    };
+
     onLogin = (e, username, password) => {
         e.preventDefault();
-        request("POST", "/api/auth/login", {login: username, password: password}
-        ).then((response)=> {
-
+        request("POST", "/api/auth/login", {
+            login: username,
+            password: password
+        }).then((response) => {
             setAuthToken(response.data.token);
-
-           request("GET", "/api/user/details")
-            .then ((userDetailsResponse) => {
-                const userData = userDetailsResponse.data;
-
+            return request("GET", "/api/user/details");
+        }).then((userDetailsResponse) => {
+            const userData = userDetailsResponse.data;
             sessionStorage.setItem('userDetails', JSON.stringify(userData));
-
-            this.setState({componentToShow: "messages",
-                userDetails: userData});
-
-        }).catch((error)=> {
-            this.setState({componentToShow: "welcome"})
-        });
-    })
-            .catch((error) => {
-                console.error('Login failed:', error);
-                this.setState({ componentToShow: "welcome" });
+            this.setState({
+                componentToShow: "messages",
+                userDetails: userData,
+                isAuthenticated: true,
+                successMessage: "Zalogowano pomyślnie"
             });
+        }).catch((error) => {
+            this.setState({
+                componentToShow: "welcome",
+                errorMessage: "Błąd logowania: " + (error.response?.data?.message || "Nieprawidłowe dane")
+            });
+        });
     };
 
     onRegister = (e, firstName, lastName, username, password) => {
         e.preventDefault();
-
         request("POST", "/api/auth/register", {
-            firstName: firstName,
-            lastName: lastName,
+            firstName,
+            lastName,
             login: username,
-            password: password}
-        ).then((response)=> {
-            console.log("Registration successful, token received:", response.data.token);
-            this.setState({componentToShow: "messages"})
+            password
+        }).then((response) => {
             setAuthToken(response.data.token);
-        }).catch((error)=> {
-            console.error("Registration error:", error);
-            this.setState({componentToShow: "welcome", errorMessage:"Błąd w rejestracji"})
+            this.setState({
+                componentToShow: "messages",
+                successMessage: "Rejestracja zakończona sukcesem"
+            });
+        }).catch((error) => {
+            this.setState({
+                componentToShow: "welcome",
+                errorMessage: "Błąd rejestracji: " + (error.response?.data?.message || "Spróbuj ponownie")
+            });
         });
     };
 
     render() {
-        return (
-            <div>
-                <Buttons login={this.login} logout={this.logout}/>
-                {this.state.errorMessage && <p style={{ color: "red" }}>{this.state.errorMessage}</p>}
-                {this.state.logoutMessage && <p style={{ color: "green" }}>{this.state.logoutMessage}</p>}
-                {this.state.componentToShow === "welcome" && <WelcomeContent/>}
-                {this.state.componentToShow === "messages" && (<AuthContent actionType="login" />
-                ) && <MessagesContent userDetails={this.state.userDetails} />}
-                {this.state.componentToShow === "login" && <LoginForm onLogin={this.onLogin} onRegister={this.onRegister}/>}
+        const { componentToShow, errorMessage, successMessage, userDetails, isAuthenticated } = this.state;
 
+        return (
+            <div className={styles.appContainer}>
+                <Buttons
+                    login={this.login}
+                    logout={this.logout}
+                    isAuthenticated={isAuthenticated}
+                />
+
+                {errorMessage && (
+                    <div className={styles.errorMessage}>
+                        {errorMessage}
+                    </div>
+                )}
+
+                {successMessage && (
+                    <div className={styles.successMessage}>
+                        {successMessage}
+                    </div>
+                )}
+
+                {componentToShow === "welcome" && <WelcomeContent />}
+                {componentToShow === "login" && (
+                    <LoginForm
+                        onLogin={this.onLogin}
+                        onRegister={this.onRegister}
+                    />
+                )}
+                {componentToShow === "messages" && (
+                    <>
+                        <MessagesContent userDetails={userDetails} />
+                        <AuthContent actionType={isAuthenticated ? "login" : "register"} />
+                    </>
+                )}
             </div>
-        )
+        );
     }
 }

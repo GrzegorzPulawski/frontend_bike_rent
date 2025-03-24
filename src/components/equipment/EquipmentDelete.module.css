@@ -1,5 +1,5 @@
-.formContainer {
-    max-width: 600px;
+.deleteContainer {
+    max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     background-color: #1e1e1e;
@@ -7,14 +7,14 @@
     border: 1px solid #333;
 }
 
-.formTitle {
+.pageTitle {
     color: #ffcc00;
     text-align: center;
     margin-bottom: 25px;
     font-weight: 600;
 }
 
-.equipmentForm {
+.deleteForm {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -31,7 +31,7 @@
     font-weight: 500;
 }
 
-.input, .select {
+.input {
     padding: 10px;
     background-color: #121212;
     border: 1px solid #333;
@@ -40,59 +40,13 @@
     transition: all 0.3s;
 }
 
-.input:focus, .select:focus {
+.input:focus {
     outline: none;
     border-color: #ff3a30;
     box-shadow: 0 0 0 2px rgba(255, 58, 48, 0.2);
 }
 
-.checkboxGroup {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.checkboxLabel {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #b3b3b3;
-    cursor: pointer;
-}
-
-.checkbox {
-    position: absolute;
-    opacity: 0;
-}
-
-.checkboxCustom {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #333;
-    border-radius: 4px;
-    background-color: #121212;
-    position: relative;
-    transition: all 0.3s;
-}
-
-.checkbox:checked + .checkboxCustom {
-    background-color: #ff3a30;
-    border-color: #ff3a30;
-}
-
-.checkbox:checked + .checkboxCustom::after {
-    content: '';
-    position: absolute;
-    left: 5px;
-    top: 1px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-
-.submitButton {
+.deleteButton {
     background-color: #ff3a30;
     color: white;
     border: none;
@@ -106,20 +60,20 @@
     align-items: center;
 }
 
-.submitButton:hover:not(:disabled) {
+.deleteButton:hover:not(:disabled) {
     background-color: #e0352b;
     transform: translateY(-2px);
 }
 
-.submitButton:disabled {
+.deleteButton:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
 .alert {
-    margin-top: 20px;
     padding: 12px;
     border-radius: 4px;
+    margin-top: 20px;
 }
 
 .alert.danger {
@@ -148,7 +102,7 @@
 }
 
 @media (max-width: 768px) {
-    .formContainer {
+    .deleteContainer {
         padding: 15px;
     }
 }

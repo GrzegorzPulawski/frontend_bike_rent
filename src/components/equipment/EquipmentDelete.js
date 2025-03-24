@@ -1,53 +1,122 @@
-import React, { useState } from 'react';
-import { Button, Form, Alert } from 'react-bootstrap';
-import {request} from "../../axios_helper";
+import React, { useState, useEffect } from 'react';
+import { request, isUserInRole } from '../../axios_helper';
 import { useNavigate } from 'react-router-dom';
+import styles from './EquipmentDelete.module.css';
+import {Alert} from "react-bootstrap";
+
+
 
 const EquipmentDelete = () => {
     const [idEquipment, setIdEquipment] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [hasAccess, setHasAccess] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    useEffect(() => {
+        // Check admin privileges on component mount
+        if (isUserInRole('ADMIN')) {
+            setHasAccess(true);
+        } else {
+            setErrorMessage("Brak uprawnień administratora");
+            setHasAccess(false);
+        }
+    }, []);
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Wykonanie żądania DELETE do backendu
-        request("DELETE", `/api/equipments/delete?idEquipment=${idEquipment}`)
-            .then((response) => {
-                console.log("Sprzęt usunięty:", response);
-                setSuccessMessage(`Sprzęt o ID ${idEquipment} został pomyślnie usunięty.`);
-                setErrorMessage('');
-                setIdEquipment(''); // Wyczyść pole po pomyślnym usunięciu
-                setTimeout(()=> {
-                    navigate("/list");
-                },2000);
-            })
-            .catch((error) => {
-                console.error("Błąd podczas usuwania sprzętu:", error);
-                setErrorMessage("Nie udało się usunąć sprzętu. Upewnij się, że sprzęt istnieje, lub czy masz uprawnienia");
-                setSuccessMessage('');
-            });
+        if (!hasAccess) {
+            setErrorMessage("Brak uprawnień do usuwania sprzętu");
+            return;
+        }
+
+        if (!idEquipment) {
+            setErrorMessage("Proszę podać ID sprzętu");
+            return;
+        }
+
+        setLoading(true);
+        setErrorMessage('');
+        setSuccessMessage('');
+
+        try {
+            const response = await request(
+                "DELETE",
+                `/api/equipments/delete?idEquipment=${idEquipment}`
+            );
+
+            setSuccessMessage(`Sprzęt o ID ${idEquipment} został pomyślnie usunięty.`);
+            setIdEquipment('');
+
+            // Redirect after 2 seconds
+            setTimeout(() => navigate("/list"), 2000);
+        } catch (error) {
+            console.error("Error deleting equipment:", error);
+            setErrorMessage(
+                error.response?.data?.message ||
+                "Nie udało się usunąć sprzętu. Sprawdź czy ID jest poprawne."
+            );
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
-        <div>
-            <h2>Usuń Sprzęt</h2>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formEquipmentId">
-                    <Form.Label>Podaj ID sprzętu do usunięcia</Form.Label>
-                    <Form.Control
+        <div className={styles.deleteContainer}>
+            <h2 className={styles.pageTitle}>Usuń Sprzęt</h2>
+
+            {!hasAccess && (
+                <Alert variant="danger" className={styles.alert}>
+                    {errorMessage}
+                </Alert>
+            )}
+
+            <form onSubmit={handleSubmit} className={styles.deleteForm}>
+                <div className={styles.formGroup}>
+                    <label htmlFor="equipmentId" className={styles.label}>
+                        ID sprzętu do usunięcia*
+                    </label>
+                    <input
+                        id="equipmentId"
                         type="number"
                         value={idEquipment}
-                        onChange={(e) => setIdEquipment(e.target.value)}
-                        placeholder="ID sprzętu"
-                        required
+                        onChange={(e) => {
+                            setIdEquipment(e.target.value);
+                            setErrorMessage('');
+                        }}
+                        className={styles.input}
+                        placeholder="Wprowadź ID sprzętu"
+                        min="1"
+                        disabled={!hasAccess}
                     />
-                </Form.Group>
-                <Button variant="danger" type="submit">Usuń Sprzęt</Button>
-            </Form>
-            {successMessage && <Alert variant="success" className="mt-3">{successMessage}</Alert>}
-            {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}
+                </div>
+
+                <button
+                    type="submit"
+                    className={styles.deleteButton}
+                    disabled={!hasAccess || loading || !idEquipment}
+                >
+                    {loading ? (
+                        <span className={styles.spinner}></span>
+                    ) : (
+                        'Usuń Sprzęt'
+                    )}
+                </button>
+
+                {successMessage && (
+                    <Alert variant="success" className={styles.alert}>
+                        {successMessage}
+                    </Alert>
+                )}
+
+                {errorMessage && (
+                    <Alert variant="danger" className={styles.alert}>
+                        {errorMessage}
+                    </Alert>
+                )}
+            </form>
         </div>
     );
 };

@@ -1,133 +1,192 @@
-import React, {useEffect, useState} from "react";
-
-import styles from "./RentingList.module.css"
-import {request} from "../../axios_helper";
+import React, { useEffect, useState } from "react";
+import { request } from "../../axios_helper";
 import ReturnRenting from "./ReturnRenting";
-import {Alert, Button, Row, Col, Form, Container} from "react-bootstrap";
-import { useNavigate} from "react-router-dom";
+import { Alert, Button, Row, Col, Form, Container, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import moment from 'moment-timezone';
-
+import styles from "./RentingList.module.css";
 
 const RentingList = () => {
     const [listRenting, setRentingList] = useState([]);
-    const [selectedRentings, setSelectedRentings] = useState([])
+    const [selectedRentings, setSelectedRentings] = useState([]);
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchRentings = async () => {
             try {
-                const response = await request('get', "/api/rentings/recentlyRenting");
+                setIsLoading(true);
+                const response = await request('GET', "/api/rentings/recentlyRenting");
                 setRentingList(response.data);
             } catch (error) {
                 console.error("Error fetching rentings:", error);
+                setErrorMessage("Błąd podczas ładowania listy wypożyczeń");
+            } finally {
+                setIsLoading(false);
             }
         };
         fetchRentings();
     }, []);
-    // Handle selecting/unselecting rentals
+
     const handleCheckboxChange = (idRenting) => {
-        setSelectedRentings((prevSelected) => {
-            if (prevSelected.includes(idRenting)) {
-                return prevSelected.filter(id => id !== idRenting); // Unselect
-            } else {
-                return [...prevSelected, idRenting]; // Select
-            }
-        });
+        setSelectedRentings((prevSelected) =>
+            prevSelected.includes(idRenting)
+                ? prevSelected.filter(id => id !== idRenting)
+                : [...prevSelected, idRenting]
+        );
     };
 
-    //Logika przekierowania do Listy umow
     const handleConfirmSelection = async () => {
-        if (selectedRentings.length > 0) {
-            try {
-                const response = await request('post', '/api/rentings/print', {idRentings: selectedRentings });
-                if (response.status === 200) {
-                    console.log('Navigating with data:', response.data); // Debug log
-                    navigate("/printAgreements", { state: { rentings: response.data } });
-                } else {
-                    setErrorMessage("Błąd podczas drukowania umów.");
-                }
-            } catch (error) {
-                setErrorMessage("Błąd podczas drukowania umów.");
-                console.error("Error during print request:", error);
-                console.error("Error response:", error.response);
-            }
-        } else {
+        if (selectedRentings.length === 0) {
             setErrorMessage("Proszę zaznaczyć co najmniej jedną umowę.");
+            return;
+        }
+
+        try {
+            setIsLoading(true);
+            const response = await request('POST', '/api/rentings/print', {
+                idRentings: selectedRentings
+            });
+
+            if (response.status === 200) {
+                navigate("/printAgreements", {
+                    state: { rentings: response.data }
+                });
+            } else {
+                setErrorMessage("Błąd podczas przygotowywania umów do druku.");
+            }
+        } catch (error) {
+            console.error("Print request error:", error);
+            setErrorMessage(error.response?.data?.message || "Błąd podczas drukowania umów.");
+        } finally {
+            setIsLoading(false);
         }
     };
+
     const handleReturnSuccess = async () => {
-        //Fetch updated renting list after successful return
-        const response = await request('get', '/api/rentings/recentlyRenting');
-        setRentingList(response.data);
-    }
+        try {
+            setIsLoading(true);
+            const response = await request('GET', '/api/rentings/recentlyRenting');
+            setRentingList(response.data);
+            setSelectedRentings([]);
+        } catch (error) {
+            console.error("Error refreshing rentals:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const handleNavigateToRecentlyReturned = () => {
         navigate('/show-currently-returned');
     };
+
     return (
-        <div>
-            <div className="d-flex flex-column flex-md-row justify-content-center align-items-center mt-3">
-                <Col xs={6} className="text-start">
+        <div className={styles.rentingContainer}>
+            <h2 className={styles.pageTitle}>Aktualne wypożyczenia</h2>
+
+            {/* Action Buttons */}
+            <div className={styles.actionButtons}>
                 <Button
-                    variant="warning"
+                    variant="primary"
                     onClick={handleConfirmSelection}
-                    disabled={selectedRentings.length === 0}
-                    className="btn-lg me-2 mb-2 mb-md-0"  // 'mb-2' dla marginesu na mniejszych ekranach
+                    disabled={selectedRentings.length === 0 || isLoading}
+                    className={styles.printButton}
                 >
-                    Wydrukuj umowę wypożyczenia
+                    {isLoading ? (
+                        <Spinner animation="border" size="sm" />
+                    ) : (
+                        'Wydrukuj umowę wypożyczenia'
+                    )}
                 </Button>
-                </Col>
+
                 <ReturnRenting
                     selectedRentings={selectedRentings}
                     setSuccessMessage={setSuccessMessage}
                     setErrorMessage={setErrorMessage}
                     onReturnSuccess={handleReturnSuccess}
                     onReturnNavigate={handleNavigateToRecentlyReturned}
+                    disabled={selectedRentings.length === 0 || isLoading}
                 />
             </div>
 
-            {successMessage && <Alert variant="success" className="mt-3">{successMessage}</Alert>}
-            {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}
+            {/* Status Messages */}
+            {successMessage && (
+                <Alert variant="success" className={styles.alertMessage}>
+                    {successMessage}
+                </Alert>
+            )}
+            {errorMessage && (
+                <Alert variant="danger" className={styles.alertMessage}>
+                    {errorMessage}
+                </Alert>
+            )}
 
-            <Container>
-                <Row className="bg-light fw-bold text-center py-2 mb-3">
-                    <Col xs={1}>Wybierz</Col>
-                    <Col xs={1}>Id</Col>
-                    <Col xs={1}>Imię</Col>
-                    <Col xs={1}>Nazwisko</Col>
-                    <Col xs={2}>Data wypożyczenia</Col>
-                    <Col xs={2}>Rower</Col>
-                    <Col xs={2}>Nr ramy</Col>
-                </Row>
-                {
-                    listRenting
-                        .map(value => {
-                        const dateRentingFormat = moment.utc(value.dateRenting).tz('Europe/Warsaw').format('DD/MM/YY HH:mm');
+            {/* Rentals Table */}
+            {isLoading ? (
+                <div className={styles.loadingContainer}>
+                    <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Ładowanie...</span>
+                    </Spinner>
+                </div>
+            ) : listRenting.length > 0 ? (
+                <Container fluid className={styles.tableContainer}>
+                    {/* Table Header */}
+                    <Row className={styles.tableHeader}>
+                        <Col xs={1}>Wybierz</Col>
+                        <Col xs={1}>ID</Col>
+                        <Col xs={1}>Imię</Col>
+                        <Col xs={1}>Nazwisko</Col>
+                        <Col xs={2}>Data wypożyczenia</Col>
+                        <Col xs={2}>Rower</Col>
+                        <Col xs={1}>Nr ramy</Col>
+                        <Col xs={2}>Status</Col>
+                    </Row>
+
+                    {/* Table Rows */}
+                    {listRenting.map((rental) => {
+                        const dateRentingFormat = moment.utc(rental.dateRenting)
+                            .tz('Europe/Warsaw')
+                            .format('DD/MM/YY HH:mm');
 
                         return (
-                            <Row className={`py-2 border-bottom text-center }`} key={value.idRenting}>
-                                <Col xs={1}>
+                            <Row
+                                key={rental.idRenting}
+                                className={`${styles.tableRow} ${
+                                    selectedRentings.includes(rental.idRenting) ? styles.selectedRow : ''
+                                }`}
+                            >
+                                <Col xs={1} className={styles.checkboxCol}>
                                     <Form.Check
-                                        type="switch"
-                                        checked={selectedRentings.includes(value.idRenting)}
-                                        onChange={() => handleCheckboxChange(value.idRenting)}
+                                        type="checkbox"
+                                        checked={selectedRentings.includes(rental.idRenting)}
+                                        onChange={() => handleCheckboxChange(rental.idRenting)}
                                         className={styles.checkbox}
                                     />
                                 </Col>
-                                <Col xs={1}>{value.idRenting}</Col>
-                                <Col xs={1}>{value.firstName}</Col>
-                                <Col xs={1}>{value.lastName}</Col>
+                                <Col xs={1}>{rental.idRenting}</Col>
+                                <Col xs={1}>{rental.firstName}</Col>
+                                <Col xs={1}>{rental.lastName}</Col>
                                 <Col xs={2}>{dateRentingFormat}</Col>
-                                <Col xs={2}>{value.nameEquipment}</Col>
-                                <Col xs={2}>{value.frameNumber || "N/A"}</Col>
+                                <Col xs={2}>{rental.nameEquipment}</Col>
+                                <Col xs={1}>{rental.frameNumber || "N/A"}</Col>
+                                <Col xs={2}>
+                                    <span className={styles.statusBadge}>
+                                        Aktywne
+                                    </span>
+                                </Col>
                             </Row>
                         );
-                    })
-                }
-            </Container>
+                    })}
+                </Container>
+            ) : (
+                <Alert variant="info" className={styles.noResultsAlert}>
+                    Brak aktywnych wypożyczeń
+                </Alert>
+            )}
         </div>
     );
-}
+};
 
 export default RentingList;

@@ -1,59 +1,112 @@
-
 .row {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
 
-.col-4 {
+.col4 {
     width: 33.33%;
+    background-color: #1e1e1e; /* Dark gray */
+    border: 1px solid #ff3a30; /* Red border */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(255, 58, 48, 0.2);
 }
 
 .nav {
+    display: flex;
     margin-bottom: 20px;
+    border-bottom: 1px solid #333; /* Dark gray */
+    padding: 0;
+    list-style: none;
 }
 
-.nav-item {
+.navItem {
     flex: 1;
-}
-
-.nav-link {
     text-align: center;
+}
+
+.navLink {
+    display: block;
+    padding: 10px 0;
+    color: #b3b3b3; /* Light gray */
+    text-decoration: none;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
     width: 100%;
+    font-size: 1rem;
 }
 
-.nav-link.active {
-    background-color: #007bff;
-    color: white;
-
+.navLink:hover {
+    color: #ffcc00; /* Yellow on hover */
 }
 
-.form-outline {
+.navLink.active {
+    color: #ffcc00; /* Yellow */
+    font-weight: bold;
+    border-bottom: 2px solid #ff3a30; /* Red underline */
+}
+
+.formOutline {
     position: relative;
     margin-bottom: 20px;
 }
 
-.form-control {
+.formControl {
     width: 100%;
+    padding: 10px;
+    background-color: #121212; /* Black */
+    border: 1px solid #333; /* Dark gray */
+    border-radius: 4px;
+    color: #e0e0e0; /* Light text */
+    font-size: 1rem;
 }
 
-.form-label {
+.formControl:focus {
+    outline: none;
+    border-color: #ff3a30; /* Red focus */
+    box-shadow: 0 0 0 2px rgba(255, 58, 48, 0.2);
+}
+
+.formLabel {
     position: absolute;
     left: 10px;
     top: -10px;
-    font-size: 14px;
-    color: #343a40;
+    background-color: #1e1e1e; /* Match background */
+    padding: 0 5px;
+    font-size: 0.9rem;
+    color: #b3b3b3; /* Light gray */
 }
 
-.btn-primary {
-    background-color: #007bff; /* Domyślny kolor */
-    color: white; /* Kolor tekstu */
-    border: lawngreen; /* Brak obramowania */
-    padding: 10px 20px; /* Odstępy wewnętrzne */
-    border-radius: 5px; /* Zaokrąglone rogi */
-    transition: background-color 0.3s; /* Gładka zmiana koloru */
+.error {
+    border-color: #ff3a30; /* Red error */
 }
 
-.btn-primary:hover {
-    background-color: #0056b3; /* Przyciemnienie koloru przy najechaniu */
+.errorMessage {
+    color: #ff3a30; /* Red error text */
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.btnPrimary {
+    background-color: #ff3a30; /* Red button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.btnPrimary:hover {
+    background-color: #e0352b; /* Darker red on hover */
+    transform: translateY(-1px);
+}
+
+.tabContent {
+    padding: 10px 0;
 }

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { request } from "../../axios_helper";
-import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
+import styles from "./EquipmentDetails.module.css";
 import BikeUnlock from "../QRScanner/BikeUnlockModal";
+import {Alert} from "react-bootstrap";
 
 const EquipmentDetails = () => {
     const { id } = useParams();
@@ -14,20 +15,23 @@ const EquipmentDetails = () => {
     const [selectedClient, setSelectedClient] = useState("");
     const [confirmationMessage, setConfirmationMessage] = useState("");
     const [rentingLoading, setRentingLoading] = useState(false);
-    const [showUnlockModal, setShowUnlockModal] = useState(false);// Bikeunlock
+    const [showUnlockModal, setShowUnlockModal] = useState(false);
 
     // Fetch equipment details
     useEffect(() => {
         const fetchEquipment = async () => {
             try {
-                const response = await request("get", `/api/equipments/details/${id}`);
+                setLoading(true);
+                const response = await request("GET", `/api/equipments/details/${id}`);
                 setEquipment(response.data);
+                setError(null);
             } catch (err) {
-                if (err.response && err.response.status === 404) {
-                    setError("Equipment not found");
+                if (err.response?.status === 404) {
+                    setError("Sprzęt nie został znaleziony");
                 } else {
-                    setError("An error occurred while fetching equipment details");
+                    setError("Wystąpił błąd podczas ładowania danych sprzętu");
                 }
+                console.error("Error fetching equipment:", err);
             } finally {
                 setLoading(false);
             }
@@ -40,7 +44,7 @@ const EquipmentDetails = () => {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const response = await request("get", "/api/clients");
+                const response = await request("GET", "/api/clients");
                 setClients(response.data);
             } catch (err) {
                 console.error("Error fetching clients:", err);
@@ -52,7 +56,7 @@ const EquipmentDetails = () => {
 
     // Handle renting submission
     const handleRentEquipment = async () => {
-        if (rentingLoading) return;
+        if (!selectedClient) return;
 
         const createRenting = {
             idClient: selectedClient,
@@ -61,121 +65,155 @@ const EquipmentDetails = () => {
 
         setRentingLoading(true);
         try {
-            const response = await request("post", "/api/rentings", createRenting);
+            const response = await request("POST", "/api/rentings", createRenting);
             setConfirmationMessage("Sprzęt pomyślnie wypożyczono!");
-            setTimeout(() => {
-                navigate("/rentingList");
-            }, 2000);
+            setTimeout(() => navigate("/rentingList"), 2000);
         } catch (err) {
-            setConfirmationMessage("Błąd podczas kreowania wypożyczenia!");
+            console.error("Error renting equipment:", err);
+            setConfirmationMessage("Błąd podczas wypożyczania: " +
+                (err.response?.data?.message || "Spróbuj ponownie"));
         } finally {
             setRentingLoading(false);
         }
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className={styles.loadingContainer}>
+                <div className={styles.spinner}></div>
+                <p>Ładowanie danych sprzętu...</p>
+            </div>
+        );
     }
 
     if (error) {
-        return <div>{error}</div>;
+        return (
+            <Alert variant="danger" className={styles.errorAlert}>
+                {error}
+            </Alert>
+        );
     }
 
     if (!equipment) {
-        return <div>Sprzęt niedostępny</div>;
+        return (
+            <Alert variant="warning" className={styles.alert}>
+                Sprzęt niedostępny
+            </Alert>
+        );
     }
 
     return (
-        <Container className="p-4 bg-light rounded-3 shadow-sm">
-            <Row>
-                <Col>
-                    <h2 className="text-secondary-emphasis mb-4">
-                        Detale Roweru
-                    </h2>
-                    <div className="card p-3 mb-3">
-                        <p className="mb-2">
-                            <strong className="text-primary"><i className="bi bi-tag me-2"></i>ID:</strong> {equipment.idEquipment}
-                        </p>
-                        <p className="mb-2">
-                            <strong className="text-primary"><i className="bi bi-card-text me-2"></i>Nazwa:</strong> {equipment.nameEquipment}
-                        </p>
-                        <p className="mb-2">
-                            <strong className="text-primary"><i className="bi bi-upc-scan me-2"></i>Numer ramy:</strong> {equipment.frameNumber}
-                        </p>
-                        <p className="mb-2">
-                            <strong className="text-primary"><i className="bi bi-rulers me-2"></i>Wielkość ramy:</strong> {equipment.size}
-                        </p>
-                        <p className="mb-2">
-                            <strong className="text-primary"><i className="bi bi-bicycle me-2"></i>Typ roweru:</strong> {equipment.type}
-                        </p>
-                        <p className="mb-2">
-                            <strong className="text-primary"><i className="bi bi-check-circle me-2"></i>Czy elektryk:</strong>
-                            <span className={`badge ${equipment.electric ? 'bg-success' : 'bg-danger'} ms-2`}>
+        <div className={styles.container}>
+            <h2 className={styles.pageTitle}>Detale Roweru</h2>
+
+            {/* Equipment Details Card */}
+            <div className={styles.detailsCard}>
+                <div className={styles.detailRow}>
+                    <span className={styles.detailLabel}>ID:</span>
+                    <span className={styles.detailValue}>{equipment.idEquipment}</span>
+                </div>
+                <div className={styles.detailRow}>
+                    <span className={styles.detailLabel}>Nazwa:</span>
+                    <span className={styles.detailValue}>{equipment.nameEquipment}</span>
+                </div>
+                <div className={styles.detailRow}>
+                    <span className={styles.detailLabel}>Numer ramy:</span>
+                    <span className={styles.detailValue}>{equipment.frameNumber}</span>
+                </div>
+                <div className={styles.detailRow}>
+                    <span className={styles.detailLabel}>Rozmiar:</span>
+                    <span className={styles.detailValue}>{equipment.size}</span>
+                </div>
+                <div className={styles.detailRow}>
+                    <span className={styles.detailLabel}>Typ:</span>
+                    <span className={styles.detailValue}>{equipment.type}</span>
+                </div>
+                <div className={styles.detailRow}>
+                    <span className={styles.detailLabel}>Elektryk:</span>
+                    <span className={`${styles.statusBadge} ${
+                        equipment.electric ? styles.active : styles.inactive
+                    }`}>
                         {equipment.electric ? "Tak" : "Nie"}
                     </span>
-                        </p>
-                        <p className="mb-2">
-                            <strong className="text-primary"><i className="bi bi-check-circle me-2"></i>Czy dostępny:</strong>
-                            <span className={`badge ${equipment.available ? 'bg-success' : 'bg-danger'} ms-2`}>
-                        {equipment.available ? "Tak" : "Nie"}
+                </div>
+                <div className={styles.detailRow}>
+                    <span className={styles.detailLabel}>Dostępność:</span>
+                    <span className={`${styles.statusBadge} ${
+                        equipment.available ? styles.active : styles.inactive
+                    }`}>
+                        {equipment.available ? "Dostępny" : "Wypożyczony"}
                     </span>
-                        </p>
-                        <p className="mb-0">
-                            <strong className="text-primary"><i className="bi bi-currency-exchange me-2"></i>Cena za dobę:</strong> {equipment.priceEquipment} Zł
-                        </p>
+                </div>
+                <div className={styles.detailRow}>
+                    <span className={styles.detailLabel}>Cena/dzień:</span>
+                    <span className={styles.priceValue}>{equipment.priceEquipment} zł</span>
+                </div>
+            </div>
+
+            {/* Rental Form */}
+            {!equipment.available ? (
+                <Alert variant="warning" className={styles.alert}>
+                    Sprzęt jest obecnie wypożyczony
+                </Alert>
+            ) : (
+                <div className={styles.rentalForm}>
+                    <h3 className={styles.sectionTitle}>Wypożycz rower</h3>
+
+                    <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Wybierz klienta:</label>
+                        <select
+                            value={selectedClient}
+                            onChange={(e) => setSelectedClient(e.target.value)}
+                            className={styles.formSelect}
+                        >
+                            <option value="">Wybierz klienta</option>
+                            {clients.map((client) => (
+                                <option key={client.idClient} value={client.idClient}>
+                                    {client.lastName} {client.firstName}
+                                </option>
+                            ))}
+                        </select>
                     </div>
-                </Col>
-            </Row>
 
-            {/* Renting Form */}
-            <Row>
-                <Col>
-                    {!equipment.available ? (
-                        <Alert variant="warning" className="mt-4">Sprzęt jest już wypożyczony</Alert>
-                    ) : (
-                        <>
-                            <h3 className="text-success mt-4">Wypożycz ten rower</h3>
-                            <Form className="mt-3">
-                                <Form.Group controlId="clientSelect" className="mb-3">
-                                    <Form.Label>Wybierz klienta:</Form.Label>
-                                    <Form.Control
-                                        as="select"
-                                        value={selectedClient}
-                                        onChange={(e) => setSelectedClient(e.target.value)}
-                                    >
-                                        <option value="">Wybierz klienta</option>
-                                        {clients.map((client) => (
-                                            <option key={client.idClient} value={client.idClient}>
-                                                {client.lastName} {client.firstName}
-                                            </option>
-                                        ))}
-                                    </Form.Control>
-                                </Form.Group>
-
-                                <Button
-                                    variant="success" // Green button
-                                    onClick={handleRentEquipment}
-                                    disabled={rentingLoading || !selectedClient}
-                                    className="w-100" // Full-width button
-                                >
-                                    {rentingLoading ? "Processing..." : "Wypożycz ten rower"}
-                                </Button>
-                            </Form>
-
-                            {confirmationMessage && (
-                                <p className="text-success mt-3">{confirmationMessage}</p>
+                    <div className={styles.buttonGroup}>
+                        <button
+                            className={styles.rentButton}
+                            onClick={handleRentEquipment}
+                            disabled={rentingLoading || !selectedClient}
+                        >
+                            {rentingLoading ? (
+                                <span className={styles.buttonSpinner}></span>
+                            ) : (
+                                'Wypożycz rower'
                             )}
-                        </>
+                        </button>
+
+                        <button
+                            className={styles.unlockButton}
+                            onClick={() => setShowUnlockModal(true)}
+                        >
+                            Odblokuj rower
+                        </button>
+                    </div>
+
+                    {confirmationMessage && (
+                        <Alert
+                            variant={confirmationMessage.includes("Błąd") ? "danger" : "success"}
+                            className={styles.alert}
+                        >
+                            {confirmationMessage}
+                        </Alert>
                     )}
-                </Col>
-            </Row>
+                </div>
+            )}
+
             {/* Bike Unlock Modal */}
             <BikeUnlock
                 bikeId={equipment.idEquipment}
                 show={showUnlockModal}
                 onHide={() => setShowUnlockModal(false)}
             />
-        </Container>
+        </div>
     );
 };
 

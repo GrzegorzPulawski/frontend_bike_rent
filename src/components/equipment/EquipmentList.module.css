@@ -1,69 +1,178 @@
-
-.Equipment {
+.equipmentContainer {
     padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 9px;
-    max-width: 800px; /* Utrzymanie maksymalnej szerokości kontenera */
-    margin: 0 auto; /* Wycentrowanie kontenera */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Cień dla kontenera */
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: #121212;
+    border-radius: 8px;
+    border: 1px solid #333;
 }
 
-h2 {
-    text-align: center; /* Wyśrodkowanie nagłówka */
-    color: #333; /* Kolor nagłówka */
-    margin-bottom: 20px; /* Margines dolny */
+.pageTitle {
+    color: #ffcc00;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
 }
 
-button {
-    background-color: #56c238; /* Kolor tła przycisku */
-    color: white; /* Kolor tekstu */
-    padding: 10px 20px; /* Padding przycisku */
-    border-radius: 5px; /* Zaokrąglenie krawędzi */
-    border: none; /* Usunięcie domyślnej ramki */
-    cursor: pointer; /* Zmiana kursora na wskaźnik */
-    transition: background-color 0.3s ease; /* Płynna zmiana koloru tła */
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #e0e0e0;
 }
 
-button:hover {
-    background-color: #13f140; /* Kolor tła przycisku przy najechaniu */
+.errorAlert {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: rgba(255, 58, 48, 0.1);
+    border-left: 4px solid #ff3a30;
+    color: #ff3a30;
 }
 
-.EquipmentTableHeader {
-    display: grid; /* Użycie siatki dla nagłówka */
-    background-color: #fff; /* Tło nagłówka */
-    padding: 15px; /* Padding dla nagłówka */
-    border-bottom: 2px solid #ccc; /* Dolna ramka nagłówka */
-    border-radius: 5px 5px 0 0; /* Zaokrąglenie górnych krawędzi */
-    color: #333; /* Kolor tekstu */
-    font-weight: bold; /* Pogrubienie tekstu nagłówka */
+.searchGroup {
+    margin-bottom: 20px;
 }
 
-.EquipmentTableRow {
-    display: flex;/* Use flexbox for rows */
-    align-items: center; /* Vertically center items in the row */
-    background-color: #fff; /* Background color for rows */
-    padding: 15px; /* Padding for rows */
-    border-bottom: 2px solid #ccc; /* Bottom border for rows */
-    color: #333; /* Text color */
-    transform: translateY(25px);
+.searchLabel {
+    display: block;
+    color: #b3b3b3;
+    margin-bottom: 8px;
+    font-weight: 500;
 }
 
-.SelectedRow {
-    background-color: #e0f7fa; /* Light blue background for selected row */
+.searchInput {
+    width: 100%;
+    padding: 10px;
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #e0e0e0;
+    transition: all 0.3s;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #ff3a30;
+    box-shadow: 0 0 0 2px rgba(255, 58, 48, 0.2);
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.actionButton {
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.actionButton:hover {
+    transform: translateY(-2px);
+}
+
+.tableContainer {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    border: 1px solid #333;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.tableHeader {
+    background-color: #333;
+    color: #ffcc00;
+    padding: 12px;
+    font-weight: 500;
+}
+
+.tableRow {
+    padding: 12px;
+    border-bottom: 1px solid #333;
+    color: #e0e0e0;
+    transition: background-color 0.3s;
+    align-items: center;
+}
+
+.tableRow:hover {
+    background-color: #2a2a2a;
     cursor: pointer;
 }
-.EquipmentTableRow:hover {
-    background-color: #f1f1f1; /* Efekt hover dla wierszy */
+
+.selectedRow {
+    background-color: rgba(255, 58, 48, 0.1);
+    border-left: 3px solid #ff3a30;
 }
 
-/* Media Queries */
+.checkboxCol {
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox {
+    transform: scale(1.3);
+    accent-color: #ff3a30;
+}
+
+.statusIndicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.statusIndicator.active {
+    background-color: #4caf50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
+
+.statusIndicator.inactive {
+    background-color: #ff3a30;
+}
+
+.price {
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.noResults {
+    padding: 20px;
+    text-align: center;
+    color: #b3b3b3;
+    background-color: #1e1e1e;
+}
+
 @media (max-width: 768px) {
-    .EquipmentTableHeader, .EquipmentTableRow {
-        grid-template-columns: 1fr; /* Na mniejszych ekranach kolumny zajmują pełną szerokość */
+    .tableHeader {
+        display: none;
     }
 
-    button {
-        width: 100%; /* Przyciski zajmują pełną szerokość */
-        margin-bottom: 10px; /* Margines dolny dla przycisków */
+    .tableRow {
+        flex-direction: column;
+        padding: 15px;
+        border-bottom: 2px solid #444;
+    }
+
+    .tableRow > Col {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 8px;
+    }
+
+    .tableRow > Col::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #ffcc00;
+        display: inline-block;
+        width: 120px;
+    }
+
+    .checkboxCol {
+        justify-content: flex-start;
+        margin-bottom: 10px;
     }
 }

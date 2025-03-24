@@ -1,8 +1,43 @@
-.AppBody{
-    background-color: var(--body);
-    border-color: var(--border-color);
+
+.AppBody {
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
     width: calc(97vw - 8px);
     min-height: calc(100vh - 78px);
-    margin: 10px auto auto;
+    margin: 10px auto;
+    color: var(--text-primary);
+    box-shadow: 0 0 15px rgba(255, 58, 48, 0.2);
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
 
+/* Optional: Add a subtle red accent glow effect */
+.AppBody::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--border-color), transparent);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .AppBody {
+        width: calc(100vw - 20px);
+        margin: 10px;
+        padding: 15px;
+        border-width: 1px;
+    }
+}
+
+/* For very large screens */
+@media (min-width: 1600px) {
+    .AppBody {
+        max-width: 1500px;
+    }
 }

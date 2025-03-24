@@ -1,88 +1,139 @@
+:root {
+    --header-bg: #1a1a1a; /* Dark gray */
+    --border-color: #ff3a30; /* Vibrant red */
+    --text-primary: #ffffff; /* White */
+    --text-secondary: #b3b3b3; /* Light gray */
+    --accent-yellow: #ffcc00; /* Gold/yellow for hover states */
+    --header-height: 60px;
+}
+
 .AppHeader {
-    background-color: var(--header);
-    border-color: var(--border-color);
-    height: 50px;
+    background-color: var(--header-bg);
+    border-bottom: 2px solid var(--border-color);
+    height: var(--header-height);
     width: calc(97vw - 8px);
-    position: sticky; /* Ustawienie jako sticky */
-    top: 0; /* Przyklejenie do góry */
-    z-index: 1000; /* Upewnij się, że nagłówek jest na wierzchu */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     display: flex;
-    align-items: center; /* Wyśrodkowanie w pionie */
-    margin: auto;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .HeaderLeft {
-    display: flex; /* Umożliwia ustawienie elementów w linii */
-    align-items: center; /* Wyśrodkowanie w pionie */
-    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
     flex: 1;
+    gap: 20px;
 }
 
 .HeaderTitle {
     font-size: 1.5rem;
     font-weight: bold;
-    color: white;
+    color: var(--text-primary);
     text-decoration: none;
-    transition: color 0.3s ease; /* Smooth hover effect */
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
 .HeaderTitle:hover {
-    color: #ffcc00; /* Zmiana koloru tekstu przy najechaniu */
+    color: var(--accent-yellow);
+    text-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
 }
 
 .HeaderRight {
-    margin-left: auto; /* Wyrównanie do prawej */
-    display: flex; /* Umożliwia ustawienie elementów w linii */
-    flex-wrap: wrap; /* Pozwala przyciskom na złamanie w nowym wierszu */
-    justify-content: flex-end; /* Wyrównanie do prawej */
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-left: auto;
 }
 
 .HeaderRight div {
-    margin: 15px 30px 20px;
-    display: inline-block;
-    font-size: large;
-    color: azure;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    position: relative;
+    padding: 5px 0;
 }
+
 .HeaderRight div:hover {
-    color: #ffcc00; /* Change text color on hover */
-    transform: scale(1.1); /* Slightly increase size on hover */
-    cursor: pointer; /* Change cursor to pointer on hover */
+    color: var(--accent-yellow);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+/* Add underline animation on hover */
+.HeaderRight div::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--border-color);
+    transition: width 0.3s ease;
+}
+
+.HeaderRight div:hover::after {
+    width: 100%;
 }
 
 .HeaderUser {
-    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: 1rem;
-    color: #ffffff;
-    opacity: 0.9; /* Lekko przyciemniony tekst */
+    color: var(--text-primary);
+}
+
+/* User avatar or icon */
+.HeaderUser::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-color: var(--border-color);
+    border-radius: 50%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .AppHeader {
+        height: auto;
+        flex-direction: column;
+        padding: 15px;
+        width: calc(100vw - 30px);
+    }
+
+    .HeaderLeft {
+        margin: 0 0 15px 0;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .HeaderRight {
+        width: 100%;
+        justify-content: space-around;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .HeaderRight div {
+        font-size: 1rem;
+        margin: 5px 0;
+    }
+
+    .HeaderTitle {
+        font-size: 1.3rem;
+        text-align: center;
+    }
 }
 
 @media print {
     .AppHeader {
-        display: none; /* Ukryj nagłówek aplikacji przy drukowaniu */
-    }
-}
-
-@media (max-width: 768px) { /* Dla ekranów o szerokości 768px i mniejszych */
-    .AppHeader {
-        height: auto; /* Dostosuj wysokość dla mniejszych ekranów */
-        flex-direction: column; /* Zmiana kierunku na kolumnę */
-        align-items: flex-start; /* Wyrównanie do początku */
-    }
-
-    .HeaderLeft {
-        margin: 10px 0; /* Dostosowanie marginesów */
-        flex: none; /* Resetowanie elastyczności dla HeaderLeft */
-        width: 100%; /* Upewnij się, że element zajmuje pełną szerokość */
-    }
-
-    .HeaderRight {
-        justify-content: center; /* Wyśrodkowanie przycisków */
-        flex-direction: row; /* Utrzymanie wiersza */
-        width: 100%; /* Szerokość na 100% */
-    }
-
-    .HeaderRight div {
-        margin: 5px; /* Zmniejszenie marginesów na małych ekranach */
-        font-size: medium; /* Dostosowanie rozmiaru czcionki */
+        display: none;
     }
 }

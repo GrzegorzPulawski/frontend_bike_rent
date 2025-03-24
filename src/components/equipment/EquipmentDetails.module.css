@@ -1,1 +1,219 @@
 /* Container styling */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.pageTitle {
+    color: #ffcc00;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #e0e0e0;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 58, 48, 0.2);
+    border-radius: 50%;
+    border-top-color: #ff3a30;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.errorAlert {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: rgba(255, 58, 48, 0.1);
+    border-left: 4px solid #ff3a30;
+    color: #ff3a30;
+}
+
+.detailsCard {
+    background-color: #121212;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 1px solid #333;
+}
+
+.detailRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+.detailRow:last-child {
+    border-bottom: none;
+}
+
+.detailLabel {
+    color: #b3b3b3;
+    font-weight: 500;
+}
+
+.detailValue {
+    color: #e0e0e0;
+}
+
+.statusBadge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.statusBadge.active {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+}
+
+.statusBadge.inactive {
+    background-color: rgba(255, 58, 48, 0.2);
+    color: #ff3a30;
+}
+
+.priceValue {
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+.rentalForm {
+    background-color: #121212;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #333;
+}
+
+.sectionTitle {
+    color: #ffcc00;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formLabel {
+    display: block;
+    color: #b3b3b3;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.formSelect {
+    width: 100%;
+    padding: 10px;
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #e0e0e0;
+    transition: all 0.3s;
+}
+
+.formSelect:focus {
+    outline: none;
+    border-color: #ff3a30;
+    box-shadow: 0 0 0 2px rgba(255, 58, 48, 0.2);
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.rentButton {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.rentButton:hover:not(:disabled) {
+    background-color: #3e8e41;
+    transform: translateY(-2px);
+}
+
+.rentButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.unlockButton {
+    background-color: #ff3a30;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.unlockButton:hover {
+    background-color: #e0352b;
+    transform: translateY(-2px);
+}
+
+.buttonSpinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+.alert {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.alert.danger {
+    background-color: rgba(255, 58, 48, 0.1);
+    border-left: 4px solid #ff3a30;
+    color: #ff3a30;
+}
+
+.alert.success {
+    background-color: rgba(76, 175, 80, 0.1);
+    border-left: 4px solid #4caf50;
+    color: #4caf50;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .buttonGroup {
+        flex-direction: column;
+    }
+}

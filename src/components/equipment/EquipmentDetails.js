@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { request } from "../../axios_helper";
 import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
+import BikeUnlock from "../QRScanner/BikeUnlockModal";
 
 const EquipmentDetails = () => {
     const { id } = useParams();
@@ -13,6 +14,7 @@ const EquipmentDetails = () => {
     const [selectedClient, setSelectedClient] = useState("");
     const [confirmationMessage, setConfirmationMessage] = useState("");
     const [rentingLoading, setRentingLoading] = useState(false);
+    const [showUnlockModal, setShowUnlockModal] = useState(false);// Bikeunlock
 
     // Fetch equipment details
     useEffect(() => {
@@ -167,6 +169,12 @@ const EquipmentDetails = () => {
                     )}
                 </Col>
             </Row>
+            {/* Bike Unlock Modal */}
+            <BikeUnlock
+                bikeId={equipment.idEquipment}
+                show={showUnlockModal}
+                onHide={() => setShowUnlockModal(false)}
+            />
         </Container>
     );
 };

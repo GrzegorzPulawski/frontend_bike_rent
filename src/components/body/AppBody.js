@@ -19,6 +19,8 @@ import Reports from "../reports/Reports";
 import ShowDailyReturned from "../reports/ShowDailyReturned";
 import DailyRentedReport from "../reports/DailyRentedReport";
 import EquipmentDetails from "../equipment/EquipmentDetails";
+import BikeUnlockPage from "../QRScanner/BikeUnlockPage";
+
 
 const AppBody = () => {
 
@@ -43,6 +45,7 @@ const AppBody = () => {
                 <Route path="/show-daily-returned" element={<ShowDailyReturned />} />
                 <Route path="/daily-rented-report" element={<DailyRentedReport />} />
                 <Route path="/equipment-details/:id" element={<EquipmentDetails />} />
+                <Route path="/unlock/:id" element={<BikeUnlockPage />} />
             </Routes>
         </div>
     );

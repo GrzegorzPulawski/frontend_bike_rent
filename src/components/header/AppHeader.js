@@ -23,6 +23,9 @@ export default  class AppHeader extends React.Component {
                     <Link to={"/"}>
                         <div>Home</div>
                     </Link>
+                    <Link to={"/unlock"}>
+                        <div>QRCode</div>
+                    </Link>
                     <Link to={"/clientlist"}>
                         <div>Klient</div>
                     </Link>

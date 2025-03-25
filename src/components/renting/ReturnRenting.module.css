@@ -1,30 +1,56 @@
-.Form  div {
-    border: 1px solid var(--border-color);
-    padding: 20px 20px 20px 20px;
-    background: var(--nawigacja);
-    color: ghostwhite;
+.buttonContainer {
     display: flex;
     justify-content: center;
-}
-.ButtonContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center; /* This will vertically align the buttons */
+    margin: 10px 0;
 }
 
-.CustomButton {
-    padding: 12px 24px;
-    font-size: 18px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-    margin-right: 10px; /* Add some margin to separate the buttons */
-}
-
-.CustomButton:hover {
-    background-color: #0056b3;
+.returnButton {
+    background-color: #ff3a30;
     color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+.returnButton:hover:not(:disabled) {
+    background-color: #e0352b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 58, 48, 0.3);
+}
 
+.returnButton:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
 
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 8px;
+}
 
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .returnButton {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        min-width: 160px;
+    }
+}

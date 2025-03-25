@@ -1,0 +1,81 @@
+.reportContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    border: 1px solid #333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pageTitle {
+    color: #ffcc00;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+.buttonGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.reportButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 100%;
+    text-align: center;
+    color: white;
+}
+
+.reportButton:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.reportButton.revenue {
+    background-color: #4caf50; /* Green */
+    background: linear-gradient(135deg, #4caf50, #2e7d32);
+}
+
+.reportButton.returns {
+    background-color: #2196F3; /* Blue */
+    background: linear-gradient(135deg, #2196F3, #0d47a1);
+}
+
+.reportButton.rentals {
+    background-color: #ff9800; /* Orange */
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+.buttonIcon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .buttonGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .reportButton {
+        padding: 20px;
+        font-size: 1rem;
+    }
+
+    .pageTitle {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+}

@@ -46,8 +46,8 @@ function Home() {
             <div className={styles.content}>
                 <div className={styles.imageContainer}>
                     <img
-                        src="https://picsum.photos/id/859/800/600"
-                        alt="Main"
+                        src="/images/logo.png"
+                        alt="Company logo"
                         className={styles.mainImage}
                     />
                 </div>

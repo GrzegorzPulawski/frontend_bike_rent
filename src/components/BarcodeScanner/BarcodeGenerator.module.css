@@ -1,0 +1,23 @@
+.button-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.pdf-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.pdf-actions button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+.barcode-value {
+    font-family: monospace;
+    font-size: 1.1rem;
+    word-break: break-all;
+}

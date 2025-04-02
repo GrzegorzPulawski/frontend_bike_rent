@@ -1,8 +1,8 @@
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
 
-axios.defaults.baseURL ="https://bike-rent-backend-f317c5c76639.herokuapp.com/";
-//axios.defaults.baseURL = "http://localhost:8080";
+//axios.defaults.baseURL ="https://bike-rent-backend-f317c5c76639.herokuapp.com/";
+axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.headers["Content-Type"] = 'application/json';
 
 export const getAuthToken =() => {

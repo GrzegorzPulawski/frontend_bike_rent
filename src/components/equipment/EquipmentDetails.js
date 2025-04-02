@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { request } from "../../axios_helper";
 import styles from "./EquipmentDetails.module.css";
-import BikeUnlock from "../QRScanner/BikeUnlockModal";
 import {Alert} from "react-bootstrap";
 
 const EquipmentDetails = () => {
@@ -15,7 +14,6 @@ const EquipmentDetails = () => {
     const [selectedClient, setSelectedClient] = useState("");
     const [confirmationMessage, setConfirmationMessage] = useState("");
     const [rentingLoading, setRentingLoading] = useState(false);
-    const [showUnlockModal, setShowUnlockModal] = useState(false);
 
     // Fetch equipment details
     useEffect(() => {
@@ -187,13 +185,6 @@ const EquipmentDetails = () => {
                                 'Wypożycz rower'
                             )}
                         </button>
-
-                        <button
-                            className={styles.unlockButton}
-                            onClick={() => setShowUnlockModal(true)}
-                        >
-                            Odblokuj rower
-                        </button>
                     </div>
 
                     {confirmationMessage && (
@@ -207,12 +198,7 @@ const EquipmentDetails = () => {
                 </div>
             )}
 
-            {/* Bike Unlock Modal */}
-            <BikeUnlock
-                bikeId={equipment.idEquipment}
-                show={showUnlockModal}
-                onHide={() => setShowUnlockModal(false)}
-            />
+
         </div>
     );
 };

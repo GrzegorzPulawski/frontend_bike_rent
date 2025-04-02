@@ -19,7 +19,9 @@ import Reports from "../reports/Reports";
 import ShowDailyReturned from "../reports/ShowDailyReturned";
 import DailyRentedReport from "../reports/DailyRentedReport";
 import EquipmentDetails from "../equipment/EquipmentDetails";
-import BikeUnlockPage from "../QRScanner/BikeUnlockPage";
+import BarcodeGenerator from "../BarcodeScanner/BarcodeGenerator";
+import BarcodePrint from "../BarcodeScanner/BarcodePrint";
+
 
 
 const AppBody = () => {
@@ -45,7 +47,7 @@ const AppBody = () => {
                 <Route path="/show-daily-returned" element={<ShowDailyReturned />} />
                 <Route path="/daily-rented-report" element={<DailyRentedReport />} />
                 <Route path="/equipment-details/:id" element={<EquipmentDetails />} />
-                <Route path="/unlock/:id" element={<BikeUnlockPage />} />
+                <Route path={"/barcode"} element={<BarcodePrint/>} />
             </Routes>
         </div>
     );

@@ -1,58 +1,53 @@
 
+import React, { useEffect, useRef, useState } from "react";
+import JsBarcode from "jsbarcode";
+
 import { useReactToPrint } from "react-to-print";
 import {request} from "../../axios_helper";
 
-import React, { useRef, useState, useEffect } from "react";
-
-
-const BarcodePrint = ({ bikeId: initialBikeId }) => {
+const BarcodePrint = () => {
+    const [bikeId, setBikeId] = useState("");  // User enters Bike ID
+    const [barcodeText, setBarcodeText] = useState("");
+    const barcodeRef = useRef(null);
     const printRef = useRef();
-    const [bikeId, setBikeId] = useState(initialBikeId || ""); // Allow setting bikeId manually
-    const [barcodeUrl, setBarcodeUrl] = useState("");
 
-    // Fetch barcode image when bikeId is set
+    // Fetch barcode text when Bike ID changes
     useEffect(() => {
-        if (!bikeId) return; // Avoid API call when bikeId is empty
+        if (!bikeId) return;
 
-     request("get",`/api/equipment/barcode/${bikeId}/barcode-image`, {
-            responseType: "blob",
-            headers: { Authorization: `Bearer ${localStorage.getItem("auth_token")}` },
-        })
+   request("GET",`/api/equipment/barcode/${bikeId}`)
             .then((response) => {
-                setBarcodeUrl(URL.createObjectURL(response.data));
+                setBarcodeText(response.data);
             })
-            .catch((error) => console.error("Failed to load barcode:", error));
+            .catch((error) => console.error("Error fetching barcode:", error));
     }, [bikeId]);
+
+    // Generate barcode dynamically
+    useEffect(() => {
+        if (barcodeText && barcodeRef.current) {
+            JsBarcode(barcodeRef.current, barcodeText, { format: "CODE128", width: 2, height: 100 });
+        }
+    }, [barcodeText]);
 
     const handlePrint = useReactToPrint({
         content: () => printRef.current,
     });
 
     return (
-        <div style={{ textAlign: "center", padding: "20px" }}>
-            <h2>Print Barcode</h2>
-
-            {/* Input field to enter Bike ID manually if not provided */}
+        <div>
+            <h2>Enter Bike ID:</h2>
             <input
                 type="text"
-                placeholder="Enter Bike ID"
                 value={bikeId}
                 onChange={(e) => setBikeId(e.target.value)}
-                style={{ padding: "8px", marginBottom: "10px" }}
+                placeholder="Enter Bike ID"
             />
+            <button onClick={handlePrint}>Print Barcode</button>
 
-            <div ref={printRef} style={{ padding: "20px", border: "1px solid #ddd" }}>
-                <h3>Bike ID: {bikeId || "N/A"}</h3>
-                {barcodeUrl ? (
-                    <img src={barcodeUrl} alt="Barcode" style={{ width: "300px", height: "100px" }} />
-                ) : (
-                    <p>{bikeId ? "Loading barcode..." : "Enter Bike ID above"}</p>
-                )}
+            <div ref={printRef} style={{ textAlign: "center", padding: "20px" }}>
+                <h2>Bike ID: {bikeId}</h2>
+                <svg ref={barcodeRef}></svg>  {/* SVG Barcode */}
             </div>
-
-            <button onClick={handlePrint} disabled={!barcodeUrl} style={{ marginTop: "10px", padding: "10px 20px" }}>
-                Print Barcode
-            </button>
         </div>
     );
 };

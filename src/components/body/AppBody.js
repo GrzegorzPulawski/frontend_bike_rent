@@ -19,7 +19,6 @@ import Reports from "../reports/Reports";
 import ShowDailyReturned from "../reports/ShowDailyReturned";
 import DailyRentedReport from "../reports/DailyRentedReport";
 import EquipmentDetails from "../equipment/EquipmentDetails";
-import BarcodeGenerator from "../BarcodeScanner/BarcodeGenerator";
 import BarcodePrint from "../BarcodeScanner/BarcodePrint";
 
 

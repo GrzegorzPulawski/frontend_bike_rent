@@ -1,7 +1,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import JsBarcode from "jsbarcode";
-
 import { useReactToPrint } from "react-to-print";
 import {request} from "../../axios_helper";
 
@@ -10,6 +9,7 @@ const BarcodePrint = () => {
     const [barcodeText, setBarcodeText] = useState("");
     const barcodeRef = useRef(null);
     const printRef = useRef();
+    const [errorMessage,setErrorMessage]= useState("");
 
     // Fetch barcode text when Bike ID changes
     useEffect(() => {
@@ -18,8 +18,10 @@ const BarcodePrint = () => {
    request("GET",`/api/equipment/barcode/${bikeId}`)
             .then((response) => {
                 setBarcodeText(response.data);
+                setErrorMessage("");
             })
             .catch((error) => console.error("Error fetching barcode:", error));
+        setErrorMessage("Nie znaleziono Id roweru!");
     }, [bikeId]);
 
     // Generate barcode dynamically
@@ -45,6 +47,7 @@ const BarcodePrint = () => {
             <button onClick={handlePrint}>Print Barcode</button>
 
             <div ref={printRef} style={{ textAlign: "center", padding: "20px" }}>
+                {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
                 <h2>Bike ID: {bikeId}</h2>
                 <svg ref={barcodeRef}></svg>  {/* SVG Barcode */}
             </div>

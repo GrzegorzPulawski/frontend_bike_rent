@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { request } from "../../axios_helper";
 import ReturnRenting from "./ReturnRenting";
 import { Alert, Button, Row, Col, Form, Container, Spinner } from "react-bootstrap";
@@ -14,6 +14,10 @@ const RentingList = () => {
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
+    const [barcodeQuery, setBarcodeQuery] = useState("");
+    const barcodeInputRef = useRef(null);
+
+
     useEffect(() => {
         const fetchRentings = async () => {
             try {
@@ -25,6 +29,7 @@ const RentingList = () => {
                 setErrorMessage("Błąd podczas ładowania listy wypożyczeń");
             } finally {
                 setIsLoading(false);
+                barcodeInputRef.current?.focus();
             }
         };
         fetchRentings();
@@ -81,6 +86,38 @@ const RentingList = () => {
     const handleNavigateToRecentlyReturned = () => {
         navigate('/show-currently-returned');
     };
+    const handleBarcodeSearch = async () => {
+        if (!barcodeQuery.trim()) return;
+
+        try {
+            const response = await request('GET', `/api/equipments/barcode/find/${barcodeQuery}`);
+            const equipment = response.data;
+
+            // Find the renting
+            const matchingRental = listRenting.find(
+                (r) => r.frameNumber?.toLowerCase() === equipment.frameNumber?.toLowerCase()
+            );
+
+
+            if (matchingRental) {
+                setSelectedRentings((prevSelected) =>
+                    prevSelected.includes(matchingRental.idRenting)
+                        ? prevSelected // jeśli już jest zaznaczony – nic nie rób
+                        : [...prevSelected, matchingRental.idRenting] // dodaj do listy
+                );
+
+                setSuccessMessage(`Znaleziono wypożyczenie dla roweru: ${equipment.nameEquipment}`);
+            } else {
+                setErrorMessage("Nie znaleziono aktywnego wypożyczenia dla tego roweru.");
+            }
+        } catch (error) {
+            setErrorMessage("Nie znaleziono roweru o podanym kodzie.");
+            console.error("Barcode search error:", error);
+        } finally {
+            setBarcodeQuery(""); // Clear input
+            barcodeInputRef.current?.focus(); // Re-focus input
+        }
+    };
 
     return (
         <div className={styles.rentingContainer}>
@@ -100,6 +137,22 @@ const RentingList = () => {
                         'Wydrukuj umowę wypożyczenia'
                     )}
                 </Button>
+                <div className={styles.searchGroup}>
+                    <label className={styles.searchLabel}>Zeskanuj lub wpisz kod kreskowy:</label>
+                    <input
+                        ref={barcodeInputRef}
+                        type="text"
+                        value={barcodeQuery}
+                        onChange={(e) => setBarcodeQuery(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                handleBarcodeSearch();
+                            }
+                        }}
+                        placeholder="Kod kreskowy roweru"
+                        className={styles.searchInput}
+                    />
+                </div>
 
                 <ReturnRenting
                     selectedRentings={selectedRentings}

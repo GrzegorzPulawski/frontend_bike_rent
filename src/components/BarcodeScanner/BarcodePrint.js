@@ -1,58 +1,90 @@
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import JsBarcode from "jsbarcode";
 import { useReactToPrint } from "react-to-print";
-import {request} from "../../axios_helper";
+import { request } from "../../axios_helper";
 
-const BarcodePrint = () => {
-    const [bikeId, setBikeId] = useState("");  // User enters Bike ID
-    const [barcodeText, setBarcodeText] = useState("");
+const BarcodeGenerator = () => {
+    const [bikeId, setBikeId] = useState("");
+    const [barcodeValue, setBarcodeValue] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const barcodeRef = useRef(null);
     const printRef = useRef();
-    const [errorMessage,setErrorMessage]= useState("");
 
-    // Fetch barcode text when Bike ID changes
-    useEffect(() => {
-        if (!bikeId) return;
+    const handleGenerateBarcode = () => {
+        if (!bikeId) {
+            setErrorMessage("Podaj ID roweru.");
+            return;
+        }
 
-   request("GET",`/api/equipment/barcode/${bikeId}`)
-            .then((response) => {
-                setBarcodeText(response.data);
+        request("POST", `/api/equipments/barcode/${bikeId}/generate`)
+            .then((res) => {
+                setBarcodeValue(res.data);
                 setErrorMessage("");
             })
-            .catch((error) => console.error("Error fetching barcode:", error));
-        setErrorMessage("Nie znaleziono Id roweru!");
-    }, [bikeId]);
+            .catch((err) => {
+                console.error("Błąd generowania kodu:", err);
+                setErrorMessage("Nie udało się wygenerować kodu dla tego ID.");
+            });
+    };
 
-    // Generate barcode dynamically
     useEffect(() => {
-        if (barcodeText && barcodeRef.current) {
-            JsBarcode(barcodeRef.current, barcodeText, { format: "CODE128", width: 2, height: 100 });
+        if (barcodeValue && barcodeRef.current) {
+            JsBarcode(barcodeRef.current, barcodeValue, {
+                format: "CODE128",
+                width: 2,
+                height: 100,
+                displayValue: true,
+            });
         }
-    }, [barcodeText]);
+    }, [barcodeValue]);
 
     const handlePrint = useReactToPrint({
         content: () => printRef.current,
+        pageStyle: `
+      @page { size: auto; margin: 0mm; }
+      @media print { 
+        body { -webkit-print-color-adjust: exact; } 
+        svg { max-width: 100% !important; height: auto !important; }
+      }
+    `,
+        documentTitle: `Barcode-${bikeId}`,
+        onAfterPrint: () => console.log("Printed successfully")
     });
+
 
     return (
         <div>
-            <h2>Enter Bike ID:</h2>
+            <h2>Generuj i drukuj kod kreskowy</h2>
             <input
                 type="text"
                 value={bikeId}
                 onChange={(e) => setBikeId(e.target.value)}
-                placeholder="Enter Bike ID"
+                placeholder="Wprowadź ID roweru"
             />
-            <button onClick={handlePrint}>Print Barcode</button>
+            <div style={{ marginTop: 10 }}>
+                <button onClick={handleGenerateBarcode}>Wygeneruj kod</button>
+                <button onClick={handlePrint} disabled={!barcodeValue}>
+                    Drukuj kod
+                </button>
+            </div>
 
-            <div ref={printRef} style={{ textAlign: "center", padding: "20px" }}>
-                {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-                <h2>Bike ID: {bikeId}</h2>
-                <svg ref={barcodeRef}></svg>  {/* SVG Barcode */}
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+
+            <div
+                ref={printRef}
+                style={{
+                    textAlign: "center",
+                    marginTop: 20,
+                    padding: 20,
+                    border: "1px dashed gray",
+                }}
+            >
+                {barcodeValue && <h3>Kod roweru: {barcodeValue}</h3>}
+                <svg ref={barcodeRef}></svg>
             </div>
         </div>
     );
 };
 
-export default BarcodePrint;
+export default BarcodeGenerator;

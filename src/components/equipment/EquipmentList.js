@@ -1,5 +1,5 @@
 import styles from "./EquipmentList.module.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { request } from "../../axios_helper.js";
 import { useNavigate } from "react-router-dom";
 import { Button, Container, Row, Col, Alert, Spinner } from "react-bootstrap";
@@ -13,6 +13,9 @@ const EquipmentList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate(); // Hook do nawigacji
+
+    const [barcodeQuery, setBarcodeQuery] = useState("");
+    const barcodeInputRef = useRef(null);
 
     useEffect(() => {
         const fetchEquipment = async () => {
@@ -29,6 +32,9 @@ const EquipmentList = () => {
                 console.error("Error fetching equipment:", error);
             } finally {
                 setLoading(false);
+                if (barcodeInputRef.current) {
+                    barcodeInputRef.current.focus();
+                }
             }
         };
         fetchEquipment();
@@ -76,6 +82,18 @@ const EquipmentList = () => {
             {error}
         </Alert>
     );
+    const handleBarcodeSearch = async () => {
+        try {
+            const response = await request('GET', `/api/equipments/barcode/find/${barcodeQuery}`);
+            const equipment = response.data;
+            navigate(`/equipment-details/${equipment.idEquipment}`);
+        } catch (error) {
+            alert("Nie znaleziono roweru z tym kodem kreskowym.");
+            console.error("Błąd przy wyszukiwaniu kodu kreskowego:", error);
+        }
+    };
+
+
     return (
         <Container className={styles.equipmentContainer}>
             <h2 className={styles.pageTitle}>Lista sprzętu</h2>
@@ -93,6 +111,27 @@ const EquipmentList = () => {
                     className={styles.searchInput}
                 />
             </div>
+            <div className={styles.searchGroup}>
+                <label className={styles.searchLabel}>
+                    Zeskanuj lub wpisz kod kreskowy:
+                </label>
+                <input
+                    ref={barcodeInputRef}
+                    type="text"
+                    value={barcodeQuery}
+                    onChange={(e) => setBarcodeQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            handleBarcodeSearch();
+                        }
+                    }}
+                    placeholder="Kod kreskowy roweru"
+                    className={styles.searchInput}
+                />
+
+            </div>
+
+
 
             {/* Action Buttons */}
             <div className={styles.buttonGroup}>

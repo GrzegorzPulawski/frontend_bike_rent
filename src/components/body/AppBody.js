@@ -19,7 +19,7 @@ import Reports from "../reports/Reports";
 import ShowDailyReturned from "../reports/ShowDailyReturned";
 import DailyRentedReport from "../reports/DailyRentedReport";
 import EquipmentDetails from "../equipment/EquipmentDetails";
-import BarcodePrint from "../BarcodeScanner/BarcodePrint";
+import BarcodeGenerator from "../BarcodeScanner/BarcodeGenerator";
 
 
 
@@ -46,7 +46,8 @@ const AppBody = () => {
                 <Route path="/show-daily-returned" element={<ShowDailyReturned />} />
                 <Route path="/daily-rented-report" element={<DailyRentedReport />} />
                 <Route path="/equipment-details/:id" element={<EquipmentDetails />} />
-                <Route path={"/barcode"} element={<BarcodePrint/>} />
+                <Route path={"/barcode"} element={<BarcodeGenerator/>} />
+
             </Routes>
         </div>
     );

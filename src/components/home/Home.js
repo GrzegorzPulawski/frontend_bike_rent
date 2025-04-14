@@ -16,8 +16,8 @@ function Home() {
         },
         {
             title: "Aktualne wypożyczenia",
-            text: "Tutaj zrobisz zwrot wypożyczeń. Zaznacz Wypożyczenie do zwrotu. Naciśnij *Zatwierdź Zwroty*. Program przekieruje Cię do Aktualnych zwrotów.",
-            footer: "Wskazówka: Możesz tutaj wydrukować Umowę Wypożyczenia."
+            text: "Tutaj zrobisz zwrot wypożyczeń. Zaznacz Wypożyczenie do zwrotu. Naciśnij *Zatwierdź Zwroty*. Program przekieruje Cię do Aktualnych zwrotów. Możesz też to zrobić używając skanera kodów kreskowych",
+            footer: "Wskazówka: Możesz tutaj wydrukować Umowę Wypożyczenia. Zaznacz ręcznie lub za pomoca skanera kodów kreskowych"
         },
         {
             title: "Aktualne zwroty",
@@ -27,7 +27,7 @@ function Home() {
         {
             title: "Sprzęt",
             text: "Możesz dodać dowolną ilość rowerów, oraz je usuwać z bazy danych. Zastosowano logikę stanów magazynowych - jeśli rower jest wypożyczony, jest niedostępny do wypożyczenia. Wybierz rower i wejdź w Detale roweru w celu Wypożyczenia.",
-            footer: "Wskazówka: Jest dostępne wyszukiwanie sprzętu po numerze ramy."
+            footer: "Wskazówka: Jest dostępne wyszukiwanie sprzętu po numerze ramy. Możesz użyć skanera kodów kreskowych do wywołania Detalu roweru"
         },
         {
             title: "Detale roweru",

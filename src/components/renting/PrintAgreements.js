@@ -30,9 +30,9 @@ const PrintAgreements = () => {
             <button onClick={handleSimplePrint} style={{ marginBottom: '20px' }}>Drukuj wszystkie umowy</button>
             </div>
                 <div ref={componentRef} style={{ padding: '0px' } }>
-                <h3>Lista Umów Na Wypożyczenie Sprzętu Zimowego</h3>
+                <h3>Lista Umów Na Wypożyczenie Rowerów</h3>
                 <div>Płatność za usługę nastąpi przy zwrocie sprzętu, w cyklu 24 godzinnym za dobę lub cyklu dziennym (Czytaj regulamin wypożyczalni).
-                Klient zobowiązuję się zwrócić sprzęt w stanie niepogorszonym. W przypadku uszkodzenia, kradzieży zobowiązuje się do pokrycia kosztów odtworzenia.</div>
+                Klient zobowiązuję się zwrócić sprzęt w stanie niepogorszonym. W przypadku uszkodzenia, kradzieży zobowiązuje się do pokrycia kosztów odtworzenia (Czytaj regulamin wypożyczalni).</div>
 
                 {rentings.map((renting) => (
                     <Card key={renting.idRenting}  style={{ margin: '10px 10px', padding: '5px' }}>
